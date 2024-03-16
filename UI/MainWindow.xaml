@@ -5,8 +5,170 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Tour Planner" Height="450" Width="800">
+    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
 
+        <!--NAVBAR-->
+        <DockPanel Grid.Row="0" VerticalAlignment="Top">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <MenuItem Header="File" 
+                      Grid.Column="0" 
+                      HorizontalAlignment="Stretch" 
+                      BorderThickness="1" 
+                      BorderBrush="LightGray"></MenuItem>
+                <MenuItem Header="Edit" 
+                      Grid.Column="1" 
+                      HorizontalAlignment="Stretch" 
+                      BorderThickness="1" 
+                      BorderBrush="LightGray"></MenuItem>
+                <MenuItem Header="Options" 
+                      Grid.Column="2" 
+                      HorizontalAlignment="Stretch" 
+                      BorderThickness="1" 
+                      BorderBrush="LightGray"></MenuItem>
+                <MenuItem Grid.Column="3" 
+                      BorderThickness="1" 
+                      BorderBrush="LightGray"></MenuItem>
+                <MenuItem Grid.Column="4" 
+                      BorderThickness="1" 
+                      BorderBrush="LightGray"></MenuItem>
+                <MenuItem Header="Help" 
+                      Grid.Column="5" 
+                      HorizontalAlignment="Stretch" 
+                      BorderThickness="1" 
+                      BorderBrush="LightGray"></MenuItem>
+            </Grid>
+        </DockPanel>
+
+        <!--SEARCHBAR-->
+        <TextBox Grid.Row="1" BorderBrush="LightGray"/>
+
+        <!--THE BOTTOM PART?-->
+        <DockPanel Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--TOURS-->
+                <DockPanel Grid.Column="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="16*"/>
+                        </Grid.RowDefinitions>
+
+                        <!--ADD/REMOVE-->
+                        <DockPanel Grid.Row="0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Tours" Grid.Column="0"></TextBlock>
+
+                                <Button x:Name="addTour" Grid.Column="2">+</Button>
+                                <Button x:Name="deleteTour" Grid.Column="3">-</Button>
+                                <Button Grid.Column="4">...</Button>
+                            </Grid>
+                        </DockPanel>
+
+                        <!--LIST OF TOURS-->
+                        <DataGrid Grid.Row="1" Name="TourList"/>
+                    </Grid>
+                </DockPanel>
+
+                <!--TOUR DETAILS-->
+                <DockPanel Grid.Column="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="8*"/>
+                            <RowDefinition Height="8*"/>
+                        </Grid.RowDefinitions>
+
+                        <!--MAP-->
+                        <DockPanel Grid.Row="0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="7*"/>
+                                </Grid.RowDefinitions>
+
+                                <DockPanel Grid.Row="0">
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button Grid.Column="0">General</Button>
+                                        <Button Grid.Column="1">Route</Button>
+                                        <Button Grid.Column="2">Misc</Button>
+                                    </Grid>
+                                </DockPanel>
+
+                                <TextBlock Grid.Row="1">HERE THE MAP PICTURE WILL BE ADDED</TextBlock>
+                            </Grid>
+                        </DockPanel>
+
+                        <!--TOUR LOGS-->
+                        <DockPanel Grid.Row="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="7*"/>
+                                </Grid.RowDefinitions>
+
+                                <DockPanel Grid.Row="0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="10*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0">Tour Logs</TextBlock>
+
+                                        <Button Grid.Column="2">+</Button>
+                                        <Button Grid.Column="3">-</Button>
+                                        <Button Grid.Column="4">...</Button>
+                                    </Grid>
+                                </DockPanel>
+
+                                <DockPanel Grid.Row="1">
+                                    <!--https://www.c-sharpcorner.com/UploadFile/mahesh/datagrid-in-wpf/-->
+                                    <DataGrid Name="TourLogs"/>
+                                </DockPanel>
+                            </Grid>
+                        </DockPanel>
+                    </Grid>
+                </DockPanel>
+            </Grid>
+        </DockPanel>
     </Grid>
 </Window>
