@@ -1,16 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Models;
+
+[Table("tours")]
 public class Tour
 {
-	[Key] public int TourId { get; set; }
-	public string Name { get; set; } = null!;
-	public string Description { get; set; } = null!;
-	public string From { get; set; } = null!;
-	public string To { get; set; } = null!;
-	public string TransportType { get; set; } = null!;
-	public float Distance { get; set; }
-	public double EstimatedTime { get; set; }
-	public string RouteInformation { get; set; } = null!;
-	public ICollection<TourLog> Logs { get; set; } = null!;
+	[Key][Column("tourid")] public int TourId { get; set; }
+	[Column("name")] public string Name { get; set; } = null!;
+	[Column("description")] public string Description { get; set; } = null!;
+	[Column("from")] public string From { get; set; } = null!;
+	[Column("to")] public string To { get; set; } = null!;
+	[Column("transporttype")] public string TransportType { get; set; } = null!;
+	[Column("distance")] public float Distance { get; set; }
+	[Column("estimatedtime")] public double EstimatedTime { get; set; }
+	[Column("routeinformation")] public string RouteInformation { get; set; } = null!;
+
+	//public ICollection<TourLog> Logs { get; set; } = null!;
 }

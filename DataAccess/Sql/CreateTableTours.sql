@@ -1,5 +1,0 @@
-CREATE TABLE IF NOT EXISTS Tours (
-    Id SERIAL PRIMARY KEY,
-    Name VARCHAR(255),
-    Price DECIMAL
-);
