@@ -1,7 +1,7 @@
 ﻿using Npgsql;
 
 namespace DataAccess.Interfaces;
-internal interface IDbConnection
+public interface IDbConnection
 {
 	void OpenConnection();
 	void CloseConnection();
