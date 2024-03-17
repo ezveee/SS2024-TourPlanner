@@ -13,4 +13,7 @@ public class TourLog
 	[Column("distance")] public float Distance { get; set; }
 	[Column("time")] public double Time { get; set; }
 	[Column("rating")] public int Rating { get; set; }
+
+	[Column("tourid")] public int TourId { get; set; }
+	public Tour Tour { get; set; } = null!;
 }
