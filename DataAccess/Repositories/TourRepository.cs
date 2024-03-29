@@ -13,7 +13,7 @@ public class TourRepository(TourPlannerContext context) : IRepository<Tour>
 
 	public IEnumerable<Tour> GetAll()
 	{
-		return [.. context.Tours];
+		return [.. context.Tours]; // TODO: be able to explain this
 	}
 
 	public void Add(Tour entity)
