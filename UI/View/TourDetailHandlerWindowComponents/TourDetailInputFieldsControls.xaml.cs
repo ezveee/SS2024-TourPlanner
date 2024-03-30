@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.UIComponents.TourDetails.MapDisplay
+namespace UI.View.TourDetailHandlerWindowComponents
 {
     /// <summary>
-    /// Interaction logic for MapDisplayControls.xaml
+    /// Interaction logic for TourDetailInputFieldsControls.xaml
     /// </summary>
-    public partial class MapDisplayControls : UserControl
+    public partial class TourDetailInputFieldsControls : UserControl
     {
-        public MapDisplayControls()
+        public TourDetailInputFieldsControls()
         {
             InitializeComponent();
         }

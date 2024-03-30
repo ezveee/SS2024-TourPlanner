@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.UIComponents
+namespace UI.View.MainWindowComponents
 {
     /// <summary>
-    /// Interaction logic for NavbarControls.xaml
+    /// Interaction logic for TourControls.xaml
     /// </summary>
-    public partial class NavbarControls : UserControl
+    public partial class TourControls : UserControl
     {
-        public NavbarControls()
+        public TourControls()
         {
             InitializeComponent();
         }
