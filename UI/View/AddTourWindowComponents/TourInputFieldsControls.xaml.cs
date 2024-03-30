@@ -10,20 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using UI.ViewModel;
 
-namespace UI
+namespace UI.View.AddTourWindowComponents
 {
     /// <summary>
-    /// Interaction logic for AddTourWindow.xaml
+    /// Interaction logic for TourInputFieldsControls.xaml
     /// </summary>
-    public partial class AddTourWindow : Window
+    public partial class TourInputFieldsControls : UserControl
     {
-        public AddTourWindow()
+        public TourInputFieldsControls()
         {
             InitializeComponent();
-            DataContext = new AddTourViewModel();
         }
     }
 }

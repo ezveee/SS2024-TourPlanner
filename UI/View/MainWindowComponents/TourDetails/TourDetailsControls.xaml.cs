@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.UIComponents.TourDetails
+namespace UI.View.MainWindowComponents.TourDetails
 {
     /// <summary>
     /// Interaction logic for TourDetailsControls.xaml

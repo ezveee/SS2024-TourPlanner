@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.UIComponents.TourDetails.TourLogs
+namespace UI.View.MainWindowComponents.TourDetails.TourLogs
 {
     /// <summary>
     /// Interaction logic for TourLogsControls.xaml
@@ -27,8 +27,8 @@ namespace UI.UIComponents.TourDetails.TourLogs
     
         private void OpenAddTourLogWindow(object sender, RoutedEventArgs e)
         {
-            AddTourDetailsWindow addTourDetailsWindow = new AddTourDetailsWindow();
-            addTourDetailsWindow.Show();
+            TourDetailHandlerWindow tourDetailHandlerWindow = new TourDetailHandlerWindow();
+            tourDetailHandlerWindow.Show();
         }
     }
 }

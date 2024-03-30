@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.UIComponents
+namespace UI.View.MainWindowComponents
 {
     /// <summary>
     /// Interaction logic for NavbarControls.xaml

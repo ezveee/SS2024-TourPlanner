@@ -11,15 +11,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UI.View.AddTourWindowComponents;
 
 namespace UI
 {
     /// <summary>
-    /// Interaction logic for AddTourDetailsWindow.xaml
+    /// Interaction logic for AddTourWindow.xaml
     /// </summary>
-    public partial class AddTourDetailsWindow : Window
+    public partial class TourHandlerWindow : Window
     {
-        public AddTourDetailsWindow()
+        public TourHandlerWindow()
         {
             InitializeComponent();
         }

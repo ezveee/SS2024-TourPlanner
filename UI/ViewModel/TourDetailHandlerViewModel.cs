@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace UI.ViewModel
 {
-    internal class AddTourViewModel
+    internal class TourDetailHandlerViewModel
     {
-        public AddTourViewModel()
-        {
-            
-        }
     }
 }
