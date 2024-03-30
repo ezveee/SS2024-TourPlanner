@@ -5,10 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         xmlns:viewmodel="clr-namespace:UI.ViewModel"
+        xmlns:components="clr-namespace:UI.View.TourDetailHandlerWindowComponents"
         mc:Ignorable="d"
         Title="Add Tour Details" Height="450" Width="800">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <!--INPUT FIELDS-->
+        <DockPanel Grid.Row="0" VerticalAlignment="Top">
+            <components:TourDetailInputFieldsControls/>
+        </DockPanel>
+
+        <!--BUTTONS-->
+        <DockPanel Grid.Row="1">
+            <components:ConfirmButtonControls/>
+        </DockPanel>
     </Grid>
 </Window>
