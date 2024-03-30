@@ -24,11 +24,5 @@ namespace UI.View.MainWindowComponents.TourDetails.TourLogs
         {
             InitializeComponent();
         }
-    
-        private void OpenAddTourLogWindow(object sender, RoutedEventArgs e)
-        {
-            TourDetailHandlerWindow tourDetailHandlerWindow = new TourDetailHandlerWindow();
-            tourDetailHandlerWindow.Show();
-        }
     }
 }

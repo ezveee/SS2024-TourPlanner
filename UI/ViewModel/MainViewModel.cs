@@ -12,16 +12,24 @@ namespace UI.ViewModel
     internal class MainViewModel
     {
         public ICommand OpenTourHandlerCommand { get; set; }
+        public ICommand OpenTourDetailHandlerCommand { get; set; }
 
         public MainViewModel()
         {
             OpenTourHandlerCommand = new RelayCommand(OpenTourHandlerWindow);
+            OpenTourDetailHandlerCommand = new RelayCommand(OpenTourDetailHandlerWindow);
         }
 
         private void OpenTourHandlerWindow(object parameter)
         {
             TourHandlerWindow tourHandlerWindow = new TourHandlerWindow();
             tourHandlerWindow.Show();
+        }
+
+        private void OpenTourDetailHandlerWindow(object parameter)
+        {
+            TourDetailHandlerWindow tourDetailHandlerWindow = new TourDetailHandlerWindow();
+            tourDetailHandlerWindow.Show();
         }
     }
 }
