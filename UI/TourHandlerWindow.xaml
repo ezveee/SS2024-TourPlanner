@@ -9,10 +9,6 @@
         mc:Ignorable="d"
         Title="Add Tour" Height="450" Width="800">
 
-    <Window.DataContext>
-        <viewmodel:TourHandlerViewModel/>
-    </Window.DataContext>
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"/>

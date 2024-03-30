@@ -13,7 +13,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="confirm" Grid.Column="1" Click="CreateTour" Margin="5">Create</Button>
-        <Button x:Name="back" Grid.Column="2" Margin="5">Back</Button>
+        <Button x:Name="confirm" Grid.Column="1" Command="{Binding TourCreationCommand}" Margin="5">Create</Button>
+        <Button x:Name="back" Grid.Column="2" Command="{Binding QuitTourCreationCommand}" Margin="5">Back</Button>
     </Grid>
 </UserControl>

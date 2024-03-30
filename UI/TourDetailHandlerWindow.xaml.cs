@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UI.ViewModel;
 
 namespace UI
 {
@@ -22,6 +23,7 @@ namespace UI
         public TourDetailHandlerWindow()
         {
             InitializeComponent();
+            DataContext = new TourDetailHandlerViewModel(this);
         }
     }
 }
