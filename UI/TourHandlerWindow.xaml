@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
-        xmlns:components="clr-namespace:UI.View.AddTourWindowComponents"
+        xmlns:components="clr-namespace:UI.View.TourHandlerWindowComponents"
         xmlns:viewmodel="clr-namespace:UI.ViewModel"
         mc:Ignorable="d"
         Title="Add Tour" Height="450" Width="800">
