@@ -11,8 +11,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
         <!--INPUT FIELDS-->

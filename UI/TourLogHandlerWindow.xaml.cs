@@ -16,14 +16,14 @@ using UI.ViewModel;
 namespace UI
 {
     /// <summary>
-    /// Interaction logic for TourDetailHandlerWindow.xaml
+    /// Interaction logic for TourLogHandlerWindow.xaml
     /// </summary>
-    public partial class TourDetailHandlerWindow : Window
+    public partial class TourLogHandlerWindow : Window
     {
-        public TourDetailHandlerWindow()
+        public TourLogHandlerWindow()
         {
             InitializeComponent();
-            DataContext = new TourDetailHandlerViewModel(this);
+            DataContext = new TourLogHandlerViewModel(this);
         }
     }
 }

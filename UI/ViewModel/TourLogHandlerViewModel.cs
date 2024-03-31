@@ -10,14 +10,14 @@ using UI.ViewModel.Interfaces;
 
 namespace UI.ViewModel
 {
-    internal class TourDetailHandlerViewModel : ICreationHandlerViewModel
+    internal class TourLogHandlerViewModel : ICreationHandlerViewModel
     {
         public ICommand CreationCommand { get; set; }
         public ICommand QuitCreationCommand { get; set; }
 
         private readonly Window _window;
 
-        public TourDetailHandlerViewModel(Window window)
+        public TourLogHandlerViewModel(Window window)
         {
             _window = window;
 

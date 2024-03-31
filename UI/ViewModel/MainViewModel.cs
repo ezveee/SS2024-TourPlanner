@@ -18,7 +18,7 @@ namespace UI.ViewModel
     internal class MainViewModel : INotifyPropertyChanged
     {
         public ICommand OpenTourHandlerCommand { get; set; }
-        public ICommand OpenTourDetailHandlerCommand { get; set; }
+        public ICommand OpenTourLogHandlerCommand { get; set; }
 
         #region uh test??
         private testmodel model = new testmodel();
@@ -38,7 +38,7 @@ namespace UI.ViewModel
         public MainViewModel()
         {
             OpenTourHandlerCommand = new RelayCommand(OpenTourHandlerWindow);
-            OpenTourDetailHandlerCommand = new RelayCommand(OpenTourDetailHandlerWindow);
+            OpenTourLogHandlerCommand = new RelayCommand(OpenTourLogHandlerWindow);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -53,10 +53,10 @@ namespace UI.ViewModel
             tourHandlerWindow.Show();
         }
 
-        private void OpenTourDetailHandlerWindow(object parameter)
+        private void OpenTourLogHandlerWindow(object parameter)
         {
-            TourDetailHandlerWindow tourDetailHandlerWindow = new TourDetailHandlerWindow();
-            tourDetailHandlerWindow.Show();
+            TourLogHandlerWindow tourLogHandlerWindow = new TourLogHandlerWindow();
+            tourLogHandlerWindow.Show();
         }
     }
 }

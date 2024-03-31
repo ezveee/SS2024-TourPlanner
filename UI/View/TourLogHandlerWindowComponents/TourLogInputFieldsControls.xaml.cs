@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.View.TourDetailHandlerWindowComponents
+namespace UI.View.TourLogHandlerWindowComponents
 {
     /// <summary>
     /// Interaction logic for TourDetailInputFieldsControls.xaml
     /// </summary>
-    public partial class TourDetailInputFieldsControls : UserControl
+    public partial class TourLogInputFieldsControls : UserControl
     {
-        public TourDetailInputFieldsControls()
+        public TourLogInputFieldsControls()
         {
             InitializeComponent();
         }
