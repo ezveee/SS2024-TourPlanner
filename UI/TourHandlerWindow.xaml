@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         xmlns:components="clr-namespace:UI.View.TourHandlerWindowComponents"
-        xmlns:viewmodel="clr-namespace:UI.ViewModel"
+        xmlns:buttons="clr-namespace:UI.View.ReusableButtonComponent"
         mc:Ignorable="d"
         Title="Add Tour" Height="450" Width="800">
 
@@ -22,7 +22,7 @@
 
         <!--BUTTONS-->
         <DockPanel Grid.Row="1">
-            <components:ConfirmButtonControls/>
+            <buttons:ConfirmButtonControls/>
         </DockPanel>
     </Grid>
 </Window>

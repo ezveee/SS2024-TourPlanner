@@ -12,8 +12,8 @@ namespace UI.ViewModel
 {
     internal class TourDetailHandlerViewModel : ICreationHandlerViewModel
     {
-        public ICommand TourDetailCreationCommand { get; set; }
-        public ICommand QuitTourDetailCreationCommand { get; set; }
+        public ICommand CreationCommand { get; set; }
+        public ICommand QuitCreationCommand { get; set; }
 
         private readonly Window _window;
 
@@ -21,8 +21,8 @@ namespace UI.ViewModel
         {
             _window = window;
 
-            TourDetailCreationCommand = new RelayCommand(Create);
-            QuitTourDetailCreationCommand = new RelayCommand(Quit);
+            CreationCommand = new RelayCommand(Create);
+            QuitCreationCommand = new RelayCommand(Quit);
         }
 
         public void Create(object parameter)

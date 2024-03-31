@@ -13,24 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.View.TourHandlerWindowComponents
+namespace UI.View.ReusableButtonComponent
 {
     /// <summary>
     /// Interaction logic for ConfirmButtonControls.xaml
     /// </summary>
     public partial class ConfirmButtonControls : UserControl
     {
-        public event EventHandler ConfirmButtonClicked;
         public ConfirmButtonControls()
         {
             InitializeComponent();
-        }
-
-        private void CreateTour(object sender, RoutedEventArgs e)
-        {
-            // code to create tours
-
-            ConfirmButtonClicked?.Invoke(this, e);
         }
     }
 }
