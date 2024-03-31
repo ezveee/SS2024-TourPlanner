@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Business.Models;
+using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -29,18 +31,110 @@ namespace UI.ViewModel
             QuitCreationCommand = new RelayCommand(Quit);
         }
 
+        #region Create new Tour
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }        
+        }
+
+        private string _desc;
+        public string Desc
+        {
+            get { return _desc; }
+            set
+            {
+                _desc = value;
+                OnPropertyChanged(nameof(Desc));
+            }
+        }
+
+        private string _from;
+        public string From
+        {
+            get { return _from; }
+            set
+            {
+                _from = value;
+                OnPropertyChanged(nameof(From));
+            }
+        }
+
+        private string _to;
+        public string To
+        {
+            get { return _to; }
+            set
+            {
+                _to = value;
+                OnPropertyChanged(nameof(To));
+            }
+        }
+
+        private string _transportType;
+        public string TransportType
+        {
+            get { return _transportType; }
+            set
+            {
+                _transportType = value;
+                OnPropertyChanged(nameof(TransportType));
+            }
+        }
+
+        private float _distance;
+        public float Distance
+        {
+            get { return _distance; }
+            set
+            {
+                _distance = value;
+                OnPropertyChanged(nameof(Distance));
+            }
+        }
+
+        private double _time;
+        public double Time
+        {
+            get { return _time; }
+            set
+            {
+                _time = value;
+                OnPropertyChanged(nameof(Time));
+            }
+        }
+
+        private string _info;
+        public string Info
+        {
+            get { return _info; }
+            set
+            {
+                _info = value;
+                OnPropertyChanged(nameof(Info));
+            }
+        }
+
         public void Create(object parameter)
         {
-            // code to create the tour
+            TourModel model = new TourModel(_name, _desc, _from, _to, _transportType, _distance, _time, _info);
+
+            // TODO: make new items immediately appear in window
 
             CloseWindow(_window);
         }
+        #endregion
 
         public void Quit(object parameter)
         {
             CloseWindow(_window);
         }
-
+        
         public void CloseWindow(Window window)
         {
             _window.Close();

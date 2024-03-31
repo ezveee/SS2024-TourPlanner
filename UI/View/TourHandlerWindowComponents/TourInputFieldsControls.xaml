@@ -22,46 +22,41 @@
         
         <DockPanel Grid.Row="1" HorizontalAlignment="Left">
             <Label Content="Name:"/>
-            <TextBox Margin="5" Width="200"/>
+            <TextBox Margin="5" Width="200" Text="{Binding Name, Mode=TwoWay}"/>
         </DockPanel>
 
         <DockPanel Grid.Row="2" HorizontalAlignment="Stretch">
             <Label Content="Description:"/>
-            <TextBox Margin="5"/>
+            <TextBox Margin="5" Text="{Binding Desc, Mode=TwoWay}"/>
         </DockPanel>
 
         <DockPanel Grid.Row="3" HorizontalAlignment="Left">
             <Label Content="From:"/>
-            <TextBox Margin="5" Width="200"/>
+            <TextBox Margin="5" Width="200" Text="{Binding From, Mode=TwoWay}"/>
 
             <Label Content="To:"/>
-            <TextBox Margin="5" Width="200"/>
+            <TextBox Margin="5" Width="200" Text="{Binding To, Mode=TwoWay}"/>
         </DockPanel>
 
         <DockPanel Grid.Row="4" HorizontalAlignment="Left">
             <Label Content="Type of Transport:"/>
-            <ComboBox Margin="5">
-                <ComboBoxItem Content="Foot"/>
-                <ComboBoxItem Content="Car"/>
-                <ComboBoxItem Content="Bike"/>
-                <!--whatever else belongs in there-->
-            </ComboBox>
+            <TextBox Margin="5" Width="200" Text="{Binding TransportType, Mode=TwoWay}"/>
         </DockPanel>
 
         <!--TODO: ask if using extended wpf toolkit is allowed-->
         <DockPanel Grid.Row="5" HorizontalAlignment="Left">
             <Label Content="Distance:"/>
-            <TextBox Margin="5" Width="200" />
+            <TextBox Margin="5" Width="200" Text="{Binding Distance, Mode=TwoWay}"/>
         </DockPanel>
 
         <DockPanel Grid.Row="6" HorizontalAlignment="Left">
             <Label Content="Estimated Time:"/>
-            <TextBox Margin="5" Width="200" />
+            <TextBox Margin="5" Width="200" Text="{Binding Time, Mode=TwoWay}"/>
         </DockPanel>
 
         <DockPanel Grid.Row="7" HorizontalAlignment="Stretch">
             <Label Content="Route Information:"/>
-            <TextBox Margin="5"/>
+            <TextBox Margin="5" Text="{Binding Info, Mode=TwoWay}"/>
         </DockPanel>
     </Grid>
 </UserControl>
