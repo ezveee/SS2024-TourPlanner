@@ -56,6 +56,7 @@ public class TourRepository(TourPlannerContext context) : IRepository<Tour>
 		_ = context.SaveChanges();
 	}
 
+	// TODO: change method location
 	private static void SaveImageToFilesystem(Tour tour)
 	{
 		string imagePath = tour.RouteInformation;

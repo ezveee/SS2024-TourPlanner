@@ -7,8 +7,8 @@ using DataAccess.Repositories;
 namespace Business;
 public class TourManager : IManager<Tour>
 {
-	private static readonly TourPlannerContext context = new();
-	private readonly IRepository<DataAccess.Models.Tour> _repository = new TourRepository(context);
+	private static readonly TourPlannerContext _context = new();
+	private readonly IRepository<DataAccess.Models.Tour> _repository = new TourRepository(_context);
 
 	public void Create(Tour entity)
 	{
@@ -48,7 +48,7 @@ public class TourManager : IManager<Tour>
 
 	public List<TourLog>? GetLogsByTourId(int id)
 	{
-		List<DataAccess.Models.TourLog> dataAccessLogs = [.. context.TourLogs.Where(log => log.TourId == id)]; // collection expression to simplify .ToList()
+		List<DataAccess.Models.TourLog> dataAccessLogs = [.. _context.TourLogs.Where(log => log.TourId == id)]; // collection expression to simplify .ToList()
 		List<TourLog> businessLogs = [];
 
 		foreach (DataAccess.Models.TourLog dataAccessLog in dataAccessLogs)
