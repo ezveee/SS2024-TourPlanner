@@ -25,8 +25,11 @@ namespace UI.ViewModel
             OpenTourHandlerCommand = new RelayCommand(OpenTourHandlerWindow);
             OpenTourLogHandlerCommand = new RelayCommand(OpenTourLogHandlerWindow);
 
-            TourModel model = new TourModel();
-            GetTourNames(model);
+            TourModel tourModel = new TourModel();
+            GetTourNames(tourModel);
+
+            TourLogModel logModel = new TourLogModel();
+            GetTourLogData(logModel);
         }
 
         private List<string> _tourNames;
@@ -37,6 +40,37 @@ namespace UI.ViewModel
             {
                 _tourNames = value;
                 OnPropertyChanged(nameof(TourNames));
+            }
+        }
+
+        private List<TourLogModel> _tourLogs;
+        public List<TourLogModel> TourLogs
+        {
+            get { return _tourLogs ?? (_tourLogs = new List<TourLogModel>()); }
+            set
+            {
+                _tourLogs = value;
+                OnPropertyChanged(nameof(TourLogs));
+            }
+        }
+
+        private void GetTourLogData(TourLogModel model)
+        {
+            _tourLogs = new List<TourLogModel>();
+
+            foreach (var item in model.TourLogs)
+            {
+                TourLogModel logModel = new TourLogModel()
+                {
+                    Date = item.Date,
+                    Comment = item.Comment,
+                    Difficulty = item.Difficulty,
+                    Distance = item.Distance,
+                    Time = item.Time,
+                    Rating = item.Rating
+                };
+
+                _tourLogs.Add(logModel);
             }
         }
 

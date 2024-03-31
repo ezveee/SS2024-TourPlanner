@@ -31,8 +31,32 @@
         </DockPanel>
 
         <DockPanel Grid.Row="1">
-            <!--https://www.c-sharpcorner.com/UploadFile/mahesh/datagrid-in-wpf/-->
-            <DataGrid Name="TourLogs"/>
+            <ListBox x:Name="TourList" Grid.Row="1" ItemsSource="{Binding TourLogs}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Date:" FontWeight="Bold"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Date}" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Comment:" FontWeight="Bold"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Comment}" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Difficulty:" FontWeight="Bold"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Difficulty}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </DockPanel>
     </Grid>
 </UserControl>
