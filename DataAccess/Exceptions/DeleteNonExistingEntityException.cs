@@ -1,5 +1,5 @@
 ﻿namespace DataAccess.Exceptions;
-internal class DeleteNonExistingEntityException : Exception
+public class DeleteNonExistingEntityException : Exception
 {
 	public DeleteNonExistingEntityException()
 	{
