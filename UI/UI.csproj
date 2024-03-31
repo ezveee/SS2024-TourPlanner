@@ -12,8 +12,4 @@
     <ProjectReference Include="..\Business\Business.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\img\" />
-  </ItemGroup>
-
 </Project>

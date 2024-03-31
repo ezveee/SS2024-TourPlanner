@@ -25,6 +25,11 @@ namespace UI.ViewModel
             QuitCreationCommand = new RelayCommand(Quit);
         }
 
+        public void ShowTourLogsById(int id)
+        {
+
+        }
+
         public void Create(object parameter)
         {
             // code to create the tour
