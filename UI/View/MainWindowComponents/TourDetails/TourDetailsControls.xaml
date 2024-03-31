@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UI.View.MainWindowComponents.TourDetails"
+             xmlns:buttons="clr-namespace:UI.View.MainWindowComponents.TourDetails.Buttons"
              xmlns:mapdisplay="clr-namespace:UI.View.MainWindowComponents.TourDetails.MapDisplay"
              xmlns:tourlogs="clr-namespace:UI.View.MainWindowComponents.TourDetails.TourLogs"
              mc:Ignorable="d" 
@@ -11,17 +12,23 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="7*"/>
             <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
 
-        <!--MAP-->
+        <!--CONTROLBUTTONS-->
         <DockPanel Grid.Row="0">
+            <buttons:ButtonsControls/>
+        </DockPanel>
+
+        <!--MAP-->
+        <DockPanel Grid.Row="1">
             <mapdisplay:MapDisplayControls/>
         </DockPanel>
 
         <!--TOUR LOGS-->
-        <DockPanel Grid.Row="1">
+        <DockPanel Grid.Row="2">
             <tourlogs:TourLogsControls/>
         </DockPanel>
     </Grid>

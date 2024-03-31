@@ -1,23 +1,50 @@
-﻿using System;
+﻿using Business;
+using Business.Interfaces;
+using Business.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using UI.Models;
 using UI.ViewModel.Commands;
 
 namespace UI.ViewModel
 {
-    internal class MainViewModel
+    internal class MainViewModel : INotifyPropertyChanged
     {
         public ICommand OpenTourHandlerCommand { get; set; }
         public ICommand OpenTourDetailHandlerCommand { get; set; }
+
+        #region uh test??
+        private testmodel model = new testmodel();
+
+        private string testtext;
+        public string Testtext
+        {
+            get { return model.output; }
+            set
+            {
+                testtext = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
         public MainViewModel()
         {
             OpenTourHandlerCommand = new RelayCommand(OpenTourHandlerWindow);
             OpenTourDetailHandlerCommand = new RelayCommand(OpenTourDetailHandlerWindow);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void OpenTourHandlerWindow(object parameter)

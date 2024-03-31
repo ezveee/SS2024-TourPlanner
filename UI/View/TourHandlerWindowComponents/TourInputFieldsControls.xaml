@@ -5,8 +5,63 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UI.View.TourHandlerWindowComponents"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="350" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0">Create a Tour:</TextBlock>
+        
+        <DockPanel Grid.Row="1" HorizontalAlignment="Left">
+            <Label Content="Name:"/>
+            <TextBox Margin="5" Width="200"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="2" HorizontalAlignment="Stretch">
+            <Label Content="Description:"/>
+            <TextBox Margin="5"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="3" HorizontalAlignment="Left">
+            <Label Content="From:"/>
+            <TextBox Margin="5" Width="200"/>
+
+            <Label Content="To:"/>
+            <TextBox Margin="5" Width="200"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="4" HorizontalAlignment="Left">
+            <Label Content="Type of Transport:"/>
+            <ComboBox Margin="5">
+                <ComboBoxItem Content="Foot"/>
+                <ComboBoxItem Content="Car"/>
+                <ComboBoxItem Content="Bike"/>
+                <!--whatever else belongs in there-->
+            </ComboBox>
+        </DockPanel>
+
+        <!--TODO: ask if using extended wpf toolkit is allowed-->
+        <DockPanel Grid.Row="5" HorizontalAlignment="Left">
+            <Label Content="Distance:"/>
+            <TextBox Margin="5" Width="200" />
+        </DockPanel>
+
+        <DockPanel Grid.Row="6" HorizontalAlignment="Left">
+            <Label Content="Estimated Time:"/>
+            <TextBox Margin="5" Width="200" />
+        </DockPanel>
+
+        <DockPanel Grid.Row="7" HorizontalAlignment="Stretch">
+            <Label Content="Route Information:"/>
+            <TextBox Margin="5"/>
+        </DockPanel>
     </Grid>
 </UserControl>
