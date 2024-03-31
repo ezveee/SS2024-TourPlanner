@@ -7,6 +7,60 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0">Add a Log to this Tour:</TextBlock>
+
+        <DockPanel Grid.Row="1" HorizontalAlignment="Left">
+            <Label Content="Date:"/>
+            <TextBox Margin="5" Width="200"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="2" HorizontalAlignment="Stretch">
+            <Label Content="Comment:"/>
+            <TextBox Margin="5"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="3" HorizontalAlignment="Left">
+            <Label Content="Difficulty (1 - easiest, 10 - hardest):"/>
+            <RadioButton Margin="5,5,10,2">1</RadioButton>
+            <RadioButton Margin="5,5,10,2">2</RadioButton>
+            <RadioButton Margin="5,5,10,2">3</RadioButton>
+            <RadioButton Margin="5,5,10,2">4</RadioButton>
+            <RadioButton Margin="5,5,10,2">5</RadioButton>
+            <RadioButton Margin="5,5,10,2">6</RadioButton>
+            <RadioButton Margin="5,5,10,2">7</RadioButton>
+            <RadioButton Margin="5,5,10,2">8</RadioButton>
+            <RadioButton Margin="5,5,10,2">9</RadioButton>
+            <RadioButton Margin="5,5,10,2">10</RadioButton>
+        </DockPanel>
+
+        <!--TODO: ask if using extended wpf toolkit is allowed-->
+        <DockPanel Grid.Row="4" HorizontalAlignment="Left">
+            <Label Content="Distance:"/>
+            <TextBox Margin="5" Width="200" />
+        </DockPanel>
+
+        <DockPanel Grid.Row="5" HorizontalAlignment="Left">
+            <Label Content="Time:"/>
+            <TextBox Margin="5" Width="200" />
+        </DockPanel>
+
+        <DockPanel Grid.Row="6" HorizontalAlignment="Stretch">
+            <Label Content="Rating (1 - worst, 5 - best):"/>
+            <RadioButton Margin="5,5,10,2">1</RadioButton>
+            <RadioButton Margin="5,5,10,2">2</RadioButton>
+            <RadioButton Margin="5,5,10,2">3</RadioButton>
+            <RadioButton Margin="5,5,10,2">4</RadioButton>
+            <RadioButton Margin="5,5,10,2">5</RadioButton>
+        </DockPanel>
     </Grid>
 </UserControl>
