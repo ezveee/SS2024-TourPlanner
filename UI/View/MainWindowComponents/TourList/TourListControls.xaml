@@ -36,7 +36,7 @@
         <ListBox x:Name="TourList" Grid.Row="1" ItemsSource="{Binding TourNames}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" />
+                    <Button Content="{Binding Item2}" Tag="{Binding Item1}" Command="{Binding SelectTourCommand}" CommandParameter="{Binding Item1}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:UI.View.MainWindowComponents.TourDetails.MapDisplay"
+             xmlns:local="clr-namespace:UI.View.MainWindowComponents.TourDetails.MapDisplay" 
+             xmlns:viewmodel="clr-namespace:UI.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        <!--<Image Source="C:\Users\PC\source\repos\SS2024-TourPlanner\UI\Models\img\temp-map-img.png" Height="450" Width="800"/>-->
+        <Image Source="{Binding Image}" Width="800" Height="400"/>
     </Grid>
 </UserControl>

@@ -22,17 +22,20 @@ namespace UI.Models
 
         public List<TourLog> TourLogs { get; set; }
 
+        private IManager<TourLog> manager = new LogManager();
+
         public TourLogModel()
         {
-            IManager<TourLog> manager = new LogManager();
-
             TourLogs = manager.GetAll();
+        }
+
+        public TourLogModel(int id)
+        {
+            TourLogs = manager.GetLogsByTourId(id);
         }
 
         public TourLogModel(int tourId, DateTime date, string comment, int difficulty, float distance, double time, int rating)
         {
-            IManager<TourLog> manager = new LogManager();
-
             TourLog tourLog = new TourLog()
             {
                 TourId = 1, //temp

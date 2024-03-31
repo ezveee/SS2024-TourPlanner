@@ -4,12 +4,16 @@ using Business.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
 using UI.Models;
 using UI.ViewModel.Commands;
 
@@ -19,23 +23,26 @@ namespace UI.ViewModel
     {
         public ICommand OpenTourHandlerCommand { get; set; }
         public ICommand OpenTourLogHandlerCommand { get; set; }
+        public ICommand SelectTourCommand { get; set; }
 
         public MainViewModel()
         {
             OpenTourHandlerCommand = new RelayCommand(OpenTourHandlerWindow);
             OpenTourLogHandlerCommand = new RelayCommand(OpenTourLogHandlerWindow);
+            SelectTourCommand = new RelayCommand(SelectTour);
 
             TourModel tourModel = new TourModel();
             GetTourNames(tourModel);
 
-            TourLogModel logModel = new TourLogModel();
-            GetTourLogData(logModel);
+            ImageModel imageModel = new ImageModel();
+            GetImage(imageModel);
         }
 
-        private List<string> _tourNames;
-        public List<string> TourNames
+        #region Display Tours
+        private List<Tuple<int, string>> _tourNames;
+        public List<Tuple<int, string>> TourNames
         {
-            get { return _tourNames ?? (_tourNames = new List<string>()); }
+            get { return _tourNames ?? (_tourNames = new List<Tuple<int, string>>()); }
             set
             {
                 _tourNames = value;
@@ -43,6 +50,20 @@ namespace UI.ViewModel
             }
         }
 
+        private void GetTourNames(TourModel model)
+        {
+            _tourNames = new List<Tuple<int, string>>();
+
+            foreach (var name in model.Tours)
+            {
+                Tuple<int, string> temp = new Tuple<int, string>(name.TourId, name.Name);
+
+                _tourNames.Add(temp);
+            }
+        }
+        #endregion
+
+        #region Display Tourlogs
         private List<TourLogModel> _tourLogs;
         public List<TourLogModel> TourLogs
         {
@@ -53,9 +74,15 @@ namespace UI.ViewModel
                 OnPropertyChanged(nameof(TourLogs));
             }
         }
-
-        private void GetTourLogData(TourLogModel model)
+        private void SelectTour(object parameter)
         {
+            GetTourLogData((int)parameter);
+        }
+
+        private void GetTourLogData(int id)
+        {
+            TourLogModel model = new TourLogModel();
+
             _tourLogs = new List<TourLogModel>();
 
             foreach (var item in model.TourLogs)
@@ -70,19 +97,32 @@ namespace UI.ViewModel
                     Rating = item.Rating
                 };
 
-                _tourLogs.Add(logModel);
+                if(item.TourId == id)
+                {
+                    _tourLogs.Add(logModel);
+                }
             }
         }
+        #endregion
 
-        private void GetTourNames(TourModel model)
+        #region Displaying Map Image (semi functional)
+        private string _image;
+        public string Image
         {
-            _tourNames = new List<string>();
-
-            foreach (var name in model.Tours)
+            get { return _image; }
+            set
             {
-                _tourNames.Add(name.Name);
+                _image = value;
+                OnPropertyChanged(nameof(Image));
             }
         }
+
+        private void GetImage(ImageModel imageModel)
+        {
+            _image = imageModel.img;
+        }
+        #endregion
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
