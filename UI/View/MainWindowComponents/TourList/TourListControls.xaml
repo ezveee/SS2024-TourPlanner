@@ -33,6 +33,12 @@
         </DockPanel>
 
         <!--LIST OF TOURS-->
-        <DataGrid Grid.Row="1" Name="TourList"/>
+        <ListBox x:Name="TourList" Grid.Row="1" ItemsSource="{Binding TourNames}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

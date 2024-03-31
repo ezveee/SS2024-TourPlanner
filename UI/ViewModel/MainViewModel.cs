@@ -20,25 +20,34 @@ namespace UI.ViewModel
         public ICommand OpenTourHandlerCommand { get; set; }
         public ICommand OpenTourLogHandlerCommand { get; set; }
 
-        #region uh test??
-        private testmodel model = new testmodel();
-
-        private string testtext;
-        public string Testtext
-        {
-            get { return model.output; }
-            set
-            {
-                testtext = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
         public MainViewModel()
         {
             OpenTourHandlerCommand = new RelayCommand(OpenTourHandlerWindow);
             OpenTourLogHandlerCommand = new RelayCommand(OpenTourLogHandlerWindow);
+
+            TourModel model = new TourModel();
+            GetTourNames(model);
+        }
+
+        private List<string> _tourNames;
+        public List<string> TourNames
+        {
+            get { return _tourNames ?? (_tourNames = new List<string>()); }
+            set
+            {
+                _tourNames = value;
+                OnPropertyChanged(nameof(TourNames));
+            }
+        }
+
+        private void GetTourNames(TourModel model)
+        {
+            _tourNames = new List<string>();
+
+            foreach (var name in model.Tours)
+            {
+                _tourNames.Add(name.Name);
+            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
