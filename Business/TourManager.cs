@@ -7,8 +7,8 @@ using DataAccess.Repositories;
 namespace Business;
 public class TourManager : IManager<Tour>
 {
-	private static readonly TourPlannerContext context = new();
-	private readonly IRepository<DataAccess.Models.Tour> _repository = new TourRepository(context);
+	private static readonly TourPlannerContext _context = new();
+	private readonly IRepository<DataAccess.Models.Tour> _repository = new TourRepository(_context);
 
 	public void Create(Tour entity)
 	{
@@ -18,15 +18,15 @@ public class TourManager : IManager<Tour>
 	public List<Tour>? GetAll()
 	{
 		List<DataAccess.Models.Tour> dataAccessTours = _repository.GetAll().ToList();
-		List<Tour> businessLogs = [];
+		List<Tour> businessTours = [];
 
 		foreach (DataAccess.Models.Tour dataAccessTour in dataAccessTours)
 		{
-			Tour businessLog = MapToBusiness(dataAccessTour);
-			businessLogs.Add(businessLog);
+			Tour businessTour = MapToBusiness(dataAccessTour);
+			businessTours.Add(businessTour);
 		}
 
-		return businessLogs;
+		return businessTours;
 	}
 
 	public Tour? GetById(int id)
@@ -46,10 +46,25 @@ public class TourManager : IManager<Tour>
 		_repository.Update(MapToDataAccess(entity));
 	}
 
+	public List<TourLog>? GetLogsByTourId(int id)
+	{
+		List<DataAccess.Models.TourLog> dataAccessLogs = [.. _context.TourLogs.Where(log => log.TourId == id)]; // collection expression to simplify .ToList()
+		List<TourLog> businessLogs = [];
+
+		foreach (DataAccess.Models.TourLog dataAccessLog in dataAccessLogs)
+		{
+			TourLog businessLog = LogManager.MapToBusiness(dataAccessLog);
+			businessLogs.Add(businessLog);
+		}
+
+		return businessLogs;
+	}
+
 	// TODO: ask if automapper is allowed
 	// if so -> should conf be in own mapping project?
 	// dependencies?
-	private static DataAccess.Models.Tour MapToDataAccess(Tour tour)
+	// TODO: if no automapper -> move to util class
+	public static DataAccess.Models.Tour MapToDataAccess(Tour tour)
 	{
 		return new()
 		{
@@ -65,7 +80,8 @@ public class TourManager : IManager<Tour>
 		};
 	}
 
-	private static Tour MapToBusiness(DataAccess.Models.Tour tour)
+	// TODO: if no automapper -> move to util class
+	public static Tour MapToBusiness(DataAccess.Models.Tour tour)
 	{
 		return new()
 		{
