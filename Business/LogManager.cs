@@ -15,12 +15,7 @@ public class LogManager : IManager<TourLog>
 		_repository.Add(MapToDataAccess(entity));
 	}
 
-	public void Delete(TourLog entity)
-	{
-		_repository.Delete(MapToDataAccess(entity));
-	}
-
-	public List<TourLog> GetAll()
+	public List<TourLog>? GetAll()
 	{
 		List<DataAccess.Models.TourLog> dataAccessLogs = _repository.GetAll().ToList();
 		List<TourLog> businessLogs = [];
@@ -34,6 +29,18 @@ public class LogManager : IManager<TourLog>
 		return businessLogs;
 	}
 
+	public TourLog? GetById(int id)
+	{
+		DataAccess.Models.TourLog? log = _repository.GetById(id);
+
+		return log is not null ? MapToBusiness(log) : null;
+	}
+
+	public void Delete(int id)
+	{
+		_repository.Delete(id);
+	}
+
 	public void Update(TourLog entity)
 	{
 		_repository.Update(MapToDataAccess(entity));
@@ -42,7 +49,7 @@ public class LogManager : IManager<TourLog>
 	// TODO: ask if automapper is allowed
 	// if so -> should conf be in own mapping project?
 	// dependencies?
-	private DataAccess.Models.TourLog MapToDataAccess(TourLog log)
+	private static DataAccess.Models.TourLog MapToDataAccess(TourLog log)
 	{
 		return new()
 		{
@@ -59,7 +66,7 @@ public class LogManager : IManager<TourLog>
 		};
 	}
 
-	private TourLog MapToBusiness(DataAccess.Models.TourLog log)
+	private static TourLog MapToBusiness(DataAccess.Models.TourLog log)
 	{
 		return new()
 		{
