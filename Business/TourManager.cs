@@ -36,9 +36,9 @@ public class TourManager : IManager<Tour>
 		return tour is not null ? MapToBusiness(tour) : null;
 	}
 
-	public void Delete(Tour entity)
+	public void Delete(int id)
 	{
-		_repository.Delete(MapToDataAccess(entity));
+		_repository.Delete(id);
 	}
 
 	public void Update(Tour entity)

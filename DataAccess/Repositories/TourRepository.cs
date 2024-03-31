@@ -1,4 +1,5 @@
 ﻿using DataAccess.Data;
+using DataAccess.Exceptions;
 using DataAccess.Interfaces;
 using DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ public class TourRepository(TourPlannerContext context) : IRepository<Tour>
 
 	public IEnumerable<Tour> GetAll()
 	{
-		return [.. context.Tours]; // TODO: be able to explain this
+		return context.Tours.OrderBy(tour => tour.TourId);
 	}
 
 	public void Add(Tour entity)
@@ -31,13 +32,23 @@ public class TourRepository(TourPlannerContext context) : IRepository<Tour>
 
 	public void Update(Tour entity)
 	{
-		context.Entry(entity).State = EntityState.Modified;
-		_ = context.SaveChanges();
+		Tour? existingEntity = context.Tours.Find(entity.TourId);
+		if (existingEntity is not null)
+		{
+			context.Entry(existingEntity).CurrentValues.SetValues(entity);
+			_ = context.SaveChanges();
+		}
 	}
 
-	public void Delete(Tour entity)
+	public void Delete(int id)
 	{
-		_ = context.Tours.Remove(entity);
+		DataAccess.Models.Tour? existingEntity = context.Tours.Find(id);
+		if (existingEntity is null)
+		{
+			throw new DeleteNonExistingEntityException();
+		}
+
+		_ = context.Tours.Remove(existingEntity);
 		_ = context.SaveChanges();
 	}
 }

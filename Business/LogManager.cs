@@ -36,9 +36,9 @@ public class LogManager : IManager<TourLog>
 		return log is not null ? MapToBusiness(log) : null;
 	}
 
-	public void Delete(TourLog entity)
+	public void Delete(int id)
 	{
-		_repository.Delete(MapToDataAccess(entity));
+		_repository.Delete(id);
 	}
 
 	public void Update(TourLog entity)
