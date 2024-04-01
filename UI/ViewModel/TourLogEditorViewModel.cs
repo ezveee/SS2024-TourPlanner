@@ -7,7 +7,7 @@ using UI.ViewModel.Interfaces;
 
 namespace UI.ViewModel;
 
-public class TourLogHandlerViewModel : ICreationHandlerViewModel, INotifyPropertyChanged
+public class TourLogEditorViewModel : ICreationHandlerViewModel, INotifyPropertyChanged
 {
 	public ICommand CreationCommand { get; set; }
 	public ICommand QuitCreationCommand { get; set; }
@@ -16,25 +16,37 @@ public class TourLogHandlerViewModel : ICreationHandlerViewModel, INotifyPropert
 
 	public event PropertyChangedEventHandler? PropertyChanged;
 
-	public TourLogHandlerViewModel(Window window)
+	private readonly TourLogModel _tourLogToModify;
+
+	public TourLogEditorViewModel(Window window, TourLogModel logToModify)
 	{
 		_window = window;
+		_tourLogToModify = logToModify;
+
+		SetTourLogToModifyValues();
 
 		CreationCommand = new RelayCommand(Create);
 		QuitCreationCommand = new RelayCommand(Quit);
 	}
 
-	#region Create a Tourlog
-	#region Tourlog details
-	private int _tourId;
-	public int TourId
+	private void SetTourLogToModifyValues()
 	{
-		get => _tourId;
-		set
+		if (_tourLogToModify == null)
 		{
-			_tourId = value;
-			OnPropertyChanged(nameof(TourId));
+			return;
 		}
+
+		_date = _tourLogToModify.Date;
+		_comment = _tourLogToModify.Comment;
+		_difficulty = _tourLogToModify.Difficulty;
+		_distance = _tourLogToModify.Distance;
+		_time = _tourLogToModify.Time;
+		_rating = _tourLogToModify.Rating;
+	}
+
+	public void CloseWindow(Window window)
+	{
+		_window.Close();
 	}
 
 	private DateTime _date;
@@ -102,23 +114,23 @@ public class TourLogHandlerViewModel : ICreationHandlerViewModel, INotifyPropert
 			OnPropertyChanged(nameof(Rating));
 		}
 	}
-	#endregion
 
 	public void Create(object parameter)
 	{
-		TourLogModel.CreateTourLog(_tourId, _date, _comment, _difficulty, _distance, _time, _rating);
+		_tourLogToModify.Date = _date;
+		_tourLogToModify.Comment = _comment;
+		_tourLogToModify.Difficulty = _difficulty;
+		_tourLogToModify.Distance = _distance;
+		_tourLogToModify.Time = _time;
+		_tourLogToModify.Rating = _rating;
+
+		TourLogModel.UpdateTourLog(_tourLogToModify);
 		CloseWindow(_window);
 	}
-	#endregion
 
 	public void Quit(object parameter)
 	{
 		CloseWindow(_window);
-	}
-
-	public void CloseWindow(Window window)
-	{
-		_window.Close();
 	}
 
 	protected virtual void OnPropertyChanged(string propertyName)
@@ -126,3 +138,4 @@ public class TourLogHandlerViewModel : ICreationHandlerViewModel, INotifyPropert
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 }
+

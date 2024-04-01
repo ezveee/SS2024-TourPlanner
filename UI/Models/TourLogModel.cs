@@ -4,7 +4,7 @@ using Business.Models;
 
 namespace UI.Models;
 
-internal class TourLogModel
+public class TourLogModel
 {
 	public int LogId { get; set; }
 	public int TourId { get; set; }
@@ -29,21 +29,69 @@ internal class TourLogModel
 		TourLogs = manager.GetLogsByTourId(id);
 	}
 
-	public TourLogModel(int tourId, DateTime date, string comment, int difficulty, float distance, double time, int rating)
+	public static void CreateTourLog(int tourId, DateTime date, string comment, int difficulty, float distance, double time, int rating)
 	{
 		TourLog tourLog = new()
 		{
-			TourId = 1, //temp
 			Date = date,
 			Comment = comment,
 			Difficulty = difficulty,
 			Distance = distance,
 			Time = time,
-			Rating = rating
+			Rating = rating,
+			TourId = tourId
 		};
 
+		IManager<TourLog> manager = new LogManager();
 		manager.Create(tourLog);
-		TourLogs = manager.GetAll();
+	}
+
+	public static void UpdateTourLog(TourLogModel model)
+	{
+		if (model is null)
+		{
+			return;
+		}
+
+		TourLog temp = new()
+		{
+			LogId = model.LogId,
+			Date = model.Date,
+			Comment = model.Comment,
+			Difficulty = model.Difficulty,
+			Distance = model.Distance,
+			Time = model.Time,
+			Rating = model.Rating,
+			TourId = model.TourId
+		};
+
+		IManager<TourLog> manager = new LogManager();
+		manager.Update(temp);
+	}
+
+	public static TourLogModel? GetTourLog(int id)
+	{
+		IManager<TourLog> manager = new LogManager();
+		TourLog? temp = manager.GetById(id);
+
+		if (temp == null)
+		{
+			return null;
+		}
+
+		TourLogModel logModel = new()
+		{
+			LogId = id,
+			Date = temp.Date,
+			Comment = temp.Comment,
+			Difficulty = temp.Difficulty,
+			Distance = temp.Distance,
+			Time = temp.Time,
+			Rating = temp.Rating,
+			TourId = temp.TourId
+		};
+
+		return logModel;
 	}
 
 	public void DeleteLog(int tourId)

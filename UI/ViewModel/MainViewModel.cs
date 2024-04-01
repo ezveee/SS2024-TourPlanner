@@ -8,16 +8,19 @@ using UI.ViewModel.Commands;
 
 namespace UI.ViewModel;
 
-internal class MainViewModel : INotifyPropertyChanged
+public class MainViewModel : INotifyPropertyChanged
 {
 	public ICommand OpenTourHandlerCommand { get; set; }
 	public ICommand OpenTourLogHandlerCommand { get; set; }
 	public ICommand DeleteTourCommand { get; set; }
 	public ICommand DeleteTourLogCommand { get; set; }
 	public ICommand SelectTourCommand { get; set; }
-
-	private readonly TourModel tourModel = new();
 	public ICommand ModifyTourCommand { get; set; }
+	public ICommand ModifyTourLogCommand { get; set; }
+
+	public static TourModel? tourToModify = new();
+	public static TourLogModel? tourLogToModify = new();
+
 
 	public MainViewModel()
 	{
@@ -27,11 +30,12 @@ internal class MainViewModel : INotifyPropertyChanged
 		DeleteTourCommand = new RelayCommand(DeleteTour);
 		DeleteTourLogCommand = new RelayCommand(DeleteTourLog);
 		ModifyTourCommand = new RelayCommand(ModifyTour);
+		ModifyTourLogCommand = new RelayCommand(ModifyTourLog);
 
-		TourHandlerViewModel tourHandler = new TourHandlerViewModel();
+		TourHandlerViewModel tourHandler = new();
 		tourHandler.TourCreated += OnTourCreated;
 
-		TourModel m = new TourModel();
+		TourModel m = new();
 		GetTourNames(m);
 
 		ImageModel imageModel = new();
@@ -40,23 +44,34 @@ internal class MainViewModel : INotifyPropertyChanged
 
 	private void OnTourCreated(object sender, EventArgs e)
 	{
-		TourModel m = new TourModel();
+		TourModel m = new();
 		GetTourNames(m);
 	}
-
-	public static TourModel? tourToModify = new TourModel();
 
 	private void ModifyTour(object parameter)
 	{
 		tourToModify = TourModel.GetTour(_selectedTour.Item1);
 
-		if (tourToModify == null) 
+		if (tourToModify == null)
 		{
 			return;
 		}
 
-		TourHandlerWindow tourHandlerWindow = new TourHandlerWindow(tourToModify);
+		TourHandlerWindow tourHandlerWindow = new(tourToModify);
 		tourHandlerWindow.Show();
+	}
+
+	private void ModifyTourLog(object parameter)
+	{
+		tourLogToModify = TourLogModel.GetTourLog(_selectedTourLog.LogId);
+
+		if (tourLogToModify == null)
+		{
+			return;
+		}
+
+		TourLogHandlerWindow tourlogHandlerWindow = new(tourLogToModify);
+		tourlogHandlerWindow.Show();
 	}
 
 	private void DeleteTour(object parameter)
@@ -113,7 +128,7 @@ internal class MainViewModel : INotifyPropertyChanged
 		{
 			_tourNames = value;
 			OnPropertyChanged(nameof(TourNames));
-			TourModel m = new TourModel();
+			TourModel m = new();
 			GetTourNames(m);
 		}
 	}
