@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Business\Business.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="View\TourEditorWindowComponents\" />
-  </ItemGroup>
-
 </Project>

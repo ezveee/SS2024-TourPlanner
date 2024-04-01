@@ -218,9 +218,9 @@ public class MainViewModel : INotifyPropertyChanged
 		}
 	}
 
-	private TourModel _selectedTourData;
+	private static TourModel _selectedTourData;
 
-	public TourModel SelectedTourData
+	public static TourModel SelectedTourData
 	{
 		get => _selectedTourData;
 		set
@@ -228,7 +228,7 @@ public class MainViewModel : INotifyPropertyChanged
 			if (_selectedTourData != value)
 			{
 				_selectedTourData = value;
-				OnPropertyChanged(nameof(SelectedTourData));
+				//OnPropertyChanged(nameof(SelectedTourData));
 			}
 		}
 	}

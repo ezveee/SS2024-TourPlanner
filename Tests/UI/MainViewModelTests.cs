@@ -52,7 +52,6 @@ public class MainViewModelTests
 	[Apartment(ApartmentState.STA)]
 	public void OpenTourHandlerWindow_Command_TourHandlerWindowOpened()
 	{
-		// This test assumes that window opening is handled correctly
 		Assert.DoesNotThrow(() => _viewModel.OpenTourHandlerWindow(null));
 	}
 
@@ -60,7 +59,6 @@ public class MainViewModelTests
 	[Apartment(ApartmentState.STA)]
 	public void OpenTourLogHandlerWindow_Command_TourLogHandlerWindowOpened()
 	{
-		// This test assumes that window opening is handled correctly
 		Assert.DoesNotThrow(() => _viewModel.OpenTourLogHandlerWindow(null));
 	}
 }
