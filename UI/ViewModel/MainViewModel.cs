@@ -109,7 +109,7 @@ public class MainViewModel : INotifyPropertyChanged
 		tourlogHandlerWindow.Show();
 	}
 
-	private void DeleteTour(object parameter)
+	public void DeleteTour(object parameter)
 	{
 		if (_selectedTour is null)
 		{
@@ -140,7 +140,7 @@ public class MainViewModel : INotifyPropertyChanged
 		GetTourNames(m);
 	}
 
-	private void DeleteTourLog(object parameter)
+	public void DeleteTourLog(object parameter)
 	{
 		if (_selectedTourLog is null)
 		{
