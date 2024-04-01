@@ -50,5 +50,19 @@ namespace UI.Models
             manager.Create(tourLog);
             TourLogs = manager.GetAll();
         }
-    }
+
+		public void DeleteLog(int tourId)
+		{
+			IManager<TourLog> manager = new LogManager();
+
+			foreach(var log in TourLogs)
+			{
+				if(log.TourId == tourId)
+				{
+					manager.Delete(tourId);
+				}
+			}
+
+		}
+	}
 }

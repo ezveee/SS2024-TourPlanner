@@ -15,7 +15,6 @@ namespace UI.Models
         public ImageModel()
         {
             ImageLoader imageLoader = new ImageLoader();
-            img = imageLoader.GetImagePath(8);
         }
     }
 }

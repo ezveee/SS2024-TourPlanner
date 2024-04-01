@@ -23,17 +23,15 @@ namespace UI.Models
 
         public List<Tour> Tours { get; set; }
 
+        public IManager<Tour> manager = new TourManager();
+
         public TourModel()
         {
-            IManager<Tour> manager = new TourManager();
-
             Tours = manager.GetAll();
         }
 
         public TourModel(string name, string desc, string from, string to, string transportType, float distance, double time, string info)
         {
-            IManager<Tour> manager = new TourManager();
-
             Tour tour = new Tour()
             {
                 Name = name,
@@ -50,5 +48,11 @@ namespace UI.Models
 
             Tours = manager.GetAll();
         }
+
+		public static void DeleteTour(int id)
+		{
+			IManager<Tour> manager = new TourManager();
+			manager.Delete(id);
+		}
     }
 }

@@ -12,19 +12,46 @@ internal class MainViewModel : INotifyPropertyChanged
 {
 	public ICommand OpenTourHandlerCommand { get; set; }
 	public ICommand OpenTourLogHandlerCommand { get; set; }
+
+	public ICommand DeleteTourCommand { get; set; }
 	public ICommand SelectTourCommand { get; set; }
+
+	TourModel tourModel = new();
 
 	public MainViewModel()
 	{
 		OpenTourHandlerCommand = new RelayCommand(OpenTourHandlerWindow);
 		OpenTourLogHandlerCommand = new RelayCommand(OpenTourLogHandlerWindow);
 		SelectTourCommand = new RelayCommand(SelectTour);
+		DeleteTourCommand = new RelayCommand(DeleteTour);
 
-		TourModel tourModel = new();
 		GetTourNames(tourModel);
 
 		ImageModel imageModel = new();
 		//GetImage(imageModel);
+	}
+
+	private void DeleteTour(object parameter)
+	{
+		foreach(var tour in _tourNames)
+		{
+			if(_selectedTour == null)
+			{
+				return;
+			}
+
+			if (tour.Item1 == _selectedTour.Item1)
+			{
+				TourModel.DeleteTour(tour.Item1);
+				TourLogModel tourLogModel = new TourLogModel();
+				tourLogModel.DeleteLog(tour.Item1);
+			}
+		}
+
+		OnPropertyChanged(nameof(TourNames));
+
+		TourModel m = new TourModel();
+		GetTourNames(m);
 	}
 
 	#region Display Tours
@@ -36,6 +63,7 @@ internal class MainViewModel : INotifyPropertyChanged
 		{
 			_tourNames = value;
 			OnPropertyChanged(nameof(TourNames));
+			GetTourNames(tourModel);
 		}
 	}
 
@@ -61,6 +89,8 @@ internal class MainViewModel : INotifyPropertyChanged
 
 			_tourNames.Add(temp);
 		}
+
+		OnPropertyChanged(nameof(TourNames));
 	}
 	#endregion
 
@@ -77,6 +107,11 @@ internal class MainViewModel : INotifyPropertyChanged
 	}
 	private void SelectTour(object parameter)
 	{
+		if(parameter == null)
+		{
+			return;
+		}
+
 		int tourId = (int)parameter;
 		GetTourLogData(tourId);
 		GetImage(tourId);

@@ -123,9 +123,6 @@ namespace UI.ViewModel
         public void Create(object parameter)
         {
             TourModel model = new TourModel(_name, _desc, _from, _to, _transportType, _distance, _time, _info);
-
-            // TODO: make new items immediately appear in window
-
             CloseWindow(_window);
         }
         #endregion
