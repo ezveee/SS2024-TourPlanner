@@ -1,4 +1,5 @@
-﻿using Business.Models;
+﻿using Business;
+using Business.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -23,7 +24,7 @@ internal class MainViewModel : INotifyPropertyChanged
 		GetTourNames(tourModel);
 
 		ImageModel imageModel = new();
-		GetImage(imageModel);
+		//GetImage(imageModel);
 	}
 
 	#region Display Tours
@@ -76,7 +77,9 @@ internal class MainViewModel : INotifyPropertyChanged
 	}
 	private void SelectTour(object parameter)
 	{
-		GetTourLogData((int)parameter);
+		int tourId = (int)parameter;
+		GetTourLogData(tourId);
+		GetImage(tourId);
 	}
 
 	private void GetTourLogData(int id)
@@ -119,9 +122,11 @@ internal class MainViewModel : INotifyPropertyChanged
 		}
 	}
 
-	private void GetImage(ImageModel imageModel)
+	private void GetImage(int tourId)
 	{
-		_image = imageModel.img;
+		// TODO: change so UI ViewModel doesnt directly access BL functions?
+		ImageLoader imageLoader = new();
+		Image = imageLoader.GetImagePath(tourId);
 	}
 	#endregion
 
