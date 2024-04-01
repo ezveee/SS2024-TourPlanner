@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using UI.ViewModel;
 
-namespace UI.View.MainWindowComponents.TourList
+namespace UI.View.MainWindowComponents.TourList;
+
+/// <summary>
+/// Interaction logic for TourListControls.xaml
+/// </summary>
+public partial class TourListControls : UserControl
 {
-    /// <summary>
-    /// Interaction logic for TourListControls.xaml
-    /// </summary>
-    public partial class TourListControls : UserControl
-    {
-        public TourListControls()
-        {
-            InitializeComponent();
-        }
-    }
+	public TourListControls()
+	{
+		InitializeComponent();
+	}
+
+	private void TourItem_Click(object sender, MouseButtonEventArgs e)
+	{
+		if (sender is TextBlock textBlock && textBlock.Tag is int tourId)
+		{
+			((MainViewModel)DataContext).SelectTourCommand.Execute(tourId);
+		}
+	}
 }
