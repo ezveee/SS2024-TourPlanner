@@ -17,6 +17,7 @@ public class MainViewModelTests
 	}
 
 	[Test]
+	[Apartment(ApartmentState.STA)]
 	public void CurrentView_Set_RaisesPropertyChanged()
 	{
 		// Arrange
@@ -47,7 +48,7 @@ public class MainViewModelTests
 		_viewModel.SelectTour(testTourId);
 
 		// Assert
-		Assert.IsNotNull(_viewModel.SelectedTourData);
-		Assert.That(_viewModel.SelectedTourData.TourId, Is.EqualTo(testTourId));
+		Assert.IsNotNull(MainViewModel.SelectedTourData);
+		Assert.That(MainViewModel.SelectedTourData.TourId, Is.EqualTo(testTourId));
 	}
 }
