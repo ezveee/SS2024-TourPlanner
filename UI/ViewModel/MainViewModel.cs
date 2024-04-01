@@ -1,7 +1,6 @@
 ﻿using Business;
 using Business.Models;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -55,7 +54,7 @@ public class MainViewModel : INotifyPropertyChanged
 
 	public UserControl CurrentView
 	{
-		get { return _currentView; }
+		get => _currentView;
 		set
 		{
 			_currentView = value;
@@ -223,7 +222,7 @@ public class MainViewModel : INotifyPropertyChanged
 
 	public TourModel SelectedTourData
 	{
-		get { return _selectedTourData; }
+		get => _selectedTourData;
 		set
 		{
 			if (_selectedTourData != value)
@@ -234,7 +233,7 @@ public class MainViewModel : INotifyPropertyChanged
 		}
 	}
 
-	private void SelectTour(object parameter)
+	public void SelectTour(object parameter)
 	{
 		if (parameter == null)
 		{
