@@ -106,6 +106,8 @@ public class TourLogHandlerViewModel : ICreationHandlerViewModel, INotifyPropert
 
 	public void Create(object parameter)
 	{
+		TourId = MainViewModel.SelectedTourData.TourId;
+
 		TourLogModel.CreateTourLog(_tourId, _date, _comment, _difficulty, _distance, _time, _rating);
 		CloseWindow(_window);
 	}
@@ -118,7 +120,7 @@ public class TourLogHandlerViewModel : ICreationHandlerViewModel, INotifyPropert
 
 	public void CloseWindow(Window window)
 	{
-		_window.Close();
+		window.Close();
 	}
 
 	protected virtual void OnPropertyChanged(string propertyName)
