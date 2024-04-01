@@ -17,15 +17,14 @@ public class ImageLoader
 			: Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "Images", tour.RouteInformation);
 	}
 
-	public void DeleteImage(int id)
+	public void DeleteImage(string imagePath)
 	{
-		string filePath = GetImagePath(id);
-		if (!File.Exists(filePath))
+		if (!File.Exists(imagePath))
 		{
 			throw new FileNotFoundException("The image file could not be located.");
 		}
 
-		File.Delete(filePath);
+		File.Delete(imagePath);
 	}
 
 	//public Image LoadTourImage(int id)
