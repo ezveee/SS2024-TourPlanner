@@ -1,4 +1,5 @@
 ﻿using global::UI.View.MainWindowComponents.TourDetails.TourData.Options;
+using System.Windows.Controls;
 using UI.ViewModel;
 
 namespace Tests.UI;
@@ -60,6 +61,27 @@ public class MainViewModelTests
 	public void OpenTourLogHandlerWindow_Command_TourLogHandlerWindowOpened()
 	{
 		Assert.DoesNotThrow(() => _viewModel.OpenTourLogHandlerWindow(null));
+	}
+
+	[Test]
+	[Apartment(ApartmentState.STA)]
+	public void CurrentView_Set_RaisesPropertyChanged()
+	{
+		// Arrange
+		bool propertyChangedRaised = false;
+		_viewModel.PropertyChanged += (s, e) =>
+		{
+			if (e.PropertyName == nameof(_viewModel.CurrentView))
+			{
+				propertyChangedRaised = true;
+			}
+		};
+
+		// Act
+		_viewModel.CurrentView = new UserControl();
+
+		// Assert
+		Assert.That(propertyChangedRaised, Is.True);
 	}
 }
 
