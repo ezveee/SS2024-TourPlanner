@@ -33,10 +33,10 @@
         </DockPanel>
 
         <!--LIST OF TOURS-->
-        <ListBox x:Name="TourList" Grid.Row="1" ItemsSource="{Binding TourNames}">
+        <ListBox x:Name="TourList" Grid.Row="1" ItemsSource="{Binding TourNames}" SelectedItem="{Binding SelectedTour}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding Item2}" Tag="{Binding Item1}" Command="{Binding SelectTourCommand}" CommandParameter="{Binding Item1}"/>
+                    <Button Content="{Binding Item2}" Tag="{Binding Item1}" Command="{Binding DataContext.SelectTourCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item1}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
