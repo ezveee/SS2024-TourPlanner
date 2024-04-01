@@ -13,16 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.View.MainWindowComponents.TourDetails.Buttons
+namespace UI.View.MainWindowComponents.TourDetails.TourData.Options;
+/// <summary>
+/// Interaction logic for GeneralControls.xaml
+/// </summary>
+public partial class GeneralControls : UserControl
 {
-    /// <summary>
-    /// Interaction logic for ButtonsControls.xaml
-    /// </summary>
-    public partial class ButtonsControls : UserControl
-    {
-        public ButtonsControls()
-        {
-            InitializeComponent();
-        }
-    }
+	public GeneralControls()
+	{
+		InitializeComponent();
+	}
 }

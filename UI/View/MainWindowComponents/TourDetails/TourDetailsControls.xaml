@@ -4,31 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UI.View.MainWindowComponents.TourDetails"
-             xmlns:buttons="clr-namespace:UI.View.MainWindowComponents.TourDetails.Buttons"
-             xmlns:mapdisplay="clr-namespace:UI.View.MainWindowComponents.TourDetails.MapDisplay"
+             xmlns:tourdata="clr-namespace:UI.View.MainWindowComponents.TourDetails.TourData"
              xmlns:tourlogs="clr-namespace:UI.View.MainWindowComponents.TourDetails.TourLogs"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="7*"/>
+            <RowDefinition Height="8*"/>
             <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
 
         <!--CONTROLBUTTONS-->
         <DockPanel Grid.Row="0">
-            <buttons:ButtonsControls/>
-        </DockPanel>
-
-        <!--MAP-->
-        <DockPanel Grid.Row="1">
-            <mapdisplay:MapDisplayControls/>
+            <tourdata:TourDataControls/>
         </DockPanel>
 
         <!--TOUR LOGS-->
-        <DockPanel Grid.Row="2">
+        <DockPanel Grid.Row="1">
             <tourlogs:TourLogsControls/>
         </DockPanel>
     </Grid>

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.View.MainWindowComponents.TourDetails.MapDisplay
+namespace UI.View.MainWindowComponents.TourDetails.TourData.Options
 {
     /// <summary>
     /// Interaction logic for MapDisplayControls.xaml

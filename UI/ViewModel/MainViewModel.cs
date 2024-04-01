@@ -1,6 +1,7 @@
 ﻿using Business;
 using Business.Models;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using UI.Models;
@@ -20,7 +21,6 @@ public class MainViewModel : INotifyPropertyChanged
 
 	public static TourModel? tourToModify = new();
 	public static TourLogModel? tourLogToModify = new();
-
 
 	public MainViewModel()
 	{
@@ -183,6 +183,21 @@ public class MainViewModel : INotifyPropertyChanged
 		}
 	}
 
+	private TourModel _selectedTourData;
+
+	public TourModel SelectedTourData
+	{
+		get { return _selectedTourData; }
+		set
+		{
+			if (_selectedTourData != value)
+			{
+				_selectedTourData = value;
+				OnPropertyChanged(nameof(SelectedTourData));
+			}
+		}
+	}
+
 	private void SelectTour(object parameter)
 	{
 		if (parameter == null)
@@ -193,6 +208,8 @@ public class MainViewModel : INotifyPropertyChanged
 		int tourId = (int)parameter;
 		GetTourLogData(tourId);
 		GetImage(tourId);
+
+		SelectedTourData = TourModel.GetTour(tourId);
 	}
 
 	private void GetTourLogData(int id)
