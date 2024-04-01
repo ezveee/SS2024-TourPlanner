@@ -23,16 +23,12 @@
                     <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0">General</Button>
-                <Button Grid.Column="1">Route</Button>
-                <Button Grid.Column="2">Misc</Button>
+                <Button Grid.Column="0" Command="{Binding GeneralCommand}">General</Button>
+                <Button Grid.Column="1" Command="{Binding MapCommand}">Route</Button>
+                <Button Grid.Column="2" Command="{Binding MiscCommand}">Misc</Button>
             </Grid>
         </DockPanel>
 
-        <DockPanel Grid.Row="1">
-            <!-- <options:MapDisplayControls/> -->
-            <!--<options:GeneralControls/>-->
-            <options:MiscControls/>
-        </DockPanel>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentView}"/>
     </Grid>
 </UserControl>

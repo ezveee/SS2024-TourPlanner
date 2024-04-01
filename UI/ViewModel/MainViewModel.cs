@@ -3,8 +3,10 @@ using Business.Models;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 using System.Windows.Input;
 using UI.Models;
+using UI.View.MainWindowComponents.TourDetails.TourData.Options;
 using UI.ViewModel.Commands;
 
 namespace UI.ViewModel;
@@ -19,6 +21,10 @@ public class MainViewModel : INotifyPropertyChanged
 	public ICommand ModifyTourCommand { get; set; }
 	public ICommand ModifyTourLogCommand { get; set; }
 
+	public ICommand GeneralCommand { get; set; }
+	public ICommand MapCommand { get; set; }
+	public ICommand MiscCommand { get; set; }
+
 	public static TourModel? tourToModify = new();
 	public static TourLogModel? tourLogToModify = new();
 
@@ -31,6 +37,9 @@ public class MainViewModel : INotifyPropertyChanged
 		DeleteTourLogCommand = new RelayCommand(DeleteTourLog);
 		ModifyTourCommand = new RelayCommand(ModifyTour);
 		ModifyTourLogCommand = new RelayCommand(ModifyTourLog);
+		GeneralCommand = new RelayCommand(SwitchToGeneral);
+		MapCommand = new RelayCommand(SwitchToMap);
+		MiscCommand = new RelayCommand(SwitchToMisc);
 
 		TourHandlerViewModel tourHandler = new();
 		tourHandler.TourCreated += OnTourCreated;
@@ -40,6 +49,33 @@ public class MainViewModel : INotifyPropertyChanged
 
 		ImageModel imageModel = new();
 		//GetImage(imageModel);
+	}
+
+	private UserControl _currentView;
+
+	public UserControl CurrentView
+	{
+		get { return _currentView; }
+		set
+		{
+			_currentView = value;
+			OnPropertyChanged(nameof(CurrentView));
+		}
+	}
+
+	private void SwitchToGeneral(object obj)
+	{
+		CurrentView = new GeneralControls();
+	}
+
+	private void SwitchToMap(object obj)
+	{
+		CurrentView = new MapDisplayControls();
+	}
+
+	private void SwitchToMisc(object obj)
+	{
+		CurrentView = new MiscControls();
 	}
 
 	private void OnTourCreated(object sender, EventArgs e)
@@ -210,6 +246,7 @@ public class MainViewModel : INotifyPropertyChanged
 		GetImage(tourId);
 
 		SelectedTourData = TourModel.GetTour(tourId);
+		CurrentView = new MapDisplayControls();
 	}
 
 	private void GetTourLogData(int id)
