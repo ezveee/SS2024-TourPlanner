@@ -62,17 +62,17 @@ public class MainViewModel : INotifyPropertyChanged
 		}
 	}
 
-	private void SwitchToGeneral(object obj)
+	public void SwitchToGeneral(object obj)
 	{
 		CurrentView = new GeneralControls();
 	}
 
-	private void SwitchToMap(object obj)
+	public void SwitchToMap(object obj)
 	{
 		CurrentView = new MapDisplayControls();
 	}
 
-	private void SwitchToMisc(object obj)
+	public void SwitchToMisc(object obj)
 	{
 		CurrentView = new MiscControls();
 	}
@@ -109,7 +109,7 @@ public class MainViewModel : INotifyPropertyChanged
 		tourlogHandlerWindow.Show();
 	}
 
-	private void DeleteTour(object parameter)
+	public void DeleteTour(object parameter)
 	{
 		if (_selectedTour is null)
 		{
@@ -140,7 +140,7 @@ public class MainViewModel : INotifyPropertyChanged
 		GetTourNames(m);
 	}
 
-	private void DeleteTourLog(object parameter)
+	public void DeleteTourLog(object parameter)
 	{
 		if (_selectedTourLog is null)
 		{
@@ -298,18 +298,18 @@ public class MainViewModel : INotifyPropertyChanged
 
 
 	public event PropertyChangedEventHandler? PropertyChanged;
-	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+	public virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 	{
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 
-	private void OpenTourHandlerWindow(object parameter)
+	public void OpenTourHandlerWindow(object parameter)
 	{
 		TourHandlerWindow tourHandlerWindow = new();
 		tourHandlerWindow.Show();
 	}
 
-	private void OpenTourLogHandlerWindow(object parameter)
+	public void OpenTourLogHandlerWindow(object parameter)
 	{
 		TourLogHandlerWindow tourLogHandlerWindow = new();
 		tourLogHandlerWindow.Show();
