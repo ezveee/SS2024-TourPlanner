@@ -9,7 +9,7 @@ using Business.Models;
 
 namespace UI.Models
 {
-    internal class TourModel
+    public class TourModel
     {
         public int TourId { get; set; }
         public string Name { get; set; } = null!;
@@ -30,24 +30,92 @@ namespace UI.Models
             Tours = manager.GetAll();
         }
 
-        public TourModel(string name, string desc, string from, string to, string transportType, float distance, double time, string info)
-        {
-            Tour tour = new Tour()
-            {
-                Name = name,
-                Description = desc,
-                From = from,
-                To = to,
-                TransportType = transportType,
-                Distance = distance,
-                EstimatedTime = time,
-                RouteInformation = info
-            };
+        //public TourModel(string name, string desc, string from, string to, string transportType, float distance, double time, string info)
+        //{
+        //    Tour tour = new Tour()
+        //    {
+        //        Name = name,
+        //        Description = desc,
+        //        From = from,
+        //        To = to,
+        //        TransportType = transportType,
+        //        Distance = distance,
+        //        EstimatedTime = time,
+        //        RouteInformation = info
+        //    };
 
-            manager.Create(tour);
+        //    manager.Create(tour);
 
-            Tours = manager.GetAll();
-        }
+        //    Tours = manager.GetAll();
+        //}
+
+		public static void CreateTour(string name, string desc, string from, string to, string transportType, float distance, double time, string info)
+		{
+			Tour tour = new Tour()
+			{
+				Name = name,
+				Description = desc,
+				From = from,
+				To = to,
+				TransportType = transportType,
+				Distance = distance,
+				EstimatedTime = time,
+				RouteInformation = info
+			};
+
+			IManager<Tour> manager = new TourManager();
+			manager.Create(tour);
+		}
+
+		public static void UpdateTour(TourModel model)
+		{
+			if (model == null)
+			{
+				return;
+			}
+
+			Tour temp = new()
+			{
+				TourId = model.TourId,
+				Name = model.Name,
+				Description = model.Description,
+				From = model.From,
+				To = model.To,
+				TransportType = model.TransportType,
+				Distance = model.Distance,
+				EstimatedTime = model.EstimatedTime,
+				RouteInformation = model.RouteInformation
+			};
+
+			IManager<Tour> manager = new TourManager();
+			manager.Update(temp);
+		}
+
+		public static TourModel? GetTour(int id)
+		{
+			IManager<Tour> manager = new TourManager();
+			Tour? temp = manager.GetById(id);
+
+			if(temp == null)
+			{
+				return null;
+			}
+
+			TourModel tourModel = new()
+			{
+				TourId = id,
+				Name = temp.Name, 
+				Description = temp.Description,
+				From = temp.From,
+				To = temp.To,
+				TransportType = temp.TransportType,
+				Distance = temp.Distance,
+				EstimatedTime = temp.EstimatedTime,
+				RouteInformation = temp.RouteInformation
+			};
+
+			return tourModel;
+		}
 
 		public static void DeleteTour(int id)
 		{

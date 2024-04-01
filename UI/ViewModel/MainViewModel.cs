@@ -12,11 +12,10 @@ internal class MainViewModel : INotifyPropertyChanged
 {
 	public ICommand OpenTourHandlerCommand { get; set; }
 	public ICommand OpenTourLogHandlerCommand { get; set; }
-
 	public ICommand DeleteTourCommand { get; set; }
 	public ICommand SelectTourCommand { get; set; }
 
-	TourModel tourModel = new();
+	public ICommand ModifyTourCommand { get; set; }
 
 	public MainViewModel()
 	{
@@ -24,11 +23,37 @@ internal class MainViewModel : INotifyPropertyChanged
 		OpenTourLogHandlerCommand = new RelayCommand(OpenTourLogHandlerWindow);
 		SelectTourCommand = new RelayCommand(SelectTour);
 		DeleteTourCommand = new RelayCommand(DeleteTour);
+		ModifyTourCommand = new RelayCommand(ModifyTour);
 
-		GetTourNames(tourModel);
+		TourHandlerViewModel tourHandler = new TourHandlerViewModel();
+		tourHandler.TourCreated += OnTourCreated;
+
+		TourModel m = new TourModel();
+		GetTourNames(m);
 
 		ImageModel imageModel = new();
 		//GetImage(imageModel);
+	}
+
+	private void OnTourCreated(object sender, EventArgs e)
+	{
+		TourModel m = new TourModel();
+		GetTourNames(m);
+	}
+
+	public static TourModel? tourToModify = new TourModel();
+
+	private void ModifyTour(object parameter)
+	{
+		tourToModify = TourModel.GetTour(_selectedTour.Item1);
+
+		if (tourToModify == null) 
+		{
+			return;
+		}
+
+		TourHandlerWindow tourHandlerWindow = new TourHandlerWindow(tourToModify);
+		tourHandlerWindow.Show();
 	}
 
 	private void DeleteTour(object parameter)
@@ -42,6 +67,7 @@ internal class MainViewModel : INotifyPropertyChanged
 
 			if (tour.Item1 == _selectedTour.Item1)
 			{
+				// TODO: delete image function implemented here
 				TourModel.DeleteTour(tour.Item1);
 				TourLogModel tourLogModel = new TourLogModel();
 				tourLogModel.DeleteLog(tour.Item1);
@@ -63,7 +89,8 @@ internal class MainViewModel : INotifyPropertyChanged
 		{
 			_tourNames = value;
 			OnPropertyChanged(nameof(TourNames));
-			GetTourNames(tourModel);
+			TourModel m = new TourModel();
+			GetTourNames(m);
 		}
 	}
 

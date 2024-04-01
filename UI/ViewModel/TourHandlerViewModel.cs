@@ -23,6 +23,8 @@ namespace UI.ViewModel
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+		public event EventHandler TourCreated;
+
         public TourHandlerViewModel(Window window)
         {
             _window = window;
@@ -31,8 +33,13 @@ namespace UI.ViewModel
             QuitCreationCommand = new RelayCommand(Quit);
         }
 
-        #region Create new Tour
-        private string _name;
+		public TourHandlerViewModel()
+		{
+			
+		}
+
+		#region Create new Tour
+		private string _name;
         public string Name
         {
             get { return _name; }
@@ -122,8 +129,10 @@ namespace UI.ViewModel
 
         public void Create(object parameter)
         {
-            TourModel model = new TourModel(_name, _desc, _from, _to, _transportType, _distance, _time, _info);
+            TourModel.CreateTour(_name, _desc, _from, _to, _transportType, _distance, _time, _info);
             CloseWindow(_window);
+
+			TourCreated?.Invoke(this, EventArgs.Empty);
         }
         #endregion
 
