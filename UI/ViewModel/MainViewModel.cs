@@ -61,24 +61,31 @@ internal class MainViewModel : INotifyPropertyChanged
 
 	private void DeleteTour(object parameter)
 	{
-		foreach (Tuple<int, string> tour in _tourNames)
+		if (_selectedTour is null)
 		{
-			if (_selectedTour == null)
-			{
-				return;
-			}
-
-			if (tour.Item1 == _selectedTour.Item1)
-			{
-				// TODO: delete image function implemented here
-				TourModel.DeleteTour(tour.Item1);
-				TourLogModel tourLogModel = new();
-				tourLogModel.DeleteLog(tour.Item1);
-			}
+			return;
 		}
 
-		OnPropertyChanged(nameof(TourNames));
+		// TODO: fix image deletion logic
+		// could not delte image as it was opened
+		// close image once tour is deleted
 
+		// TODO: change so ViewModel doesnt directly access BL function
+		//ImageLoader imageLoader = new();
+		//string imagePath = imageLoader.GetImagePath(_selectedTour.Item1);
+		//Image = null;
+		//imageLoader.DeleteImage(imagePath);
+
+		TourModel.DeleteTour(_selectedTour.Item1);
+		if (_tourLogs.Count > 0)
+		{
+			TourLogModel tourLogModel = new();
+			tourLogModel.DeleteLog(_selectedTour.Item1);
+		}
+
+		_selectedTour = null;
+
+		OnPropertyChanged(nameof(TourNames));
 		TourModel m = new();
 		GetTourNames(m);
 	}
@@ -111,7 +118,7 @@ internal class MainViewModel : INotifyPropertyChanged
 		}
 	}
 
-	private Tuple<int, string> _selectedTour;
+	private Tuple<int, string>? _selectedTour;
 	public Tuple<int, string> SelectedTour
 	{
 		get => _selectedTour;
@@ -202,8 +209,8 @@ internal class MainViewModel : INotifyPropertyChanged
 	#endregion
 
 	#region Displaying Map Image (semi functional)
-	private string _image;
-	public string Image
+	private string? _image;
+	public string? Image
 	{
 		get => _image;
 		set
