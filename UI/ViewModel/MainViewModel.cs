@@ -85,6 +85,11 @@ public class MainViewModel : INotifyPropertyChanged
 
 	private void ModifyTour(object parameter)
 	{
+		if (_selectedTour is null)
+		{
+			return;
+		}
+
 		tourToModify = TourModel.GetTour(_selectedTour.Item1);
 
 		if (tourToModify == null)
@@ -98,6 +103,11 @@ public class MainViewModel : INotifyPropertyChanged
 
 	private void ModifyTourLog(object parameter)
 	{
+		if (_selectedTourLog is null)
+		{
+			return;
+		}
+
 		tourLogToModify = TourLogModel.GetTourLog(_selectedTourLog.LogId);
 
 		if (tourLogToModify == null)
@@ -311,6 +321,11 @@ public class MainViewModel : INotifyPropertyChanged
 
 	public void OpenTourLogHandlerWindow(object parameter)
 	{
+		if (_selectedTour is null)
+		{
+			return;
+		}
+
 		TourLogHandlerWindow tourLogHandlerWindow = new();
 		tourLogHandlerWindow.Show();
 	}

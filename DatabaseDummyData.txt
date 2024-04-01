@@ -1,0 +1,190 @@
+-- TOURS
+
+INSERT INTO tours (name, description, "from", "to", transporttype, distance, estimatedtime, routeinformation)
+VALUES 
+    ('Mountain Hike', 'A scenic hike through the mountains', 'Mountain Village', 'Summit Peak', 'Hiking', 10.5, 4.5, 'mountain_hike_route.png'),
+    ('City Bike Tour', 'Explore the city by bike', 'City Center', 'Historical District', 'Biking', 8.2, 2.5, 'city_bike_tour_route.png'),
+    ('Beach Day Trip', 'Relaxing day at the beach', 'Beach Resort', 'Sunset Cove', 'Car', 15.8, 1.5, 'beach_day_trip_route.png'),
+    ('River Rafting Adventure', 'Thrilling rafting experience', 'River Basecamp', 'Rapids End', 'Rafting', 12.3, 3.75, 'river_rafting_route.png'),
+    ('Forest Hike', 'Exploring the lush green forest trails', 'Forest Entrance', 'Clearing', 'Hiking', 7.6, 3.0, 'forest_hike_route.png'),
+    ('Historical Walking Tour', 'Discover the rich history of the city', 'City Hall', 'Ancient Ruins', 'Walking', 5.0, 2.0, 'historical_walking_tour_route.png'),
+    ('Wine Tasting Tour', 'Visit local vineyards and sample wines', 'Winery A', 'Winery B', 'Car', 20.1, 2.5, 'wine_tasting_tour_route.png'),
+    ('Countryside Bike Ride', 'Enjoy the scenic views of the countryside', 'Village Center', 'Farm Fields', 'Biking', 12.8, 3.0, 'countryside_bike_ride_route.png'),
+    ('Mountain Climbing Expedition', 'Challenge yourself with a mountain climb', 'Basecamp', 'Peak Summit', 'Climbing', 18.5, 8.0, 'mountain_climbing_expedition_route.png'),
+    ('Kayaking Adventure', 'Paddle through scenic waterways', 'Kayak Rental Shop', 'River Junction', 'Kayaking', 9.3, 2.5, 'kayaking_adventure_route.png'),
+    ('Nature Photography Tour', 'Capture the beauty of nature', 'Nature Reserve', 'Wildlife Sanctuary', 'Walking', 6.7, 2.0, 'nature_photography_tour_route.png'),
+    ('Desert Safari', 'Explore the desert dunes in a 4x4', 'Desert Basecamp', 'Oasis', 'Off-road Vehicle', 25.0, 4.0, 'desert_safari_route.png'),
+    ('Fishing Trip', 'Relaxing day of fishing on the lake', 'Fishing Dock', 'Fishing Spot', 'Boat', 10.0, 4.0, 'fishing_trip_route.png'),
+    ('Skiing Adventure', 'Hit the slopes for an exhilarating skiing experience', 'Ski Resort', 'Mountain Peak', 'Ski Lift', 15.5, 6.0, 'skiing_adventure_route.png'),
+    ('Scuba Diving Expedition', 'Dive into the depths of the ocean', 'Dive Center', 'Reef', 'Boat', 30.0, 3.0, 'scuba_diving_expedition_route.png'),
+    ('Cultural Food Tour', 'Taste the flavors of the local cuisine', 'Food Market', 'Street Food Stalls', 'Walking', 4.5, 2.0, 'cultural_food_tour_route.png'),
+    ('Paragliding Experience', 'Soar through the skies with a paraglider', 'Paragliding Launch Site', 'Landing Zone', 'Paraglider', 12.0, 1.0, 'paragliding_experience_route.png'),
+    ('Hot Air Balloon Ride', 'Enjoy breathtaking views from a hot air balloon', 'Launch Site', 'Landing Site', 'Hot Air Balloon', 50.0, 3.0, 'hot_air_balloon_ride_route.png'),
+    ('Sightseeing Bus Tour', 'Explore the city's landmarks from a comfortable bus', 'Tourist Center', 'Landmarks', 'Bus', 25.0, 4.0, 'sightseeing_bus_tour_route.png'),
+    ('Rock Climbing Adventure', 'Conquer challenging rock faces', 'Rock Climbing Gym', 'Crag', 'Rock Climbing', 6.5, 3.0, 'rock_climbing_adventure_route.png');
+
+
+-- TOURLOGS
+
+-- Inserting data into the 'tourlogs' table for Mountain Hike
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-03-29 09:30:00', 'Amazing views, moderate difficulty', 7, 10.5, 4.25, 4, 1),
+    ('2024-04-03 09:00:00', 'Challenging terrain but worth the effort', 8, 10.5, 5.0, 4, 1),
+    ('2024-04-06 08:45:00', 'Beautiful sunrise at the peak', 9, 10.5, 6.0, 5, 1),
+    ('2024-04-10 10:30:00', 'Encountered wildlife along the trail', 6, 10.5, 4.75, 4, 1);
+
+-- Inserting data into the 'tourlogs' table for City Bike Tour
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-03-30 14:00:00', 'Great experience exploring the city', 3, 8.2, 2.75, 5, 2),
+    ('2024-04-04 12:30:00', 'Stunning views along the bike trails', 4, 8.2, 2.0, 5, 2),
+    ('2024-04-07 10:15:00', 'Visited famous landmarks and monuments', 2, 8.2, 2.25, 5, 2),
+    ('2024-04-11 13:00:00', 'Enjoyed local cuisine at a street market', 3, 8.2, 2.5, 4, 2);
+
+-- Inserting data into the 'tourlogs' table for Beach Day Trip
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-01 11:00:00', 'Beautiful weather and clear water', 2, 15.8, 1.25, 5, 3),
+    ('2024-04-05 10:30:00', 'Relaxed and enjoyed the sunshine', 2, 15.8, 1.5, 5, 3),
+    ('2024-04-09 11:45:00', 'Building sandcastles and beach games', 1, 15.8, 1.0, 4, 3),
+    ('2024-04-13 14:30:00', 'Sunset picnic with friends', 2, 15.8, 1.75, 5, 3);
+
+-- Inserting data into the 'tourlogs' table for River Rafting Adventure
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-02 10:45:00', 'Adrenaline-pumping adventure!', 9, 12.3, 3.5, 4, 4),
+    ('2024-04-06 11:15:00', 'Exciting rapids with heart-pounding moments', 9, 12.3, 4.0, 4, 4),
+    ('2024-04-10 12:30:00', 'Teamwork and cooperation during the trip', 8, 12.3, 3.75, 5, 4),
+    ('2024-04-14 09:00:00', 'Refreshed and rejuvenated by the river', 7, 12.3, 3.25, 4, 4);
+
+-- Inserting data into the 'tourlogs' table for Forest Hike
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-03-30 09:00:00', 'Beautiful scenery with diverse wildlife', 6, 7.6, 3.0, 4, 5),
+    ('2024-04-05 11:30:00', 'Peaceful hike through the tranquil forest', 5, 7.6, 2.5, 4, 5),
+    ('2024-04-09 10:15:00', 'Discovered hidden waterfalls along the trail', 7, 7.6, 3.5, 5, 5),
+    ('2024-04-14 08:45:00', 'Challenging climb to reach the summit', 8, 7.6, 4.0, 4, 5);
+
+-- Inserting data into the 'tourlogs' table for Historical Walking Tour
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-03-31 11:00:00', 'Fascinating insights into the city\'s history', 3, 5.0, 2.0, 5, 6),
+    ('2024-04-06 14:30:00', 'Strolled through cobblestone streets and alleys', 2, 5.0, 1.5, 5, 6),
+    ('2024-04-10 12:45:00', 'Visited ancient ruins and archaeological sites', 4, 5.0, 2.5, 4, 6),
+    ('2024-04-15 10:15:00', 'Enjoyed local delicacies at historic cafes', 3, 5.0, 2.0, 4, 6);
+
+-- Inserting data into the 'tourlogs' table for Wine Tasting Tour
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-01 14:00:00', 'Delightful wine tasting experience', 2, 20.1, 2.5, 5, 7),
+    ('2024-04-06 11:30:00', 'Learned about wine-making process', 3, 20.1, 2.75, 5, 7),
+    ('2024-04-11 15:00:00', 'Sampled a variety of local and exotic wines', 2, 20.1, 2.25, 5, 7),
+    ('2024-04-16 13:45:00', 'Breathtaking views of vineyards and countryside', 2, 20.1, 2.0, 4, 7);
+
+-- Inserting data into the 'tourlogs' table for Countryside Bike Ride
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-02 10:00:00', 'Scenic ride through picturesque countryside', 4, 12.8, 3.0, 4, 8),
+    ('2024-04-07 13:30:00', 'Relaxed and enjoyed the fresh air', 3, 12.8, 2.5, 5, 8),
+    ('2024-04-12 09:45:00', 'Discovered charming villages along the route', 5, 12.8, 3.5, 4, 8),
+    ('2024-04-17 11:15:00', 'Visited local farms and tasted farm-fresh produce', 4, 12.8, 3.0, 5, 8);
+
+-- Inserting data into the 'tourlogs' table for Mountain Climbing Expedition
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-03 07:00:00', 'Reached the basecamp after a challenging ascent', 8, 18.5, 7.0, 4, 9),
+    ('2024-04-07 10:30:00', 'Summited the peak with breathtaking views', 9, 18.5, 8.0, 5, 9),
+    ('2024-04-11 09:45:00', 'Navigated through difficult terrain with the team', 8, 18.5, 7.5, 4, 9),
+    ('2024-04-15 11:00:00', 'Shared memorable experiences with fellow climbers', 7, 18.5, 6.5, 5, 9);
+
+-- Inserting data into the 'tourlogs' table for Kayaking Adventure
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-04 12:00:00', 'Exciting kayak adventure along the river', 4, 9.3, 2.5, 4, 10),
+    ('2024-04-08 11:30:00', 'Explored hidden coves and remote areas', 5, 9.3, 3.0, 4, 10),
+    ('2024-04-12 10:45:00', 'Encountered wildlife along the riverbanks', 6, 9.3, 3.5, 5, 10),
+    ('2024-04-16 09:30:00', 'Tranquil paddle through calm waters', 3, 9.3, 2.0, 5, 10);
+
+-- Inserting data into the 'tourlogs' table for Nature Photography Tour
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-05 08:00:00', 'Captured stunning shots of wildlife and landscapes', 5, 6.7, 2.0, 4, 11),
+    ('2024-04-09 10:30:00', 'Explored diverse ecosystems for unique shots', 6, 6.7, 2.5, 4, 11),
+    ('2024-04-13 12:15:00', 'Chased the perfect light for photography', 4, 6.7, 2.25, 5, 11),
+    ('2024-04-17 11:45:00', 'Immersed in nature while capturing moments', 5, 6.7, 2.75, 5, 11);
+
+-- Inserting data into the 'tourlogs' table for Desert Safari
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-06 09:00:00', 'Thrilling ride through the desert dunes', 7, 25.0, 4.5, 4, 12),
+    ('2024-04-11 11:30:00', 'Spectacular views of the desert landscape', 8, 25.0, 5.0, 5, 12),
+    ('2024-04-16 10:45:00', 'Cultural insights into desert life and traditions', 6, 25.0, 4.0, 4, 12),
+    ('2024-04-20 12:00:00', 'Admired the starry night sky in the desert', 5, 25.0, 3.5, 5, 12);
+
+-- Inserting data into the 'tourlogs' table for Fishing Trip
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-07 08:00:00', 'Relaxing day of fishing with a good catch', 3, 10.0, 4.0, 5, 13),
+    ('2024-04-12 09:30:00', 'Exciting moments reeling in big catches', 4, 10.0, 3.5, 4, 13),
+    ('2024-04-17 10:45:00', 'Shared fishing stories and camaraderie', 3, 10.0, 4.25, 5, 13),
+    ('2024-04-22 12:00:00', 'Tranquil fishing experience on a sunny day', 2, 10.0, 4.5, 5, 13);
+
+-- Inserting data into the 'tourlogs' table for Skiing Adventure
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-08 09:00:00', 'Exciting ski runs with fresh powder', 7, 15.5, 5.0, 4, 14),
+    ('2024-04-13 11:30:00', 'Perfect weather for a day on the slopes', 6, 15.5, 4.5, 5, 14),
+    ('2024-04-18 10:45:00', 'Thrilling downhill descents and jumps', 8, 15.5, 5.5, 4, 14),
+    ('2024-04-23 12:00:00', 'Admired panoramic views from the mountaintop', 5, 15.5, 4.0, 5, 14);
+
+-- Inserting data into the 'tourlogs' table for Scuba Diving Expedition
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-09 08:00:00', 'Dived into the depths of the ocean', 8, 30.0, 3.0, 4, 15),
+    ('2024-04-14 10:30:00', 'Explored colorful coral reefs and marine life', 7, 30.0, 3.5, 5, 15),
+    ('2024-04-19 11:45:00', 'Encountered exotic underwater species', 9, 30.0, 4.0, 4, 15),
+    ('2024-04-24 13:00:00', 'Mesmerized by the beauty of the underwater world', 8, 30.0, 3.75, 5, 15);
+
+-- Inserting data into the 'tourlogs' table for Cultural Food Tour
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-10 11:00:00', 'Tasted delicious street food specialties', 3, 4.5, 2.0, 5, 16),
+    ('2024-04-15 13:30:00', 'Explored vibrant food markets and stalls', 4, 4.5, 2.5, 4, 16),
+    ('2024-04-20 10:45:00', 'Sampled authentic dishes from local eateries', 3, 4.5, 2.25, 5, 16),
+    ('2024-04-25 09:00:00', 'Indulged in a culinary journey of flavors', 4, 4.5, 2.75, 5, 16);
+
+-- Inserting data into the 'tourlogs' table for Paragliding Experience
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-11 07:00:00', 'Soared through the skies with breathtaking views', 8, 12.0, 1.5, 4, 17),
+    ('2024-04-16 08:30:00', 'Felt the rush of adrenaline during the flight', 9, 12.0, 2.0, 5, 17),
+    ('2024-04-21 09:45:00', 'Gained a new perspective of the landscape', 7, 12.0, 1.75, 4, 17),
+    ('2024-04-26 11:00:00', 'Enjoyed the tranquility of the sky', 6, 12.0, 1.25, 5, 17);
+
+-- Inserting data into the 'tourlogs' table for Hot Air Balloon Ride
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-12 06:00:00', 'Enjoyed breathtaking views from the hot air balloon', 5, 50.0, 3.0, 4, 18),
+    ('2024-04-17 07:30:00', 'Witnessed stunning landscapes from above', 6, 50.0, 3.5, 5, 18),
+    ('2024-04-22 08:45:00', 'Captured mesmerizing aerial photographs', 7, 50.0, 4.0, 4, 18),
+    ('2024-04-27 10:00:00', 'Marvelled at the sunrise during the flight', 5, 50.0, 3.25, 5, 18);
+
+-- Inserting data into the 'tourlogs' table for Sightseeing Bus Tour
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-13 09:00:00', 'Explored famous landmarks and attractions', 3, 25.0, 3.0, 4, 19),
+    ('2024-04-18 10:30:00', 'Learned about the city\'s history and culture', 4, 25.0, 3.5, 5, 19),
+    ('2024-04-23 11:45:00', 'Took memorable photos from the open-top bus', 3, 25.0, 3.25, 5, 19),
+    ('2024-04-28 13:00:00', 'Enjoyed a comfortable and informative tour', 2, 25.0, 2.75, 4, 19);
+
+-- Inserting data into the 'tourlogs' table for Rock Climbing Adventure
+INSERT INTO tourlogs (date, comment, difficulty, distance, time, rating, tourid)
+VALUES
+    ('2024-04-14 08:00:00', 'Challenging climbs with breathtaking views', 7, 6.5, 3.0, 4, 20),
+    ('2024-04-19 09:30:00', 'Conquered difficult routes and achieved new heights', 8, 6.5, 3.5, 5, 20),
+    ('2024-04-24 10:45:00', 'Enjoyed the thrill of outdoor rock climbing', 6, 6.5, 3.25, 4, 20),
+    ('2024-04-29 12:00:00', 'Experienced the rush of adrenaline while climbing', 8, 5.6, 5.5, 4, 20);
+
+
+
