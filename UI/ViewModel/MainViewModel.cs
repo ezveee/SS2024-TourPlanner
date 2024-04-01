@@ -14,9 +14,10 @@ internal class MainViewModel : INotifyPropertyChanged
 	public ICommand OpenTourLogHandlerCommand { get; set; }
 
 	public ICommand DeleteTourCommand { get; set; }
+	public ICommand DeleteTourLogCommand { get; set; }
 	public ICommand SelectTourCommand { get; set; }
 
-	TourModel tourModel = new();
+	private readonly TourModel tourModel = new();
 
 	public MainViewModel()
 	{
@@ -24,6 +25,7 @@ internal class MainViewModel : INotifyPropertyChanged
 		OpenTourLogHandlerCommand = new RelayCommand(OpenTourLogHandlerWindow);
 		SelectTourCommand = new RelayCommand(SelectTour);
 		DeleteTourCommand = new RelayCommand(DeleteTour);
+		DeleteTourLogCommand = new RelayCommand(DeleteTourLog);
 
 		GetTourNames(tourModel);
 
@@ -33,9 +35,9 @@ internal class MainViewModel : INotifyPropertyChanged
 
 	private void DeleteTour(object parameter)
 	{
-		foreach(var tour in _tourNames)
+		foreach (Tuple<int, string> tour in _tourNames)
 		{
-			if(_selectedTour == null)
+			if (_selectedTour == null)
 			{
 				return;
 			}
@@ -43,15 +45,29 @@ internal class MainViewModel : INotifyPropertyChanged
 			if (tour.Item1 == _selectedTour.Item1)
 			{
 				TourModel.DeleteTour(tour.Item1);
-				TourLogModel tourLogModel = new TourLogModel();
+				TourLogModel tourLogModel = new();
 				tourLogModel.DeleteLog(tour.Item1);
 			}
 		}
 
 		OnPropertyChanged(nameof(TourNames));
 
-		TourModel m = new TourModel();
+		TourModel m = new();
 		GetTourNames(m);
+	}
+
+	private void DeleteTourLog(object parameter)
+	{
+		if (_selectedTourLog is null)
+		{
+			return;
+		}
+
+		TourLogModel tourLogModel = new();
+		tourLogModel.DeleteLog(_selectedTourLog.LogId);
+
+		OnPropertyChanged(nameof(TourLogs));
+		GetTourLogData(_selectedTour.Item1);
 	}
 
 	#region Display Tours
@@ -105,9 +121,21 @@ internal class MainViewModel : INotifyPropertyChanged
 			OnPropertyChanged(nameof(TourLogs));
 		}
 	}
+
+	private TourLogModel _selectedTourLog;
+	public TourLogModel SelectedTourLog
+	{
+		get => _selectedTourLog;
+		set
+		{
+			_selectedTourLog = value;
+			OnPropertyChanged(nameof(SelectedTourLog));
+		}
+	}
+
 	private void SelectTour(object parameter)
 	{
-		if(parameter == null)
+		if (parameter == null)
 		{
 			return;
 		}
@@ -120,13 +148,13 @@ internal class MainViewModel : INotifyPropertyChanged
 	private void GetTourLogData(int id)
 	{
 		TourLogModel model = new();
-
 		_tourLogs = [];
 
 		foreach (TourLog item in model.TourLogs)
 		{
 			TourLogModel logModel = new()
 			{
+				LogId = item.LogId,
 				Date = item.Date,
 				Comment = item.Comment,
 				Difficulty = item.Difficulty,
