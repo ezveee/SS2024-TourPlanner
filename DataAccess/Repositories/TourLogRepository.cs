@@ -43,7 +43,8 @@ public class TourLogRepository(TourPlannerContext context) : IRepository<TourLog
 
 	public void Delete(int id)
 	{
-		DataAccess.Models.TourLog? existingEntity = context.TourLogs.Find(id);
+		// TODO: try catch
+		TourLog? existingEntity = context.TourLogs.Find(id);
 		if (existingEntity is null)
 		{
 			throw new DeleteNonExistingEntityException();

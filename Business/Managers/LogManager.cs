@@ -1,18 +1,21 @@
-﻿using Business.Interfaces;
+﻿using Business.Extensions;
+using Business.Interfaces;
 using Business.Models;
 using DataAccess.Data;
 using DataAccess.Interfaces;
 using DataAccess.Repositories;
 
-namespace Business;
+namespace Business.Managers;
 public class LogManager : IManager<TourLog>
 {
+	// TODO: i dont think thats supposed to be here either :|
 	private static readonly TourPlannerContext _context = new();
+	// TODO: bruh thats not testable, change that shit
 	private readonly IRepository<DataAccess.Models.TourLog> _repository = new TourLogRepository(_context);
 
 	public void Create(TourLog entity)
 	{
-		_repository.Add(MapToDataAccess(entity));
+		_repository.Add(entity.MapLogToDataAccess());
 	}
 
 	public List<TourLog>? GetAll()
@@ -22,7 +25,7 @@ public class LogManager : IManager<TourLog>
 
 		foreach (DataAccess.Models.TourLog dataAccessLog in dataAccessLogs)
 		{
-			TourLog businessLog = MapToBusiness(dataAccessLog);
+			TourLog businessLog = dataAccessLog.MapLogToBusiness();
 			businessLogs.Add(businessLog);
 		}
 
@@ -33,7 +36,7 @@ public class LogManager : IManager<TourLog>
 	{
 		DataAccess.Models.TourLog? log = _repository.GetById(id);
 
-		return log is not null ? MapToBusiness(log) : null;
+		return log?.MapLogToBusiness();
 	}
 
 	public void Delete(int id)
@@ -43,7 +46,7 @@ public class LogManager : IManager<TourLog>
 
 	public void Update(TourLog entity)
 	{
-		_repository.Update(MapToDataAccess(entity));
+		_repository.Update(entity.MapLogToDataAccess());
 	}
 
 	public List<TourLog>? GetLogsByTourId(int id)
@@ -53,45 +56,10 @@ public class LogManager : IManager<TourLog>
 
 		foreach (DataAccess.Models.TourLog dataAccessLog in dataAccessLogs)
 		{
-			TourLog businessLog = MapToBusiness(dataAccessLog);
+			TourLog businessLog = dataAccessLog.MapLogToBusiness();
 			businessLogs.Add(businessLog);
 		}
 
 		return businessLogs;
-	}
-
-	// TODO: ask if automapper is allowed
-	// if so -> should conf be in own mapping project?
-	// dependencies?
-	// TODO: if no automapper -> move to util class
-	public static DataAccess.Models.TourLog MapToDataAccess(TourLog log)
-	{
-		return new()
-		{
-			LogId = log.LogId,
-			Date = log.Date,
-			Comment = log.Comment,
-			Difficulty = log.Difficulty,
-			Distance = log.Distance,
-			Time = log.Time,
-			Rating = log.Rating,
-			TourId = log.TourId,
-		};
-	}
-
-	// TODO: if no automapper -> move to util class
-	public static TourLog MapToBusiness(DataAccess.Models.TourLog log)
-	{
-		return new()
-		{
-			LogId = log.LogId,
-			Date = log.Date,
-			Comment = log.Comment,
-			Difficulty = log.Difficulty,
-			Distance = log.Distance,
-			Time = log.Time,
-			Rating = log.Rating,
-			TourId = log.TourId,
-		};
 	}
 }

@@ -140,7 +140,7 @@ public class MainViewModel : INotifyPropertyChanged
 		if (_tourLogs.Count > 0)
 		{
 			TourLogModel tourLogModel = new();
-			tourLogModel.DeleteLog(_selectedTour.Item1);
+			tourLogModel.DeleteLog(_selectedTour.Item1); // TODO: why not work. raoul explain.
 		}
 
 		_selectedTour = null;
