@@ -9,7 +9,7 @@ public sealed class HttpClientSingleton
 		{
 			HttpClient client = new()
 			{
-				BaseAddress = new Uri("https://localhost/") // TODO: change to not hardcoded uri
+				BaseAddress = new Uri("https://localhost:7144/") // TODO: change to not hardcoded uri
 			};
 			return client;
 		});
