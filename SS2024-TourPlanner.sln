@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "UI\UI.csproj", "{BDEA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{0B972880-BEEF-4F77-87B3-D26BF658D783}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpServer", "HttpServer\HttpServer.csproj", "{DA8F13A4-F3D1-47D3-BC87-EB166CF77755}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpServer", "HttpServer\HttpServer.csproj", "{35BECD36-E93F-4462-B46E-AD29491EBCAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{0B972880-BEEF-4F77-87B3-D26BF658D783}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B972880-BEEF-4F77-87B3-D26BF658D783}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B972880-BEEF-4F77-87B3-D26BF658D783}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA8F13A4-F3D1-47D3-BC87-EB166CF77755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA8F13A4-F3D1-47D3-BC87-EB166CF77755}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA8F13A4-F3D1-47D3-BC87-EB166CF77755}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA8F13A4-F3D1-47D3-BC87-EB166CF77755}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35BECD36-E93F-4462-B46E-AD29491EBCAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35BECD36-E93F-4462-B46E-AD29491EBCAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35BECD36-E93F-4462-B46E-AD29491EBCAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35BECD36-E93F-4462-B46E-AD29491EBCAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

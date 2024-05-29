@@ -1,6 +1,6 @@
 ﻿using Business.Interfaces;
-using Business.Managers;
 using Business.Models;
+using Business.Services;
 
 namespace UI.Models;
 
@@ -17,11 +17,11 @@ public class TourLogModel
 
 	public List<TourLog> TourLogs { get; set; }
 
-	private readonly IManager<TourLog> manager = new LogManager();
+	private readonly IService<TourLog> manager = new TourLogService();
 
 	public TourLogModel()
 	{
-		TourLogs = manager.GetAll();
+		TourLogs = manager.GetAll().ToList();
 	}
 
 	public TourLogModel(int id)
@@ -42,7 +42,7 @@ public class TourLogModel
 			TourId = tourId
 		};
 
-		IManager<TourLog> manager = new LogManager();
+		IService<TourLog> manager = new TourLogService();
 		manager.Create(tourLog);
 	}
 
@@ -65,13 +65,13 @@ public class TourLogModel
 			TourId = model.TourId
 		};
 
-		IManager<TourLog> manager = new LogManager();
+		IService<TourLog> manager = new TourLogService();
 		manager.Update(temp);
 	}
 
 	public static TourLogModel? GetTourLog(int id)
 	{
-		IManager<TourLog> manager = new LogManager();
+		IService<TourLog> manager = new TourLogService();
 		TourLog? temp = manager.GetById(id);
 
 		if (temp == null)
@@ -96,7 +96,7 @@ public class TourLogModel
 
 	public void DeleteLog(int tourId)
 	{
-		IManager<TourLog> manager = new LogManager();
+		IService<TourLog> manager = new TourLogService();
 		manager.Delete(tourId);
 	}
 }

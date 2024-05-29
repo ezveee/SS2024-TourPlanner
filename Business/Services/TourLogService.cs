@@ -5,8 +5,8 @@ using DataAccess.Data;
 using DataAccess.Interfaces;
 using DataAccess.Repositories;
 
-namespace Business.Managers;
-public class LogManager : IManager<TourLog>
+namespace Business.Services;
+public class TourLogService : IService<TourLog>
 {
 	// TODO: i dont think thats supposed to be here either :|
 	private static readonly TourPlannerContext _context = new();
@@ -18,18 +18,24 @@ public class LogManager : IManager<TourLog>
 		_repository.Add(entity.MapLogToDataAccess());
 	}
 
-	public List<TourLog>? GetAll()
+	//public List<TourLog>? GetAll()
+	//{
+	//	List<DataAccess.Models.TourLog> dataAccessLogs = _repository.GetAll().ToList();
+	//	List<TourLog> businessLogs = [];
+
+	//	foreach (DataAccess.Models.TourLog dataAccessLog in dataAccessLogs)
+	//	{
+	//		TourLog businessLog = dataAccessLog.MapLogToBusiness();
+	//		businessLogs.Add(businessLog);
+	//	}
+
+	//	return businessLogs;
+	//}
+
+	public IEnumerable<TourLog>? GetAll()
 	{
-		List<DataAccess.Models.TourLog> dataAccessLogs = _repository.GetAll().ToList();
-		List<TourLog> businessLogs = [];
-
-		foreach (DataAccess.Models.TourLog dataAccessLog in dataAccessLogs)
-		{
-			TourLog businessLog = dataAccessLog.MapLogToBusiness();
-			businessLogs.Add(businessLog);
-		}
-
-		return businessLogs;
+		IEnumerable<DataAccess.Models.TourLog> dataAccessTourLogs = _repository.GetAll();
+		return dataAccessTourLogs.Select(dataAccessTourLog => dataAccessTourLog.MapLogToBusiness());
 	}
 
 	public TourLog? GetById(int id)

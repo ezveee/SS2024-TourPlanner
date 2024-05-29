@@ -1,6 +1,6 @@
 ﻿using Business.Interfaces;
-using Business.Managers;
 using Business.Models;
+using Business.Services;
 
 namespace UI.Models;
 
@@ -18,11 +18,11 @@ public class TourModel
 
 	public List<Tour> Tours { get; set; }
 
-	public IManager<Tour> manager = new TourManager();
+	public IService<Tour> manager = new TourService();
 
 	public TourModel()
 	{
-		Tours = manager.GetAll();
+		Tours = manager.GetAll().ToList();
 	}
 
 	public static void CreateTour(string name, string desc, string from, string to, string transportType, float distance, double time, string info)
@@ -39,7 +39,7 @@ public class TourModel
 			RouteInformation = info
 		};
 
-		IManager<Tour> manager = new TourManager();
+		IService<Tour> manager = new TourService();
 		manager.Create(tour);
 	}
 
@@ -63,13 +63,13 @@ public class TourModel
 			RouteInformation = model.RouteInformation
 		};
 
-		IManager<Tour> manager = new TourManager();
+		IService<Tour> manager = new TourService();
 		manager.Update(temp);
 	}
 
 	public static TourModel? GetTour(int id)
 	{
-		IManager<Tour> manager = new TourManager();
+		IService<Tour> manager = new TourService();
 		Tour? temp = manager.GetById(id);
 
 		if (temp == null)
@@ -95,7 +95,7 @@ public class TourModel
 
 	public static void DeleteTour(int id)
 	{
-		IManager<Tour> manager = new TourManager();
+		IService<Tour> manager = new TourService();
 		manager.Delete(id);
 	}
 }

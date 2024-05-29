@@ -1,10 +1,10 @@
 ﻿using Business.Models;
 
 namespace Business.Interfaces;
-public interface IManager<TEntity> where TEntity : class
+public interface IService<TEntity> where TEntity : class
 {
 	void Create(TEntity entity);
-	List<TEntity>? GetAll();
+	IEnumerable<TEntity>? GetAll();
 	TEntity? GetById(int id);
 	List<TourLog>? GetLogsByTourId(int id); // TODO: change. i dont like this. ew. ewewewewew.
 	void Update(TEntity entity);
