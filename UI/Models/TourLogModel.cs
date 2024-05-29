@@ -1,6 +1,8 @@
 ﻿using Business.Interfaces;
 using Business.Models;
 using Business.Services;
+using DataAccess.Interfaces;
+using DataAccess.Repositories;
 
 namespace UI.Models;
 
@@ -17,16 +19,19 @@ public class TourLogModel
 
 	public List<TourLog> TourLogs { get; set; }
 
-	private readonly IService<TourLog> manager = new TourLogService();
+	// TODO: i still hate myself. why am i here? just to suffer?
+	private static DataAccess.Data.TourPlannerContext tourPlannerContext = new();
+	private static IRepository<DataAccess.Models.TourLog> tourLogRepository = new TourLogRepository(tourPlannerContext);
+	private static IService<TourLog> tourLogService = new TourLogService(tourLogRepository);
 
 	public TourLogModel()
 	{
-		TourLogs = manager.GetAll().ToList();
+		TourLogs = tourLogService.GetAll().ToList();
 	}
 
 	public TourLogModel(int id)
 	{
-		TourLogs = manager.GetLogsByTourId(id);
+		TourLogs = [.. tourLogService.GetLogsByTourId(id)];
 	}
 
 	public static void CreateTourLog(int tourId, DateTime date, string comment, int difficulty, float distance, double time, int rating)
@@ -42,8 +47,7 @@ public class TourLogModel
 			TourId = tourId
 		};
 
-		IService<TourLog> manager = new TourLogService();
-		manager.Create(tourLog);
+		_ = tourLogService.Create(tourLog);
 	}
 
 	public static void UpdateTourLog(TourLogModel model)
@@ -65,14 +69,12 @@ public class TourLogModel
 			TourId = model.TourId
 		};
 
-		IService<TourLog> manager = new TourLogService();
-		manager.Update(temp);
+		_ = tourLogService.Update(temp);
 	}
 
 	public static TourLogModel? GetTourLog(int id)
 	{
-		IService<TourLog> manager = new TourLogService();
-		TourLog? temp = manager.GetById(id);
+		TourLog? temp = tourLogService.GetById(id);
 
 		if (temp == null)
 		{
@@ -96,7 +98,6 @@ public class TourLogModel
 
 	public void DeleteLog(int tourId)
 	{
-		IService<TourLog> manager = new TourLogService();
-		manager.Delete(tourId);
+		tourLogService.Delete(tourId);
 	}
 }

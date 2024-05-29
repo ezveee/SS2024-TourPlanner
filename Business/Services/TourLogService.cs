@@ -1,71 +1,55 @@
 ﻿using Business.Extensions;
 using Business.Interfaces;
 using Business.Models;
-using DataAccess.Data;
 using DataAccess.Interfaces;
-using DataAccess.Repositories;
+using System.Linq.Expressions;
 
 namespace Business.Services;
-public class TourLogService : IService<TourLog>
+
+// TODO: figure out how to implement GenericService class
+public class TourLogService(IRepository<DataAccess.Models.TourLog> repository) : IService<TourLog>
 {
-	// TODO: i dont think thats supposed to be here either :|
-	private static readonly TourPlannerContext _context = new();
-	// TODO: bruh thats not testable, change that shit
-	private readonly IRepository<DataAccess.Models.TourLog> _repository = new TourLogRepository(_context);
-
-	public void Create(TourLog entity)
+	public TourLog Create(TourLog entity)
 	{
-		_repository.Add(entity.MapLogToDataAccess());
+		DataAccess.Models.TourLog DataAccessTourLog = repository.Add(entity.MapLogToDataAccess());
+		repository.SaveChanges();
+		return DataAccessTourLog.MapLogToBusiness();
 	}
 
-	//public List<TourLog>? GetAll()
-	//{
-	//	List<DataAccess.Models.TourLog> dataAccessLogs = _repository.GetAll().ToList();
-	//	List<TourLog> businessLogs = [];
-
-	//	foreach (DataAccess.Models.TourLog dataAccessLog in dataAccessLogs)
-	//	{
-	//		TourLog businessLog = dataAccessLog.MapLogToBusiness();
-	//		businessLogs.Add(businessLog);
-	//	}
-
-	//	return businessLogs;
-	//}
-
-	public IEnumerable<TourLog>? GetAll()
+	public TourLog Update(TourLog entity)
 	{
-		IEnumerable<DataAccess.Models.TourLog> dataAccessTourLogs = _repository.GetAll();
-		return dataAccessTourLogs.Select(dataAccessTourLog => dataAccessTourLog.MapLogToBusiness());
-	}
-
-	public TourLog? GetById(int id)
-	{
-		DataAccess.Models.TourLog? log = _repository.GetById(id);
-
-		return log?.MapLogToBusiness();
+		DataAccess.Models.TourLog DataAccessTourLog = repository.Update(entity.MapLogToDataAccess());
+		repository.SaveChanges();
+		return DataAccessTourLog.MapLogToBusiness();
 	}
 
 	public void Delete(int id)
 	{
-		_repository.Delete(id);
+		repository.Delete(id);
+		repository.SaveChanges();
 	}
 
-	public void Update(TourLog entity)
+	public TourLog? GetById(int id)
 	{
-		_repository.Update(entity.MapLogToDataAccess());
+		DataAccess.Models.TourLog? log = repository.GetById(id);
+		return log?.MapLogToBusiness();
 	}
 
-	public List<TourLog>? GetLogsByTourId(int id)
+	public IEnumerable<TourLog>? GetAll()
 	{
-		List<DataAccess.Models.TourLog> dataAccessLogs = [.. _context.TourLogs.Where(log => log.TourId == id)]; // collection expression to simplify .ToList()
-		List<TourLog> businessLogs = [];
+		IEnumerable<DataAccess.Models.TourLog>? dataAccessTourLogs = repository.GetAll();
+		return dataAccessTourLogs is null ? (IEnumerable<TourLog>?)null : dataAccessTourLogs.Select(dataAccessTourLog => dataAccessTourLog.MapLogToBusiness());
+	}
 
-		foreach (DataAccess.Models.TourLog dataAccessLog in dataAccessLogs)
-		{
-			TourLog businessLog = dataAccessLog.MapLogToBusiness();
-			businessLogs.Add(businessLog);
-		}
+	public IEnumerable<TourLog>? Find(Expression<Func<TourLog, bool>> predicate)
+	{
+		IEnumerable<TourLog>? businessTourLogs = GetAll();
+		return businessTourLogs is null ? (IEnumerable<TourLog>?)null : businessTourLogs.Where(predicate.Compile());
+	}
 
-		return businessLogs;
+	public IEnumerable<TourLog>? GetLogsByTourId(int id)
+	{
+		IEnumerable<DataAccess.Models.TourLog>? dataAccessTourLogs = repository.Find(log => log.TourId == id);
+		return dataAccessTourLogs is null ? (IEnumerable<TourLog>?)null : dataAccessTourLogs.Select(dataAccessLog => dataAccessLog.MapLogToBusiness());
 	}
 }

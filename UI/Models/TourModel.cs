@@ -1,6 +1,8 @@
 ﻿using Business.Interfaces;
 using Business.Models;
 using Business.Services;
+using DataAccess.Interfaces;
+using DataAccess.Repositories;
 
 namespace UI.Models;
 
@@ -18,11 +20,14 @@ public class TourModel
 
 	public List<Tour> Tours { get; set; }
 
-	public IService<Tour> manager = new TourService();
+	// TODO: i actually hate myself. i dont know what to do about this
+	private static DataAccess.Data.TourPlannerContext tourPlannerContext = new();
+	private static IRepository<DataAccess.Models.Tour> tourRepository = new TourRepository(tourPlannerContext);
+	private static IService<Tour> tourService = new TourService(tourRepository);
 
 	public TourModel()
 	{
-		Tours = manager.GetAll().ToList();
+		Tours = tourService.GetAll().ToList();
 	}
 
 	public static void CreateTour(string name, string desc, string from, string to, string transportType, float distance, double time, string info)
@@ -39,8 +44,7 @@ public class TourModel
 			RouteInformation = info
 		};
 
-		IService<Tour> manager = new TourService();
-		manager.Create(tour);
+		_ = tourService.Create(tour);
 	}
 
 	public static void UpdateTour(TourModel model)
@@ -63,14 +67,12 @@ public class TourModel
 			RouteInformation = model.RouteInformation
 		};
 
-		IService<Tour> manager = new TourService();
-		manager.Update(temp);
+		_ = tourService.Update(temp);
 	}
 
 	public static TourModel? GetTour(int id)
 	{
-		IService<Tour> manager = new TourService();
-		Tour? temp = manager.GetById(id);
+		Tour? temp = tourService.GetById(id);
 
 		if (temp == null)
 		{
@@ -95,7 +97,6 @@ public class TourModel
 
 	public static void DeleteTour(int id)
 	{
-		IService<Tour> manager = new TourService();
-		manager.Delete(id);
+		tourService.Delete(id);
 	}
 }
