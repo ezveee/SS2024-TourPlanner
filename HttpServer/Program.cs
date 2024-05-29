@@ -1,3 +1,4 @@
+using Business;
 using Business.Interfaces;
 using Business.Models;
 using Business.Services;
@@ -11,6 +12,7 @@ builder.Services.AddTransient<IService<TourLog>, TourLogService>();
 
 // TODO: please change. for my sanity.
 builder.Services.AddTransient<DataAccess.Data.TourPlannerContext>();
+builder.Services.AddTransient<ReportGenerator>();
 builder.Services.AddTransient<DataAccess.Interfaces.IRepository<DataAccess.Models.Tour>, DataAccess.Repositories.TourRepository>();
 builder.Services.AddTransient<DataAccess.Interfaces.IRepository<DataAccess.Models.TourLog>, DataAccess.Repositories.TourLogRepository>();
 

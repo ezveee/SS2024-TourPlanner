@@ -1,12 +1,15 @@
 ﻿using Business;
+using Business.Interfaces;
 using Business.Models;
 using System.ComponentModel;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
 using UI.Models;
 using UI.View.MainWindowComponents.TourDetails.TourData.Options;
 using UI.ViewModel.Commands;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace UI.ViewModel;
 
@@ -24,6 +27,9 @@ public class MainViewModel : INotifyPropertyChanged
 	public ICommand MapCommand { get; set; }
 	public ICommand MiscCommand { get; set; }
 
+	public ICommand GenerateTourReportCommand { get; set; }
+	public ICommand GenerateSummaryCommand { get; set; }
+
 	public static TourModel? tourToModify = new();
 	public static TourLogModel? tourLogToModify = new();
 
@@ -39,6 +45,8 @@ public class MainViewModel : INotifyPropertyChanged
 		GeneralCommand = new RelayCommand(SwitchToGeneral);
 		MapCommand = new RelayCommand(SwitchToMap);
 		MiscCommand = new RelayCommand(SwitchToMisc);
+		GenerateTourReportCommand = new RelayCommand(GenerateTourReport);
+		GenerateSummaryCommand = new RelayCommand(GenerateSummaryReport);
 
 		TourHandlerViewModel tourHandler = new();
 		tourHandler.TourCreated += OnTourCreated;
@@ -75,6 +83,23 @@ public class MainViewModel : INotifyPropertyChanged
 	public void SwitchToMisc(object obj)
 	{
 		CurrentView = new MiscControls();
+	}
+
+	public async void GenerateTourReport(object parameter)
+	{
+		if (_selectedTour == null)
+		{
+			return;
+		}
+
+		ReportViewModel reportViewModel = new ();
+		await reportViewModel.PostDataToApiAsync(_selectedTour.Item1, "tour");
+
+	}
+
+	public void GenerateSummaryReport(object parameter)
+	{
+
 	}
 
 	private void OnTourCreated(object sender, EventArgs e)
