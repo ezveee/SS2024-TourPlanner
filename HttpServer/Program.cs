@@ -8,6 +8,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddTransient<IService<Tour>, TourService>();
 builder.Services.AddTransient<IService<TourLog>, TourLogService>();
+
 // TODO: please change. for my sanity.
 builder.Services.AddTransient<DataAccess.Data.TourPlannerContext>();
 builder.Services.AddTransient<DataAccess.Interfaces.IRepository<DataAccess.Models.Tour>, DataAccess.Repositories.TourRepository>();

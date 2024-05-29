@@ -14,45 +14,30 @@ public class TourController(IService<Tour> tourService) : ControllerBase
 		return tourService.GetAll();
 	}
 
-	//[HttpGet("{id}")]
-	//public ActionResult<Tour> Get(int id)
-	//{
-	//	Tour tour = Tours.Find(t => t.TourId == id);
-	//	return tour == null ? (ActionResult<Tour>)NotFound() : (ActionResult<Tour>)tour;
-	//}
+	[HttpGet("{id}")]
+	public ActionResult<Tour> Get(int id)
+	{
+		Tour? tour = tourService.GetById(id);
+		return tour is null ? (ActionResult<Tour>)NotFound() : (ActionResult<Tour>)tour;
+	}
 
-	//[HttpPost]
-	//public ActionResult<Tour> Post(Tour tour)
-	//{
-	//	tour.TourId = Tours.Count + 1;
-	//	Tours.Add(tour);
-	//	return CreatedAtAction(nameof(Get), new { id = tour.TourId }, tour);
-	//}
+	[HttpPost]
+	public ActionResult<Tour> Post(Tour tour)
+	{
+		return (ActionResult<Tour>)tourService.Create(tour);
+		//return CreatedAtAction(nameof(Get), new { id = tour.TourId }, tour);
+	}
 
-	//[HttpPut("{id}")]
-	//public IActionResult Put(int id, Tour updatedTour)
-	//{
-	//	Tour tour = Tours.Find(t => t.TourId == id);
-	//	if (tour == null)
-	//	{
-	//		return NotFound();
-	//	}
+	[HttpPut("{id}")]
+	public ActionResult<Tour> Put(Tour updatedTour)
+	{
+		return (ActionResult<Tour>)tourService.Update(updatedTour);
+	}
 
-	//	tour.Name = updatedTour.Name;
-	//	tour.Description = updatedTour.Description;
-	//	return NoContent();
-	//}
-
-	//[HttpDelete("{id}")]
-	//public IActionResult Delete(int id)
-	//{
-	//	Tour tour = Tours.Find(t => t.TourId == id);
-	//	if (tour == null)
-	//	{
-	//		return NotFound();
-	//	}
-
-	//	_ = Tours.Remove(tour);
-	//	return NoContent();
-	//}
+	[HttpDelete("{id}")]
+	public IActionResult Delete(int id)
+	{
+		tourService.Delete(id);
+		return NoContent();
+	}
 }
