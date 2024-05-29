@@ -25,10 +25,9 @@ public class TourController(IService<Tour> tourService) : ControllerBase
 	public ActionResult<Tour> Post(Tour tour)
 	{
 		return (ActionResult<Tour>)tourService.Create(tour);
-		//return CreatedAtAction(nameof(Get), new { id = tour.TourId }, tour);
 	}
 
-	[HttpPut("{id}")]
+	[HttpPut]
 	public ActionResult<Tour> Put(Tour updatedTour)
 	{
 		return (ActionResult<Tour>)tourService.Update(updatedTour);
