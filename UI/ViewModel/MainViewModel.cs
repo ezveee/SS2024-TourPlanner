@@ -97,9 +97,15 @@ public class MainViewModel : INotifyPropertyChanged
 
 	}
 
-	public void GenerateSummaryReport(object parameter)
+	public async void GenerateSummaryReport(object parameter)
 	{
+		if (_selectedTour == null)
+		{
+			return;
+		}
 
+		ReportViewModel reportViewModel = new();
+		await reportViewModel.PostDataToApiAsync(_selectedTour.Item1, "summary");
 	}
 
 	private void OnTourCreated(object sender, EventArgs e)
