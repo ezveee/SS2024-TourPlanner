@@ -23,9 +23,14 @@ public class TourLogService(IRepository<DataAccess.Models.TourLog> repository) :
 		return DataAccessTourLog.MapLogToBusiness();
 	}
 
-	public void Delete(int id)
+	public void Delete(int tourId)
 	{
-		repository.Delete(id);
+		IEnumerable<TourLog> logs = GetLogsByTourId(tourId);
+		foreach (TourLog log in logs)
+		{
+			repository.Delete(log.LogId);
+		}
+
 		repository.SaveChanges();
 	}
 

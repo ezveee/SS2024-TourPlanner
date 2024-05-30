@@ -68,5 +68,14 @@ namespace UI {
                 return ResourceManager.GetString("Route_Tour", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /tourlog.
+        /// </summary>
+        internal static string Route_TourLog {
+            get {
+                return ResourceManager.GetString("Route_TourLog", resourceCulture);
+            }
+        }
     }
 }

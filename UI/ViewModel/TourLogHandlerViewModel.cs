@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using UI.HttpHelpers;
+using UI.Interfaces;
 using UI.Models;
 using UI.ViewModel.Commands;
 using UI.ViewModel.Interfaces;
@@ -15,6 +17,9 @@ public class TourLogHandlerViewModel : ICreationHandlerViewModel, INotifyPropert
 	private readonly Window _window;
 
 	public event PropertyChangedEventHandler? PropertyChanged;
+
+	// you know the gist
+	private readonly IHttpHelper<TourLogModel> _tourLogHelper = new HttpTourLogHelper();
 
 	public TourLogHandlerViewModel(Window window)
 	{
@@ -108,7 +113,18 @@ public class TourLogHandlerViewModel : ICreationHandlerViewModel, INotifyPropert
 	{
 		TourId = MainViewModel.SelectedTourData.TourId;
 
-		TourLogModel.CreateTourLog(_tourId, _date, _comment, _difficulty, _distance, _time, _rating);
+		TourLogModel tourLogModel = new()
+		{
+			TourId = _tourId,
+			Date = _date,
+			Comment = _comment,
+			Difficulty = _difficulty,
+			Distance = _distance,
+			Time = _time,
+			Rating = _rating
+		};
+
+		_ = _tourLogHelper.CreateDataAsync(tourLogModel);
 		CloseWindow(_window);
 	}
 	#endregion

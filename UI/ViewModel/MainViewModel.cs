@@ -1,9 +1,9 @@
-﻿using Business;
-using Business.Models;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
+using UI.HttpHelpers;
+using UI.Interfaces;
 using UI.Models;
 using UI.View.MainWindowComponents.TourDetails.TourData.Options;
 using UI.ViewModel.Commands;
@@ -27,6 +27,10 @@ public class MainViewModel : INotifyPropertyChanged
 	public static TourModel? tourToModify = new();
 	public static TourLogModel? tourLogToModify = new();
 
+	// again, im aware this is ugly
+	private readonly IHttpHelper<TourModel> _tourHelper = new HttpTourHelper();
+	private readonly IHttpHelper<TourLogModel> _tourLogHelper = new HttpTourLogHelper();
+
 	public MainViewModel()
 	{
 		OpenTourHandlerCommand = new RelayCommand(OpenTourHandlerWindow);
@@ -43,8 +47,7 @@ public class MainViewModel : INotifyPropertyChanged
 		TourHandlerViewModel tourHandler = new();
 		tourHandler.TourCreated += OnTourCreated;
 
-		TourModel m = new();
-		GetTourNames(m);
+		GetTourNames();
 
 		ImageModel imageModel = new();
 		//GetImage(imageModel);
@@ -79,20 +82,19 @@ public class MainViewModel : INotifyPropertyChanged
 
 	private void OnTourCreated(object sender, EventArgs e)
 	{
-		TourModel m = new();
-		GetTourNames(m);
+		GetTourNames();
 	}
 
-	private void ModifyTour(object parameter)
+	private async void ModifyTour(object parameter)
 	{
 		if (_selectedTour is null)
 		{
 			return;
 		}
 
-		tourToModify = TourModel.GetTour(_selectedTour.Item1);
+		tourToModify = await _tourHelper.GetDataAsync(_selectedTour.Item1);
 
-		if (tourToModify == null)
+		if (tourToModify is null)
 		{
 			return;
 		}
@@ -101,14 +103,14 @@ public class MainViewModel : INotifyPropertyChanged
 		tourHandlerWindow.Show();
 	}
 
-	private void ModifyTourLog(object parameter)
+	private async void ModifyTourLog(object parameter)
 	{
 		if (_selectedTourLog is null)
 		{
 			return;
 		}
 
-		tourLogToModify = TourLogModel.GetTourLog(_selectedTourLog.LogId);
+		tourLogToModify = await _tourLogHelper.GetDataAsync(_selectedTourLog.LogId);
 
 		if (tourLogToModify == null)
 		{
@@ -136,18 +138,16 @@ public class MainViewModel : INotifyPropertyChanged
 		//Image = null;
 		//imageLoader.DeleteImage(imagePath);
 
-		TourModel.DeleteTour(_selectedTour.Item1);
+		_ = _tourHelper.DeleteDataAsync(_selectedTour.Item1);
 		if (_tourLogs.Count > 0)
 		{
-			TourLogModel tourLogModel = new();
-			tourLogModel.DeleteLog(_selectedTour.Item1); // TODO: why not work. raoul explain.
+			_ = _tourLogHelper.DeleteDataAsync(_selectedTour.Item1);
 		}
 
 		_selectedTour = null;
 
 		OnPropertyChanged(nameof(TourNames));
-		TourModel m = new();
-		GetTourNames(m);
+		GetTourNames();
 	}
 
 	public void DeleteTourLog(object parameter)
@@ -157,8 +157,7 @@ public class MainViewModel : INotifyPropertyChanged
 			return;
 		}
 
-		TourLogModel tourLogModel = new();
-		tourLogModel.DeleteLog(_selectedTourLog.LogId);
+		_ = _tourLogHelper.DeleteDataAsync(_selectedTourLog.LogId);
 
 		OnPropertyChanged(nameof(TourLogs));
 		GetTourLogData(_selectedTour.Item1);
@@ -173,8 +172,7 @@ public class MainViewModel : INotifyPropertyChanged
 		{
 			_tourNames = value;
 			OnPropertyChanged(nameof(TourNames));
-			TourModel m = new();
-			GetTourNames(m);
+			GetTourNames();
 		}
 	}
 
@@ -190,11 +188,12 @@ public class MainViewModel : INotifyPropertyChanged
 		}
 	}
 
-	private void GetTourNames(TourModel model)
+	private async void GetTourNames()
 	{
 		_tourNames = [];
+		List<TourModel> tours = await _tourHelper.GetDataAsync();
 
-		foreach (Tour name in model.Tours)
+		foreach (TourModel name in tours)
 		{
 			Tuple<int, string> temp = new(name.TourId, name.Name);
 
@@ -243,7 +242,7 @@ public class MainViewModel : INotifyPropertyChanged
 		}
 	}
 
-	public void SelectTour(object parameter)
+	public async void SelectTour(object parameter)
 	{
 		if (parameter == null)
 		{
@@ -254,31 +253,22 @@ public class MainViewModel : INotifyPropertyChanged
 		GetTourLogData(tourId);
 		GetImage(tourId);
 
-		SelectedTourData = TourModel.GetTour(tourId);
+		SelectedTourData = await _tourHelper.GetDataAsync(tourId);
 		CurrentView = new MapDisplayControls();
 	}
 
-	private void GetTourLogData(int id)
+	private async void GetTourLogData(int id)
 	{
-		TourLogModel model = new();
+		_ = new TourLogModel();
 		_tourLogs = [];
 
-		foreach (TourLog item in model.TourLogs)
-		{
-			TourLogModel logModel = new()
-			{
-				LogId = item.LogId,
-				Date = item.Date,
-				Comment = item.Comment,
-				Difficulty = item.Difficulty,
-				Distance = item.Distance,
-				Time = item.Time,
-				Rating = item.Rating
-			};
+		List<TourLogModel> tourLogs = await _tourLogHelper.GetDataAsync();
 
+		foreach (TourLogModel item in tourLogs)
+		{
 			if (item.TourId == id)
 			{
-				_tourLogs.Add(logModel);
+				_tourLogs.Add(item);
 			}
 		}
 
@@ -300,9 +290,9 @@ public class MainViewModel : INotifyPropertyChanged
 
 	private void GetImage(int tourId)
 	{
-		// TODO: change so UI ViewModel doesnt directly access BL functions?
-		ImageLoader imageLoader = new();
-		Image = imageLoader.GetImagePath(tourId);
+		// TODO: fix image loading
+		//ImageLoader imageLoader = new();
+		//Image = imageLoader.GetImagePath(tourId);
 	}
 	#endregion
 

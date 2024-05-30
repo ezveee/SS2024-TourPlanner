@@ -1,6 +1,4 @@
-﻿using Business;
-
-namespace UI.Models;
+﻿namespace UI.Models;
 
 internal class ImageModel
 {
@@ -8,6 +6,7 @@ internal class ImageModel
 
 	public ImageModel()
 	{
-		_ = new ImageLoader();
+		// TODO: fix image loading
+		//_ = new ImageLoader();
 	}
 }

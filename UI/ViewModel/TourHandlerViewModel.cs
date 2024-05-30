@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using UI.HttpHelpers;
+using UI.Interfaces;
 using UI.Models;
 using UI.ViewModel.Commands;
 using UI.ViewModel.Interfaces;
@@ -13,10 +15,14 @@ public class TourHandlerViewModel : ICreationHandlerViewModel, INotifyPropertyCh
 	public ICommand QuitCreationCommand { get; set; }
 
 	private readonly Window _window;
-
 	public event PropertyChangedEventHandler? PropertyChanged;
-
 	public event EventHandler TourCreated;
+
+	// i know this is bad. but im adding this in hindsight
+	// and id probably have to change the entire ui
+	// if i were to use DI as planned
+	// so yeah uh- my apologies
+	private readonly IHttpHelper<TourModel> _tourHelper = new HttpTourHelper();
 
 	public TourHandlerViewModel(Window window)
 	{
@@ -124,7 +130,18 @@ public class TourHandlerViewModel : ICreationHandlerViewModel, INotifyPropertyCh
 
 	public void Create(object parameter)
 	{
-		TourModel.CreateTour(_name, _desc, _from, _to, _transportType, _distance, _time, _info);
+		TourModel tour = new()
+		{
+			Name = _name,
+			Description = _desc,
+			From = _from,
+			To = _to,
+			TransportType = _transportType,
+			Distance = _distance,
+			EstimatedTime = _time,
+			RouteInformation = _info
+		};
+		_ = _tourHelper.CreateDataAsync(tour);
 		CloseWindow(_window);
 
 		TourCreated?.Invoke(this, EventArgs.Empty);

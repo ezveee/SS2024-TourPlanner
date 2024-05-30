@@ -7,19 +7,19 @@ using UI.Interfaces;
 using UI.Models;
 
 namespace UI.HttpHelpers;
-public class HttpTourHelper : IHttpHelper<TourModel>
+public class HttpTourLogHelper : IHttpHelper<TourLogModel>
 {
 	private readonly JsonSerializerOptions _options = new()
 	{
 		DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault
 	};
 
-	public async Task<TourModel?> CreateDataAsync(TourModel tour)
+	public async Task<TourLogModel?> CreateDataAsync(TourLogModel tourLog)
 	{
 		try
 		{
-			string url = Resource.Route_Tour;
-			string json = JsonSerializer.Serialize(tour, _options);
+			string url = Resource.Route_TourLog;
+			string json = JsonSerializer.Serialize(tourLog, _options);
 			HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
 			HttpResponseMessage response = await HttpClientSingleton.Instance.PostAsync(url, content);
@@ -27,7 +27,7 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 			string responseBody = await response.Content.ReadAsStringAsync();
 
 			_ = MessageBox.Show(responseBody);
-			return JsonSerializer.Deserialize<TourModel>(responseBody);
+			return JsonSerializer.Deserialize<TourLogModel>(responseBody);
 		}
 		catch (HttpRequestException e)
 		{
@@ -36,16 +36,16 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 		}
 	}
 
-	public async Task<List<TourModel>?> GetDataAsync()
+	public async Task<List<TourLogModel>?> GetDataAsync()
 	{
 		try
 		{
-			string url = Resource.Route_Tour;
+			string url = Resource.Route_TourLog;
 			HttpResponseMessage response = await HttpClientSingleton.Instance.GetAsync(url);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
 			_ = MessageBox.Show(responseBody);
-			return JsonSerializer.Deserialize<List<TourModel>>(responseBody);
+			return JsonSerializer.Deserialize<List<TourLogModel>>(responseBody);
 		}
 		catch (HttpRequestException e)
 		{
@@ -54,16 +54,16 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 		}
 	}
 
-	public async Task<TourModel?> GetDataAsync(int id)
+	public async Task<TourLogModel?> GetDataAsync(int id)
 	{
 		try
 		{
-			string url = Resource.Route_Tour + $"/{id}";
+			string url = Resource.Route_TourLog + $"/{id}";
 			HttpResponseMessage response = await HttpClientSingleton.Instance.GetAsync(url);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
 			_ = MessageBox.Show(responseBody);
-			return JsonSerializer.Deserialize<TourModel>(responseBody);
+			return JsonSerializer.Deserialize<TourLogModel>(responseBody);
 		}
 		catch (HttpRequestException e)
 		{
@@ -72,19 +72,19 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 		}
 	}
 
-	public async Task<TourModel?> UpdateDataAsync(TourModel updatedTour)
+	public async Task<TourLogModel?> UpdateDataAsync(TourLogModel updatedTourLog)
 	{
 		try
 		{
-			string url = Resource.Route_Tour;
-			string json = JsonSerializer.Serialize(updatedTour, _options);
+			string url = Resource.Route_TourLog;
+			string json = JsonSerializer.Serialize(updatedTourLog, _options);
 			HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
 			HttpResponseMessage response = await HttpClientSingleton.Instance.PutAsync(url, content);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
 			_ = MessageBox.Show(responseBody);
-			return JsonSerializer.Deserialize<TourModel>(responseBody);
+			return JsonSerializer.Deserialize<TourLogModel>(responseBody);
 		}
 		catch (HttpRequestException e)
 		{
@@ -97,7 +97,7 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 	{
 		try
 		{
-			string url = Resource.Route_Tour + $"/{id}";
+			string url = Resource.Route_TourLog + $"/{id}";
 			HttpResponseMessage response = await HttpClientSingleton.Instance.DeleteAsync(url);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();

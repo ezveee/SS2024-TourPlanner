@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using UI.HttpHelpers;
+using UI.Interfaces;
 using UI.Models;
 using UI.ViewModel.Commands;
 using UI.ViewModel.Interfaces;
@@ -20,7 +17,10 @@ public class TourEditorViewModel : ICreationHandlerViewModel, INotifyPropertyCha
 
 	public event PropertyChangedEventHandler? PropertyChanged;
 
-	TourModel _tourToModify;
+	private readonly TourModel _tourToModify;
+
+	// ...
+	private readonly IHttpHelper<TourModel> _tourHelper = new HttpTourHelper();
 
 	public TourEditorViewModel(Window window, TourModel tourToModify)
 	{
@@ -35,7 +35,7 @@ public class TourEditorViewModel : ICreationHandlerViewModel, INotifyPropertyCha
 
 	private void SetTourToModifyValues()
 	{
-		if (_tourToModify == null) 
+		if (_tourToModify == null)
 		{
 			return;
 		}
@@ -58,7 +58,7 @@ public class TourEditorViewModel : ICreationHandlerViewModel, INotifyPropertyCha
 	private string _name;
 	public string Name
 	{
-		get { return _name; }
+		get => _name;
 		set
 		{
 			_name = value;
@@ -69,7 +69,7 @@ public class TourEditorViewModel : ICreationHandlerViewModel, INotifyPropertyCha
 	private string _desc;
 	public string Desc
 	{
-		get { return _desc; }
+		get => _desc;
 		set
 		{
 			_desc = value;
@@ -80,7 +80,7 @@ public class TourEditorViewModel : ICreationHandlerViewModel, INotifyPropertyCha
 	private string _from;
 	public string From
 	{
-		get { return _from; }
+		get => _from;
 		set
 		{
 			_from = value;
@@ -91,7 +91,7 @@ public class TourEditorViewModel : ICreationHandlerViewModel, INotifyPropertyCha
 	private string _to;
 	public string To
 	{
-		get { return _to; }
+		get => _to;
 		set
 		{
 			_to = value;
@@ -102,7 +102,7 @@ public class TourEditorViewModel : ICreationHandlerViewModel, INotifyPropertyCha
 	private string _transportType;
 	public string TransportType
 	{
-		get { return _transportType; }
+		get => _transportType;
 		set
 		{
 			_transportType = value;
@@ -113,7 +113,7 @@ public class TourEditorViewModel : ICreationHandlerViewModel, INotifyPropertyCha
 	private float _distance;
 	public float Distance
 	{
-		get { return _distance; }
+		get => _distance;
 		set
 		{
 			_distance = value;
@@ -124,7 +124,7 @@ public class TourEditorViewModel : ICreationHandlerViewModel, INotifyPropertyCha
 	private double _time;
 	public double Time
 	{
-		get { return _time; }
+		get => _time;
 		set
 		{
 			_time = value;
@@ -135,7 +135,7 @@ public class TourEditorViewModel : ICreationHandlerViewModel, INotifyPropertyCha
 	private string _info;
 	public string Info
 	{
-		get { return _info; }
+		get => _info;
 		set
 		{
 			_info = value;
@@ -154,7 +154,7 @@ public class TourEditorViewModel : ICreationHandlerViewModel, INotifyPropertyCha
 		_tourToModify.EstimatedTime = _time;
 		_tourToModify.RouteInformation = _info;
 
-		TourModel.UpdateTour(_tourToModify);
+		_ = _tourHelper.UpdateDataAsync(_tourToModify);
 		CloseWindow(_window);
 	}
 

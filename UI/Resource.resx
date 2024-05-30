@@ -120,4 +120,7 @@
   <data name="Route_Tour" xml:space="preserve">
     <value>/tour</value>
   </data>
+  <data name="Route_TourLog" xml:space="preserve">
+    <value>/tourlog</value>
+  </data>
 </root>
