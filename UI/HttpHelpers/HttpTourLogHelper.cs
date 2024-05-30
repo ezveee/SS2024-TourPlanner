@@ -26,7 +26,6 @@ public class HttpTourLogHelper : IHttpHelper<TourLogModel>
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
 
-			_ = MessageBox.Show(responseBody);
 			return JsonSerializer.Deserialize<TourLogModel>(responseBody);
 		}
 		catch (HttpRequestException e)
@@ -44,7 +43,6 @@ public class HttpTourLogHelper : IHttpHelper<TourLogModel>
 			HttpResponseMessage response = await HttpClientSingleton.Instance.GetAsync(url);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
-			_ = MessageBox.Show(responseBody);
 			return JsonSerializer.Deserialize<List<TourLogModel>>(responseBody);
 		}
 		catch (HttpRequestException e)
@@ -62,7 +60,6 @@ public class HttpTourLogHelper : IHttpHelper<TourLogModel>
 			HttpResponseMessage response = await HttpClientSingleton.Instance.GetAsync(url);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
-			_ = MessageBox.Show(responseBody);
 			return JsonSerializer.Deserialize<TourLogModel>(responseBody);
 		}
 		catch (HttpRequestException e)
@@ -83,7 +80,6 @@ public class HttpTourLogHelper : IHttpHelper<TourLogModel>
 			HttpResponseMessage response = await HttpClientSingleton.Instance.PutAsync(url, content);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
-			_ = MessageBox.Show(responseBody);
 			return JsonSerializer.Deserialize<TourLogModel>(responseBody);
 		}
 		catch (HttpRequestException e)
@@ -101,7 +97,6 @@ public class HttpTourLogHelper : IHttpHelper<TourLogModel>
 			HttpResponseMessage response = await HttpClientSingleton.Instance.DeleteAsync(url);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
-			_ = MessageBox.Show(responseBody);
 		}
 		catch (HttpRequestException e)
 		{

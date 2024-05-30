@@ -26,7 +26,6 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
 
-			_ = MessageBox.Show(responseBody);
 			return JsonSerializer.Deserialize<TourModel>(responseBody);
 		}
 		catch (HttpRequestException e)
@@ -44,7 +43,6 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 			HttpResponseMessage response = await HttpClientSingleton.Instance.GetAsync(url);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
-			_ = MessageBox.Show(responseBody);
 			return JsonSerializer.Deserialize<List<TourModel>>(responseBody);
 		}
 		catch (HttpRequestException e)
@@ -62,7 +60,6 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 			HttpResponseMessage response = await HttpClientSingleton.Instance.GetAsync(url);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
-			_ = MessageBox.Show(responseBody);
 			return JsonSerializer.Deserialize<TourModel>(responseBody);
 		}
 		catch (HttpRequestException e)
@@ -79,11 +76,10 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 			string url = Resource.Route_Tour;
 			string json = JsonSerializer.Serialize(updatedTour, _options);
 			HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
-
 			HttpResponseMessage response = await HttpClientSingleton.Instance.PutAsync(url, content);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
-			_ = MessageBox.Show(responseBody);
+
 			return JsonSerializer.Deserialize<TourModel>(responseBody);
 		}
 		catch (HttpRequestException e)
@@ -101,7 +97,6 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 			HttpResponseMessage response = await HttpClientSingleton.Instance.DeleteAsync(url);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
-			_ = MessageBox.Show(responseBody);
 		}
 		catch (HttpRequestException e)
 		{
