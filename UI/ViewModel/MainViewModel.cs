@@ -1,7 +1,8 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Xml.Linq;
 using UI.HttpHelpers;
 using UI.Interfaces;
 using UI.Models;
@@ -24,6 +25,8 @@ public class MainViewModel : INotifyPropertyChanged
 	public ICommand MapCommand { get; set; }
 	public ICommand MiscCommand { get; set; }
 
+	public ICommand RefreshTourCommand { get; set; }
+
 	public static TourModel? tourToModify = new();
 	public static TourLogModel? tourLogToModify = new();
 
@@ -43,9 +46,7 @@ public class MainViewModel : INotifyPropertyChanged
 		GeneralCommand = new RelayCommand(SwitchToGeneral);
 		MapCommand = new RelayCommand(SwitchToMap);
 		MiscCommand = new RelayCommand(SwitchToMisc);
-
-		TourHandlerViewModel tourHandler = new();
-		tourHandler.TourCreated += OnTourCreated;
+		RefreshTourCommand = new RelayCommand(RefreshTourList);
 
 		GetTourNames();
 
@@ -63,6 +64,11 @@ public class MainViewModel : INotifyPropertyChanged
 			_currentView = value;
 			OnPropertyChanged(nameof(CurrentView));
 		}
+	}
+
+	public void RefreshTourList(object obj)
+	{
+		GetTourNames();
 	}
 
 	public void SwitchToGeneral(object obj)
@@ -145,8 +151,6 @@ public class MainViewModel : INotifyPropertyChanged
 		}
 
 		_selectedTour = null;
-
-		OnPropertyChanged(nameof(TourNames));
 		GetTourNames();
 	}
 
@@ -171,7 +175,6 @@ public class MainViewModel : INotifyPropertyChanged
 		set
 		{
 			_tourNames = value;
-			OnPropertyChanged(nameof(TourNames));
 			GetTourNames();
 		}
 	}
@@ -306,6 +309,7 @@ public class MainViewModel : INotifyPropertyChanged
 	public void OpenTourHandlerWindow(object parameter)
 	{
 		TourHandlerWindow tourHandlerWindow = new();
+		((TourHandlerViewModel)tourHandlerWindow.DataContext).TourCreated += OnTourCreated;
 		tourHandlerWindow.Show();
 	}
 
