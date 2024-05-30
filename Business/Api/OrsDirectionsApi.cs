@@ -11,19 +11,19 @@ using System.Web;
 namespace Business.Api;
 
 // TODO AFTER DONE: rm main function and set bl back to lib
-class Program
-{
-	static async Task Main(string[] args)
-	{
-		OrsDirectionsApi api = new OrsDirectionsApi();
+//class Program
+//{
+//	static async Task Main(string[] args)
+//	{
+//		OrsDirectionsApi api = new OrsDirectionsApi();
 
-		await api.GeocodeGetCoordinatesAsync("Höchstädtplatz 6, 1200 Wien");
+//		await api.GeocodeGetCoordinatesAsync("Höchstädtplatz 6, 1200 Wien");
 
-		await api.DirectionsGetRouteAsync("Schwedenplatz, 1010 Wien", "Höchstädtplatz 6, 1200 Wien", "walking");
-	}
-}
+//		await api.DirectionsGetRouteAsync("Schwedenplatz, 1010 Wien", "Höchstädtplatz 6, 1200 Wien", "walking");
+//	}
+//}
 
-#region STRUCT DECLARATIONS
+#region STRUCT DECLARATIONS GEOCODE
 public struct Coordinates
 {
 	public string lon;
@@ -40,9 +40,32 @@ public struct Geometry
 	public string[] coordinates;
 }
 
-public struct Root
+public struct GeocodeRoot
 {
 	public Feature[] features;
+}
+#endregion
+
+#region STRUCT DECLARATIONS DIRECTIONS
+public struct Summary
+{
+	public float distance;
+	public double duration;
+}
+
+public struct Properties
+{
+	public Summary summary;
+}
+
+public struct Route // == Feature
+{
+	public Properties properties;
+}
+
+public struct DirectionsRoot
+{
+	public List<Route> features;
 }
 #endregion
 
@@ -61,7 +84,6 @@ public class TransportTypes
 		{ "bike", "cycling-regular" }
 	};
 }
-
 
 public class OrsDirectionsApi
 {
@@ -88,7 +110,7 @@ public class OrsDirectionsApi
 			using (var response = await _client.GetAsync(""))
 			{
 				string responseData = await response.Content.ReadAsStringAsync();
-				var data = JsonConvert.DeserializeObject<Root>(responseData);
+				var data = JsonConvert.DeserializeObject<GeocodeRoot>(responseData);
 
 				//Console.WriteLine(data);
 
@@ -102,13 +124,14 @@ public class OrsDirectionsApi
 	}
 
 	// call directions api to receive distance, duration, etc
-	public async Task<Tour> DirectionsGetRouteAsync(string start, string end, string transportType)
+	public async Task<(float Distance, double Duration)> DirectionsGetRouteAsync(string start, string end, string transportType)
 	{
-		Tour temp = new Tour();
 		TransportTypes transportTypes = new TransportTypes();
 
 		Coordinates startPoint = GeocodeGetCoordinatesAsync(start).Result;
 		Coordinates endPoint = GeocodeGetCoordinatesAsync(end).Result;
+
+		Console.WriteLine(startPoint.lon + " " + endPoint.lon);
 
 		using (_client = new HttpClient { BaseAddress = new Uri($"https://api.openrouteservice.org/v2/directions/{transportTypes.DTransportTypes[transportType]}" +
 																	$"?api_key={_apiKey}" +
@@ -121,14 +144,11 @@ public class OrsDirectionsApi
 			using (var response = await _client.GetAsync(""))
 			{
 				string responseData = await response.Content.ReadAsStringAsync();
-				var data = JsonConvert.DeserializeObject(responseData);
 
-				Console.WriteLine(data);
+				var data = JsonConvert.DeserializeObject<DirectionsRoot>(responseData);
 
-				
+				return ((float)data.features[0].properties.summary.distance, (double)data.features[0].properties.summary.duration);
 			}
 		}
-
-		return temp;
 	}
 }
