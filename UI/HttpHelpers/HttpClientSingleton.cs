@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace UI;
+namespace UI.Http;
 
 public sealed class HttpClientSingleton
 {
