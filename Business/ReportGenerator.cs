@@ -19,10 +19,11 @@ public class ReportGenerator(IService<Tour> tourService, IService<TourLog> tourL
 {
 	public void GenerateTourReport(int id)
 	{
-		Tour? currTour = new(); //move to business, only pass id
+		Tour? currTour = new();
 		IEnumerable<TourLog>? currLogs;
 		currTour = tourService.GetById(id);
 		currLogs = tourLogService.GetLogsByTourId(id);
+		PromptSaveDialog();
 
 	}
 
@@ -38,28 +39,38 @@ public class ReportGenerator(IService<Tour> tourService, IService<TourLog> tourL
 
 	public void PromptSaveDialog()
 	{
-		Stream stream;
-		SaveFileDialog saveFileDialog = new SaveFileDialog();
-
-		saveFileDialog.CheckWriteAccess = true;
-		saveFileDialog.Filter = "pdf files (*.pdf)|*.pdf|All files (*.*)|*.*";
-		saveFileDialog.FilterIndex = 2;
-		saveFileDialog.RestoreDirectory = true;
-
-		if (saveFileDialog.ShowDialog() == DialogResult.OK)
+		var t = new Thread((ThreadStart)(() =>
 		{
-			if ((stream = saveFileDialog.OpenFile()) != null)
-			{
-				PdfWriter writer = new PdfWriter(stream);
-				PdfDocument pdf = new PdfDocument(writer);
-				Document document = new Document(pdf);
-				Paragraph header = new Paragraph("HEADER")
-				   .SetTextAlignment(TextAlignment.CENTER)
-				   .SetFontSize(20);
+			Stream stream;
+			SaveFileDialog saveFileDialog = new SaveFileDialog();
 
-				document.Add(header);
-				document.Close();
+			saveFileDialog.CheckWriteAccess = true;
+			saveFileDialog.Filter = "pdf files (*.pdf)|*.pdf|All files (*.*)|*.*";
+			saveFileDialog.FilterIndex = 2;
+			saveFileDialog.RestoreDirectory = true;
+
+			if (saveFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				if ((stream = saveFileDialog.OpenFile()) != null)
+				{
+					PopulatePdf(new PdfWriter(stream));	
+				}
 			}
-		}
+		}));
+		t.SetApartmentState(ApartmentState.STA);
+		t.Start();
+		t.Join();
+	}
+
+	public void PopulatePdf(PdfWriter writer)
+	{
+		PdfDocument pdf = new PdfDocument(writer);
+		Document document = new Document(pdf);
+		Paragraph header = new Paragraph("HEADER")
+		   .SetTextAlignment(TextAlignment.CENTER)
+		   .SetFontSize(20);
+
+		document.Add(header);
+		document.Close();
 	}
 }
