@@ -16,5 +16,5 @@ public class Tour
 	[Column("estimatedtime")] public double EstimatedTime { get; set; }
 	[Column("routeinformation")] public string RouteInformation { get; set; } = null!;
 
-	public ICollection<TourLog> TourLogs { get; set; } = null!;
+	//public virtual ICollection<TourLog> TourLogs { get; set; } = null!;
 }

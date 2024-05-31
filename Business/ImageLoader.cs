@@ -4,10 +4,9 @@ using DataAccess.Interfaces;
 using DataAccess.Repositories;
 
 namespace Business;
-public class ImageLoader
+public class ImageLoader(TourPlannerContext context)
 {
-	private static readonly TourPlannerContext _context = new();
-	private readonly IRepository<DataAccess.Models.Tour> _repository = new TourRepository(_context);
+	private readonly IRepository<DataAccess.Models.Tour> _repository = new TourRepository(context);
 
 	public string GetImagePath(int id)
 	{

@@ -6,11 +6,9 @@ using System.Linq.Expressions;
 namespace DataAccess.Repositories;
 public abstract class GenericRepository<T>(TourPlannerContext context) : IRepository<T> where T : class
 {
-	protected TourPlannerContext _context = context;
-
 	public virtual T Add(T entity)
 	{
-		return _context.Add(entity).Entity;
+		return context.Add(entity).Entity;
 	}
 
 	public virtual void Delete(int id)
@@ -26,28 +24,28 @@ public abstract class GenericRepository<T>(TourPlannerContext context) : IReposi
 
 	public virtual IEnumerable<T>? GetAll()
 	{
-		return [.. _context.Set<T>()];
+		return [.. context.Set<T>()];
 	}
 
 	public virtual IEnumerable<T>? Find(Expression<Func<T, bool>> predicate)
 	{
-		return [.. _context.Set<T>()
+		return [.. context.Set<T>()
 			.AsQueryable()
 			.Where(predicate)];
 	}
 
 	public virtual T? GetById(int id)
 	{
-		return _context.Find<T>(id);
+		return context.Find<T>(id);
 	}
 
 	public virtual void SaveChanges()
 	{
-		_ = _context.SaveChanges();
+		_ = context.SaveChanges();
 	}
 
 	public virtual T Update(T entity)
 	{
-		return _context.Update(entity).Entity;
+		return context.Update(entity).Entity;
 	}
 }

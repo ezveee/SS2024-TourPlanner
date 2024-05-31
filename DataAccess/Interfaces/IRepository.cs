@@ -10,5 +10,4 @@ public interface IRepository<T> where T : class
 	IEnumerable<T>? GetAll();
 	IEnumerable<T>? Find(Expression<Func<T, bool>> predicate);
 	void SaveChanges();
-
 }
