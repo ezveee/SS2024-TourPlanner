@@ -10,37 +10,48 @@ public class Logger : ILogger
 {
     private readonly ILog _logger;
 
-    public Logger()
-    {
-        var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
-        XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
-        _logger = LogManager.GetLogger(typeof(Logger));
-    }
+	public static Logger CreateLogger(string configPath, string caller)
+	{
+		var realPath = Path.Combine(@"..\..\..\", configPath);
+		if (!File.Exists(realPath))
+		{
+			throw new ArgumentException("Does not exist.", nameof(configPath));
+		}
 
-    public void LogInfo(string message)
-    {
-        _logger.Info(message);
-    }
+		log4net.Config.XmlConfigurator.Configure(new FileInfo(realPath));
+		var logger = log4net.LogManager.GetLogger(caller);  // System.Reflection.MethodBase.GetCurrentMethod().DeclaringType
 
-    public void LogWarning(string message)
-    {
-        _logger.Warn(message);
-    }
+		return new Logger(logger);
+	}
 
-    public void LogError(string message, Exception exception = null)
-    {
-        if (exception == null)
-        {
-            _logger.Error(message);
-        }
-        else
-        {
-            _logger.Error(message, exception);
-        }
-    }
+	private Logger(log4net.ILog logger)
+	{
+		this._logger = logger;
+	}
 
-    public void LogDebug(string message)
-    {
-        _logger.Debug(message);
-    }
+	public void Info(string message)
+	{
+		this._logger.Info(message);
+	}
+
+	public void Debug(string message)
+	{
+		this._logger.Debug(message);
+	}
+
+	public void Warn(string message)
+	{
+		this._logger.Warn(message);
+	}
+
+	public void Error(string message)
+	{
+		this._logger.Error(message);
+	}
+
+	public void Fatal(string message)
+	{
+		this._logger.Fatal(message);
+	}
+
 }
