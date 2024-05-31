@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -13,23 +14,23 @@ namespace Business.Api;
 // TODO AFTER DONE: rm main function and set bl back to lib
 //class Program
 //{
-//	static async Task Main(string[] args)
+//	static void Main(string[] args)
 //	{
 //		OrsDirectionsApi api = new OrsDirectionsApi();
 
-//		await api.GeocodeGetCoordinatesAsync("Höchstädtplatz 6, 1200 Wien");
+//		_ = api.GeocodeGetCoordinatesAsync("Höchstädtplatz 6, 1200 Wien").Result;
 
-//		await api.DirectionsGetRouteAsync("Schwedenplatz, 1010 Wien", "Höchstädtplatz 6, 1200 Wien", "walking");
+//		_ = api.DirectionsGetRouteAsync("Schwedenplatz, 1010 Wien", "Höchstädtplatz 6, 1200 Wien", "walking").Result;
 //	}
 //}
 
-#region STRUCT DECLARATIONS GEOCODE
 public struct Coordinates
 {
 	public string lon;
 	public string lat;
 }
 
+#region STRUCT DECLARATIONS GEOCODE
 public struct Feature
 {
 	public Geometry geometry;
@@ -109,6 +110,13 @@ public class OrsDirectionsApi
 
 			using (var response = await _client.GetAsync(""))
 			{
+				if (!response.IsSuccessStatusCode)
+				{
+					// Console.WriteLine(response.StatusCode.ToString());
+
+					throw new Exception($"Failed to retrieve coordinates for {address}");
+				}
+
 				string responseData = await response.Content.ReadAsStringAsync();
 				var data = JsonConvert.DeserializeObject<GeocodeRoot>(responseData);
 
@@ -131,7 +139,7 @@ public class OrsDirectionsApi
 		Coordinates startPoint = GeocodeGetCoordinatesAsync(start).Result;
 		Coordinates endPoint = GeocodeGetCoordinatesAsync(end).Result;
 
-		Console.WriteLine(startPoint.lon + " " + endPoint.lon);
+		// Console.WriteLine(startPoint.lon + " " + endPoint.lon);
 
 		using (_client = new HttpClient { BaseAddress = new Uri($"https://api.openrouteservice.org/v2/directions/{transportTypes.DTransportTypes[transportType]}" +
 																	$"?api_key={_apiKey}" +
@@ -143,6 +151,13 @@ public class OrsDirectionsApi
 
 			using (var response = await _client.GetAsync(""))
 			{
+				if (!response.IsSuccessStatusCode)
+				{
+					// Console.WriteLine(response.StatusCode.ToString());
+
+					throw new Exception($"Failed to retrieve route");
+				}
+
 				string responseData = await response.Content.ReadAsStringAsync();
 
 				var data = JsonConvert.DeserializeObject<DirectionsRoot>(responseData);
