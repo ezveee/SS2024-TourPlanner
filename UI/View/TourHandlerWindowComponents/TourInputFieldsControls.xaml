@@ -46,12 +46,12 @@
         <!--TODO: ask if using extended wpf toolkit is allowed-->
         <DockPanel Grid.Row="5" HorizontalAlignment="Left">
             <Label Content="Distance:"/>
-            <TextBox Margin="5" Width="200" Text="{Binding Distance, Mode=TwoWay}"/>
+            <TextBox Margin="5" Width="200" Text="{Binding Distance, Mode=TwoWay}" IsReadOnly="True"/>
         </DockPanel>
 
         <DockPanel Grid.Row="6" HorizontalAlignment="Left">
             <Label Content="Estimated Time:"/>
-            <TextBox Margin="5" Width="200" Text="{Binding Time, Mode=TwoWay}"/>
+            <TextBox Margin="5" Width="200" Text="{Binding Time, Mode=TwoWay}" IsReadOnly="True"/>
         </DockPanel>
 
         <DockPanel Grid.Row="7" HorizontalAlignment="Stretch">

@@ -1,9 +1,11 @@
-﻿using Business.Extensions;
+﻿using Business.Api;
+using Business.Extensions;
 using Business.Interfaces;
 using Business.Models;
 using DataAccess.Data;
 using DataAccess.Interfaces;
 using DataAccess.Repositories;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Business.Services;
 public class TourService : IService<Tour>
@@ -13,8 +15,12 @@ public class TourService : IService<Tour>
 	// TODO: bruh thats not testable, change that shit
 	private readonly IRepository<DataAccess.Models.Tour> _repository = new TourRepository(_context);
 
+	private OrsDirectionsApi _ors = new OrsDirectionsApi();
+
 	public void Create(Tour entity)
 	{
+		(entity.Distance, entity.EstimatedTime) = _ors.DirectionsGetRouteAsync(entity.From, entity.To, entity.TransportType).Result;
+
 		_repository.Add(entity.MapTourToDataAccess());
 	}
 
