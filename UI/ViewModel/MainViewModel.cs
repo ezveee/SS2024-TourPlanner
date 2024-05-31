@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,6 +26,9 @@ public class MainViewModel : INotifyPropertyChanged
 	public ICommand MapCommand { get; set; }
 	public ICommand MiscCommand { get; set; }
 
+	public ICommand GenerateTourReportCommand { get; set; }
+	public ICommand GenerateSummaryCommand { get; set; }
+
 	public ICommand RefreshTourCommand { get; set; }
 
 	public static TourModel? tourToModify = new();
@@ -46,6 +50,8 @@ public class MainViewModel : INotifyPropertyChanged
 		GeneralCommand = new RelayCommand(SwitchToGeneral);
 		MapCommand = new RelayCommand(SwitchToMap);
 		MiscCommand = new RelayCommand(SwitchToMisc);
+		GenerateTourReportCommand = new RelayCommand(GenerateTourReport);
+		GenerateSummaryCommand = new RelayCommand(GenerateSummaryReport);
 		RefreshTourCommand = new RelayCommand(RefreshTourList);
 
 		GetTourNames();
@@ -84,6 +90,29 @@ public class MainViewModel : INotifyPropertyChanged
 	public void SwitchToMisc(object obj)
 	{
 		CurrentView = new MiscControls();
+	}
+
+	public async void GenerateTourReport(object parameter)
+	{
+		if (_selectedTour == null)
+		{
+			return;
+		}
+
+		ReportViewModel reportViewModel = new ();
+		await reportViewModel.PostDataToApiAsync(_selectedTour.Item1, "tour");
+
+	}
+
+	public async void GenerateSummaryReport(object parameter)
+	{
+		if (_selectedTour == null)
+		{
+			return;
+		}
+
+		ReportViewModel reportViewModel = new();
+		await reportViewModel.PostDataToApiAsync(_selectedTour.Item1, "summary");
 	}
 
 	private void OnTourCreated(object sender, EventArgs e)

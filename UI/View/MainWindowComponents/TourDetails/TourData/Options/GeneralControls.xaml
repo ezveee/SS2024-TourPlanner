@@ -14,7 +14,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
@@ -42,6 +45,16 @@
 
         <TextBlock Grid.Row="6" Grid.Column="0" Text="Estimated Time   " FontWeight="Bold"/>
         <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding SelectedTourData.EstimatedTime}"/>
+
+        <Button x:Name="tourReport"
+                Grid.Column="1"
+                Grid.Row="7"
+                Command="{Binding GenerateTourReportCommand}">Generate Tour Report</Button>
+        <Button x:Name="summaryReport"
+                Grid.Column="1"
+                Grid.Row="8"
+                Command="{Binding GenerateSummaryCommand}">Generate Summary Report</Button>
+
     </Grid>
 
 </UserControl>
