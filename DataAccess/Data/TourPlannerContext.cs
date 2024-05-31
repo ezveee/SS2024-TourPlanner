@@ -1,5 +1,6 @@
 ﻿using DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace DataAccess.Data;
 public class TourPlannerContext : DbContext
@@ -9,6 +10,11 @@ public class TourPlannerContext : DbContext
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
-		_ = optionsBuilder.UseNpgsql("Host=localhost;Database=tourplanner;Username=swen2;Password=123"); // TODO: secure connection string
+		IConfiguration config = new ConfigurationBuilder()
+			.SetBasePath(Directory.GetCurrentDirectory())
+			.AddJsonFile("config.json", false, true)
+			.Build();
+
+		_ = optionsBuilder.UseNpgsql(config["dbConnectionString"]); // TODO: secure connection string
 	}
 }
