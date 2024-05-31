@@ -15,6 +15,4 @@ public class Tour
 	[Column("distance")] public float Distance { get; set; }
 	[Column("estimatedtime")] public double EstimatedTime { get; set; }
 	[Column("routeinformation")] public string RouteInformation { get; set; } = null!;
-
-	//public virtual ICollection<TourLog> TourLogs { get; set; } = null!;
 }

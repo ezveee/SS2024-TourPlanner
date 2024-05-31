@@ -15,5 +15,4 @@ public class TourLog
 	[Column("rating")] public int Rating { get; set; }
 
 	[Column("tourid")] public int TourId { get; set; }
-	public virtual Tour Tour { get; set; } = null!;
 }
