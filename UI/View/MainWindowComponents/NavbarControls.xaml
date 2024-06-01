@@ -41,9 +41,9 @@
                 <MenuItem Grid.Column="3" 
               BorderThickness="1" 
               BorderBrush="LightGray"></MenuItem>
-                <MenuItem Grid.Column="4" 
+                <Button Grid.Column="4" 
               BorderThickness="1" 
-              BorderBrush="LightGray"></MenuItem>
+              BorderBrush="LightGray" Command="{Binding ToggleThemeCommand}" Content="Change Theme"></Button>
                 <MenuItem Header="Help" 
               Grid.Column="5" 
               HorizontalAlignment="Stretch" 

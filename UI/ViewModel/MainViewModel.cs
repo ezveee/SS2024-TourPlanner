@@ -3,6 +3,7 @@ using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Xml.Linq;
 using UI.HttpHelpers;
 using UI.Interfaces;
@@ -31,6 +32,8 @@ public class MainViewModel : INotifyPropertyChanged
 
 	public ICommand RefreshTourCommand { get; set; }
 
+	public ICommand ToggleThemeCommand { get; set; }
+
 	public static TourModel? tourToModify = new();
 	public static TourLogModel? tourLogToModify = new();
 
@@ -53,6 +56,11 @@ public class MainViewModel : INotifyPropertyChanged
 		GenerateTourReportCommand = new RelayCommand(GenerateTourReport);
 		GenerateSummaryCommand = new RelayCommand(GenerateSummaryReport);
 		RefreshTourCommand = new RelayCommand(RefreshTourList);
+		ToggleThemeCommand = new RelayCommand(ToggleTheme);
+
+		IsDarkMode = false;
+		BackgroundBrush = Brushes.White;
+		ForegroundBrush = Brushes.Black;
 
 		GetTourNames();
 
@@ -351,5 +359,58 @@ public class MainViewModel : INotifyPropertyChanged
 
 		TourLogHandlerWindow tourLogHandlerWindow = new();
 		tourLogHandlerWindow.Show();
+	}
+
+	private bool _isDarkMode;
+	public bool IsDarkMode
+	{
+		get => _isDarkMode;
+		set
+		{
+			_isDarkMode = value;
+			OnPropertyChanged();
+			ApplyTheme(value);
+		}
+	}
+
+	private SolidColorBrush _backgroundBrush;
+	public SolidColorBrush BackgroundBrush
+	{
+		get => _backgroundBrush;
+		set
+		{
+			_backgroundBrush = value;
+			OnPropertyChanged();
+		}
+	}
+
+	private SolidColorBrush _foregroundBrush;	
+	public SolidColorBrush ForegroundBrush
+	{
+		get => _foregroundBrush;
+		set
+		{
+			_foregroundBrush = value;
+			OnPropertyChanged();
+		}
+	}
+
+	public void ToggleTheme(object parameter)
+	{
+		IsDarkMode = !IsDarkMode;
+	}
+
+	private void ApplyTheme(bool isDarkMode)
+	{
+		if (isDarkMode)
+		{
+			BackgroundBrush = Brushes.Black;
+			ForegroundBrush = Brushes.White;
+		}
+		else
+		{
+			BackgroundBrush = Brushes.White;
+			ForegroundBrush = Brushes.Black;
+		}
 	}
 }
