@@ -405,12 +405,12 @@ public class MainViewModel : INotifyPropertyChanged
 		if (isDarkMode)
 		{
 			BackgroundBrush = new SolidColorBrush(Color.FromArgb(230, 34, 31, 47));
-			ForegroundBrush = Brushes.White;
+			ForegroundBrush = new SolidColorBrush(Colors.White);
+
+			return;
 		}
-		else
-		{
-			BackgroundBrush = Brushes.White;
-			ForegroundBrush = Brushes.Black;
-		}
+		
+		BackgroundBrush = new SolidColorBrush(Colors.White); 
+		ForegroundBrush = new SolidColorBrush(Colors.Black); 
 	}
 }

@@ -23,9 +23,9 @@
                     <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Command="{Binding GeneralCommand}" Background="{Binding BackgroundBrush.Color}">General</Button>
-                <Button Grid.Column="1" Command="{Binding MapCommand}" Background="{Binding BackgroundBrush.Color}">Route</Button>
-                <Button Grid.Column="2" Command="{Binding MiscCommand}" Background="{Binding BackgroundBrush.Color}">Misc</Button>
+                <Button Grid.Column="0" Command="{Binding GeneralCommand}" Background="{Binding BackgroundBrush}" Foreground="{Binding ForegroundBrush}">General</Button>
+                <Button Grid.Column="1" Command="{Binding MapCommand}" Background="{Binding BackgroundBrush}" Foreground="{Binding ForegroundBrush}">Route</Button>
+                <Button Grid.Column="2" Command="{Binding MiscCommand}" Background="{Binding BackgroundBrush}" Foreground="{Binding ForegroundBrush}">Misc</Button>
             </Grid>
         </DockPanel>
 
