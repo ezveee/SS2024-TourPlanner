@@ -133,6 +133,8 @@ public class TourLogControllerTests
 	[Test]
 	public void CanCallPut()
 	{
+		_tourLogs = [];
+
 		// Arrange
 		TourLog updatedTourLog = new()
 		{
