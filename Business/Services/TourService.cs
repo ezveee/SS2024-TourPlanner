@@ -1,4 +1,5 @@
-﻿using Business.Extensions;
+using Business.Api;
+using Business.Extensions;
 using Business.Interfaces;
 using Business.Models;
 using DataAccess.Interfaces;
@@ -8,8 +9,12 @@ namespace Business.Services;
 
 public class TourService(IRepository<DataAccess.Models.Tour> repository) : IService<Tour>
 {
+    private OrsDirectionsApi _ors = new OrsDirectionsApi();
+
 	public Tour Create(Tour entity)
 	{
+        (entity.Distance, entity.EstimatedTime) = _ors.DirectionsGetRouteAsync(entity.From, entity.To, entity.TransportType).Result;
+        
 		DataAccess.Models.Tour DataAccessTour = repository.Add(entity.MapTourToDataAccess());
 		repository.SaveChanges();
 		return DataAccessTour.MapTourToBusiness();
