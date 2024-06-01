@@ -43,7 +43,7 @@
               BorderBrush="LightGray"></MenuItem>
                 <Button Grid.Column="4" 
               BorderThickness="1" 
-              BorderBrush="LightGray" Command="{Binding ToggleThemeCommand}" Content="Change Theme"></Button>
+              BorderBrush="LightGray" Command="{Binding ToggleThemeCommand}" Content="Change Theme" Background="{Binding BackgroundBrush.Color}"></Button>
                 <MenuItem Header="Help" 
               Grid.Column="5" 
               HorizontalAlignment="Stretch" 
@@ -53,6 +53,6 @@
         </DockPanel>
 
         <!--SEARCHBAR-->
-        <TextBox Grid.Row="1" BorderBrush="LightGray"/>
+        <TextBox Grid.Row="1" BorderBrush="LightGray" Background="{Binding BackgroundBrush.Color}"/>
     </Grid>
 </UserControl>

@@ -49,11 +49,11 @@
         <Button x:Name="tourReport"
                 Grid.Column="1"
                 Grid.Row="7"
-                Command="{Binding GenerateTourReportCommand}">Generate Tour Report</Button>
+                Command="{Binding GenerateTourReportCommand}" Background="{Binding BackgroundBrush.Color}">Generate Tour Report</Button>
         <Button x:Name="summaryReport"
                 Grid.Column="1"
                 Grid.Row="8"
-                Command="{Binding GenerateSummaryCommand}">Generate Summary Report</Button>
+                Command="{Binding GenerateSummaryCommand}" Background="{Binding BackgroundBrush.Color}">Generate Summary Report</Button>
 
     </Grid>
 

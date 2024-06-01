@@ -373,8 +373,8 @@ public class MainViewModel : INotifyPropertyChanged
 		}
 	}
 
-	private SolidColorBrush _backgroundBrush;
-	public SolidColorBrush BackgroundBrush
+	private Brush _backgroundBrush;
+	public Brush BackgroundBrush
 	{
 		get => _backgroundBrush;
 		set
@@ -384,8 +384,8 @@ public class MainViewModel : INotifyPropertyChanged
 		}
 	}
 
-	private SolidColorBrush _foregroundBrush;	
-	public SolidColorBrush ForegroundBrush
+	private Brush _foregroundBrush;	
+	public Brush ForegroundBrush
 	{
 		get => _foregroundBrush;
 		set
@@ -404,7 +404,7 @@ public class MainViewModel : INotifyPropertyChanged
 	{
 		if (isDarkMode)
 		{
-			BackgroundBrush = Brushes.Black;
+			BackgroundBrush = new SolidColorBrush(Color.FromArgb(230, 34, 31, 47));
 			ForegroundBrush = Brushes.White;
 		}
 		else

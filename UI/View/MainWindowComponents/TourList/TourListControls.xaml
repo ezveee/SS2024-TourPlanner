@@ -27,17 +27,17 @@
 
                 <TextBlock Text="Tours" Grid.Column="0"></TextBlock>
 
-                <Button x:Name="addTour" Grid.Column="2" Command="{Binding OpenTourHandlerCommand}">+</Button>
-                <Button x:Name="deleteTour" Grid.Column="3" Command="{Binding DeleteTourCommand}">-</Button>
+                <Button x:Name="addTour" Grid.Column="2" Command="{Binding OpenTourHandlerCommand}" Background="{Binding BackgroundBrush.Color}">+</Button>
+                <Button x:Name="deleteTour" Grid.Column="3" Command="{Binding DeleteTourCommand}" Background="{Binding BackgroundBrush.Color}">-</Button>
                 <Button x:Name="refreshTour"
                         Grid.Column="4"
-                        Command="{Binding RefreshTourCommand}">G</Button>
-                <Button Grid.Column="5" Command="{Binding ModifyTourCommand}">...</Button>
+                        Command="{Binding RefreshTourCommand}" Background="{Binding BackgroundBrush.Color}">G</Button>
+                <Button Grid.Column="5" Command="{Binding ModifyTourCommand}" Background="{Binding BackgroundBrush.Color}">...</Button>
             </Grid>
         </DockPanel>
 
         <!--LIST OF TOURS-->
-        <ListBox x:Name="TourList" Grid.Row="1" ItemsSource="{Binding TourNames}" SelectedItem="{Binding SelectedTour}">
+        <ListBox x:Name="TourList" Grid.Row="1" ItemsSource="{Binding TourNames}" SelectedItem="{Binding SelectedTour}" Background="{Binding BackgroundBrush.Color}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Item2}" Tag="{Binding Item1}" MouseLeftButtonDown="TourItem_Click"/>
