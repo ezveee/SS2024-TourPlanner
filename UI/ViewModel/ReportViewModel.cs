@@ -22,7 +22,6 @@ public class ReportViewModel
 			string json = $"{{ \"id\": {id}, \"type\": \"{type}\" }}";
 			HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-			_logger.Info("Sending request to generate report");
 			HttpResponseMessage response = await HttpClientSingleton.Instance.PostAsync(url, content);
 			response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();

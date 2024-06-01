@@ -4,11 +4,14 @@ using System.Text.Json;
 using System.Windows;
 using UI.Http;
 using UI.Interfaces;
+using UI.Logging;
 using UI.Models;
 
 namespace UI.HttpHelpers;
 public class HttpTourHelper : IHttpHelper<TourModel>
 {
+	private static readonly ILogger _logger = LoggerFactory.GetLogger();
+
 	private readonly JsonSerializerOptions _options = new()
 	{
 		DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault
@@ -26,11 +29,13 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
 
+			_logger.Info("Create response sent from server");
 			return JsonSerializer.Deserialize<TourModel>(responseBody);
 		}
 		catch (HttpRequestException e)
 		{
 			_ = MessageBox.Show("Request error: " + e.Message);
+			_logger.Error("Request error: " + e.Message);
 			return null;
 		}
 	}
@@ -43,11 +48,14 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 			HttpResponseMessage response = await HttpClientSingleton.Instance.GetAsync(url);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
+
+			_logger.Info("Get Tourlist response sent from server");
 			return JsonSerializer.Deserialize<List<TourModel>>(responseBody);
 		}
 		catch (HttpRequestException e)
 		{
 			_ = MessageBox.Show("Request error: " + e.Message);
+			_logger.Error("Request error: " + e.Message);
 			return null;
 		}
 	}
@@ -60,11 +68,13 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 			HttpResponseMessage response = await HttpClientSingleton.Instance.GetAsync(url);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
+			_logger.Info("Get Tour response sent from server");
 			return JsonSerializer.Deserialize<TourModel>(responseBody);
 		}
 		catch (HttpRequestException e)
 		{
 			_ = MessageBox.Show("Request error: " + e.Message);
+			_logger.Error("Request error: " + e.Message);
 			return null;
 		}
 	}
@@ -80,11 +90,13 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
 
+			_logger.Info("Update Tour response sent from server");
 			return JsonSerializer.Deserialize<TourModel>(responseBody);
 		}
 		catch (HttpRequestException e)
 		{
 			_ = MessageBox.Show("Request error: " + e.Message);
+			_logger.Error("Request error: " + e.Message);
 			return null;
 		}
 	}
@@ -97,10 +109,12 @@ public class HttpTourHelper : IHttpHelper<TourModel>
 			HttpResponseMessage response = await HttpClientSingleton.Instance.DeleteAsync(url);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
+			_logger.Info("Delete Tour response sent from server");
 		}
 		catch (HttpRequestException e)
 		{
 			_ = MessageBox.Show("Request error: " + e.Message);
+			_logger.Error("Request error: " + e.Message);
 		}
 	}
 }

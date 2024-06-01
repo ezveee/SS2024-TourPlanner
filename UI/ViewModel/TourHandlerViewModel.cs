@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using UI.HttpHelpers;
 using UI.Interfaces;
+using UI.Logging;
 using UI.Models;
 using UI.ViewModel.Commands;
 using UI.ViewModel.Interfaces;
@@ -11,6 +12,8 @@ namespace UI.ViewModel;
 
 public class TourHandlerViewModel : ICreationHandlerViewModel, INotifyPropertyChanged
 {
+	private static readonly ILogger _logger = LoggerFactory.GetLogger();
+
 	public ICommand CreationCommand { get; set; }
 	public ICommand QuitCreationCommand { get; set; }
 
@@ -145,6 +148,7 @@ public class TourHandlerViewModel : ICreationHandlerViewModel, INotifyPropertyCh
 		CloseWindow(_window);
 
 		TourCreated?.Invoke(this, EventArgs.Empty);
+		_logger.Info("Tour was created");
 	}
 	#endregion
 
@@ -156,6 +160,7 @@ public class TourHandlerViewModel : ICreationHandlerViewModel, INotifyPropertyCh
 	public void CloseWindow(Window window)
 	{
 		_window.Close();
+		_logger.Info("Window was closed");
 	}
 
 	protected virtual void OnPropertyChanged(string propertyName)

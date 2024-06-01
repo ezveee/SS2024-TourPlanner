@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using UI.HttpHelpers;
 using UI.Interfaces;
+using UI.Logging;
 using UI.Models;
 using UI.ViewModel.Commands;
 using UI.ViewModel.Interfaces;
@@ -12,6 +13,8 @@ public class TourEditorViewModel : ICreationHandlerViewModel, INotifyPropertyCha
 {
 	public ICommand CreationCommand { get; set; }
 	public ICommand QuitCreationCommand { get; set; }
+
+	private static readonly ILogger _logger = LoggerFactory.GetLogger();
 
 	private readonly Window _window;
 
@@ -48,10 +51,13 @@ public class TourEditorViewModel : ICreationHandlerViewModel, INotifyPropertyCha
 		_distance = _tourToModify.Distance;
 		_time = _tourToModify.EstimatedTime;
 		_info = _tourToModify.RouteInformation;
+
+		_logger.Info("Tour was set to modified value");
 	}
 
 	public void CloseWindow(Window window)
 	{
+		_logger.Info("Window closed");
 		_window.Close();
 	}
 
