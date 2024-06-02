@@ -59,7 +59,7 @@ public class ReportGenerator(IService<Tour> tourService, IService<TourLog> tourL
 		}
 		this._summarizedStats.AverageDistance = averageDistance / this._currLogs.Count();
 		this._summarizedStats.AverageTime = averageTime / this._currLogs.Count();
-		this._summarizedStats.AverageRating = averageRating / this._currLogs.Count();
+		this._summarizedStats.AverageRating = averageRating / (this._currLogs.Count() == 0 ? 1 : this._currLogs.Count());
 	}
 
 	private void PromptSaveDialog(ReportGenerator.Type type)

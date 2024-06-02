@@ -39,7 +39,7 @@
         </DockPanel>
 
         <DockPanel Grid.Row="4" HorizontalAlignment="Left">
-            <Label Content="Type of Transport:"/>
+            <Label Content="Type of Transport (Bike, Car, Walking):"/>
             <TextBox Margin="5" Width="200" Text="{Binding TransportType, Mode=TwoWay}"/>
         </DockPanel>
 
