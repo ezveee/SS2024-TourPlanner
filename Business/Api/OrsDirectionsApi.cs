@@ -12,17 +12,17 @@ using System.Web;
 namespace Business.Api;
 
 // TODO AFTER DONE: rm main function and set bl back to lib
-//class Program
-//{
-//	static void Main(string[] args)
-//	{
-//		OrsDirectionsApi api = new OrsDirectionsApi();
+class Program
+{
+	static void Main(string[] args)
+	{
+		OrsDirectionsApi api = new OrsDirectionsApi();
 
-//		_ = api.GeocodeGetCoordinatesAsync("Höchstädtplatz 6, 1200 Wien").Result;
+		_ = api.GeocodeGetCoordinatesAsync("Höchstädtplatz 6, 1200 Wien").Result;
 
-//		_ = api.DirectionsGetRouteAsync("Schwedenplatz, 1010 Wien", "Höchstädtplatz 6, 1200 Wien", "walking").Result;
-//	}
-//}
+		_ = api.DirectionsGetRouteAsync("Schwedenplatz, 1010 Wien", "Höchstädtplatz 6, 1200 Wien", "walking").Result;
+	}
+}
 
 public struct Coordinates
 {

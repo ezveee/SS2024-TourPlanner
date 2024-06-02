@@ -137,9 +137,9 @@ public class TourHandlerViewModel : ICreationHandlerViewModel, INotifyPropertyCh
 			From = _from,
 			To = _to,
 			TransportType = _transportType,
-			Distance = _distance,
-			EstimatedTime = _time,
-			RouteInformation = _info
+			Distance = 0,
+			EstimatedTime = 0,
+			RouteInformation = string.Empty
 		};
 		_ = _tourHelper.CreateDataAsync(tour);
 		CloseWindow(_window);

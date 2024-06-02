@@ -54,7 +54,7 @@ internal class OsmTilesApi
 
 				var bytes = await response.Content.ReadAsByteArrayAsync();
 
-				string directoryPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "Images");
+				string directoryPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "Images");
 				if (!Directory.Exists(directoryPath))
 				{
 					Directory.CreateDirectory(directoryPath);

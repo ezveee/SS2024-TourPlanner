@@ -1,6 +1,7 @@
 ﻿using Business.Interfaces;
 using Business.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace HttpServer.Controllers;
 
@@ -20,6 +21,14 @@ public class TourController(IService<Tour> tourService) : ControllerBase
 		Tour? tour = tourService.GetById(id);
 		return tour is null ? (ActionResult<Tour>)NotFound() : (ActionResult<Tour>)tour;
 	}
+
+	//[HttpPost]
+	//public ActionResult<Tour> Post(string tourJson)
+	//{
+	//	Tour tour = JsonSerializer.Deserialize<Tour>(tourJson);
+
+	//	return (ActionResult<Tour>)tourService.Create(tour);
+	//}
 
 	[HttpPost]
 	public ActionResult<Tour> Post(Tour tour)
