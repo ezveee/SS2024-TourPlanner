@@ -34,8 +34,8 @@ internal class OsmTilesApi
 
 	public async Task<string> TilesCreateMapPngAsync(Coordinates coordinates)
 	{
-		double.TryParse(coordinates.lat.Replace(".", ","), out double lat);
-		double.TryParse(coordinates.lon.Replace(".", ","), out double lon);
+		double lat = double.Parse(coordinates.lat, System.Globalization.CultureInfo.InvariantCulture);
+		double lon = double.Parse(coordinates.lon, System.Globalization.CultureInfo.InvariantCulture);
 
 		(int x, int y) = ConvertCoordinatesToTiles(lat, lon);
 

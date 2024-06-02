@@ -72,7 +72,8 @@ public class TourServiceTests
 						return tour;
 					});
 
-		_testService = new TourService(mockRepository.Object);
+		Mock<IRepository<DataAccess.Models.TourLog>> mockLogRepository = new();
+		_testService = new TourService(mockRepository.Object, mockLogRepository.Object);
 	}
 
 	[Test]
