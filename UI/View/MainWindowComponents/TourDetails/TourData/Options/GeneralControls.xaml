@@ -41,10 +41,10 @@
         <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding SelectedTourData.TransportType}"/>
 
         <TextBlock Grid.Row="5" Grid.Column="0" Text="Distance   " FontWeight="Bold"/>
-        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding SelectedTourData.Distance}"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding SelectedTourData.Distance, StringFormat={}{0} km}"/>
 
         <TextBlock Grid.Row="6" Grid.Column="0" Text="Estimated Time   " FontWeight="Bold"/>
-        <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding SelectedTourData.EstimatedTime}"/>
+        <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding SelectedTourData.EstimatedTime, StringFormat={}{0} min}"/>
 
         <Button x:Name="tourReport"
                 Grid.Column="1"

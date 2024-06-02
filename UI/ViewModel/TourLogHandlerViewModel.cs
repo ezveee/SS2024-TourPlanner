@@ -42,7 +42,7 @@ public class TourLogHandlerViewModel : ICreationHandlerViewModel, INotifyPropert
 		}
 	}
 
-	private DateTime _date;
+	private DateTime _date = DateTime.Now;
 	public DateTime Date
 	{
 		get => _date;
@@ -116,7 +116,7 @@ public class TourLogHandlerViewModel : ICreationHandlerViewModel, INotifyPropert
 		TourLogModel tourLogModel = new()
 		{
 			TourId = _tourId,
-			Date = _date,
+			Date = _date.ToUniversalTime(),
 			Comment = _comment,
 			Difficulty = _difficulty,
 			Distance = _distance,
