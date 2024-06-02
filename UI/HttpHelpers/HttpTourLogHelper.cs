@@ -56,7 +56,7 @@ public class HttpTourLogHelper : IHttpHelper<TourLogModel>
 	{
 		try
 		{
-			string url = Resource.Route_TourLog + $"/{id}";
+			string url = Resource.Route_TourLog + $"/logs/{id}";
 			HttpResponseMessage response = await HttpClientSingleton.Instance.GetAsync(url);
 			_ = response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();

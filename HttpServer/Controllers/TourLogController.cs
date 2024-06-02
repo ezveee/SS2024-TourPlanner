@@ -20,6 +20,12 @@ public class TourLogController(IService<TourLog> tourLogService) : ControllerBas
 		return tourLogService.GetLogsByTourId(id);
 	}
 
+	[HttpGet("logs/{id}")]
+	public ActionResult<TourLog?> GetLog(int id)
+	{
+		return tourLogService.GetById(id);
+	}
+
 	[HttpPost]
 	public ActionResult<TourLog> Post(TourLog tourLog)
 	{

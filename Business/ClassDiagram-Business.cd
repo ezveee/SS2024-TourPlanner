@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Business.Services.TourLogService">
+    <Position X="1" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAAAAAAAAAAAAAAAAAAAEIAEAAAgAAAAAAAIA=</HashCode>
+      <FileName>Services\TourLogService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="Business.Services.TourService">
+    <Position X="2.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAAAAAAAAAAAAAAAAAAAEIAEAAAgAAAAAAAIA=</HashCode>
+      <FileName>Services\TourService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Business.ReportGenerator">
+    <Position X="5" Y="0.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Business.ReportGenerator.Type">
+        <TypeIdentifier>
+          <NewMemberFileName>ReportGenerator.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAgAAABQAAAAAQAAAAQAAAQAABAAAAAQAAAAAAAAAg=</HashCode>
+      <FileName>ReportGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Business.Models.Tour">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAQAAAAAAQgAAAAAAAAAAQAAAAIAADAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\Tour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Business.Models.TourLog">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAQAEAAAAAAAAAAAAAAFBAAAEAAAAAQA=</HashCode>
+      <FileName>Models\TourLog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Business.Models.TourStatsSummary">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAIAAAAAAAAAAACAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Models\TourStatsSummary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Business.Interfaces.IService&lt;T&gt;">
+    <Position X="1" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAAAAAAAAAAAAAAAAAAAEIAEAAAgAAAAAAAIA=</HashCode>
+      <FileName>Interfaces\IService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
