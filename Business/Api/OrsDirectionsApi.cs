@@ -12,17 +12,17 @@ using System.Web;
 namespace Business.Api;
 
 // TODO AFTER DONE: rm main function and set bl back to lib
-//class Program
-//{
-//	static void Main(string[] args)
-//	{
-//		OrsDirectionsApi api = new OrsDirectionsApi();
+class Program
+{
+	static void Main(string[] args)
+	{
+		OrsDirectionsApi api = new OrsDirectionsApi();
 
-//		_ = api.GeocodeGetCoordinatesAsync("Höchstädtplatz 6, 1200 Wien").Result;
+		_ = api.GeocodeGetCoordinatesAsync("Höchstädtplatz 6, 1200 Wien").Result;
 
-//		_ = api.DirectionsGetRouteAsync("Schwedenplatz, 1010 Wien", "Höchstädtplatz 6, 1200 Wien", "walking").Result;
-//	}
-//}
+		_ = api.DirectionsGetRouteAsync("Schwedenplatz, 1010 Wien", "Höchstädtplatz 6, 1200 Wien", "walking").Result;
+	}
+}
 
 public struct Coordinates
 {
@@ -91,6 +91,8 @@ public class OrsDirectionsApi
 	private HttpClient _client;
 	private static readonly string _apiKey = "5b3ce3597851110001cf62486bc559c2cd674064a1310170a99106a2"; // TODO: maybe move to a config file or smth like that????
 
+	private OsmTilesApi _osm = new OsmTilesApi();
+
 	public OrsDirectionsApi()
 	{
 		
@@ -132,12 +134,14 @@ public class OrsDirectionsApi
 	}
 
 	// call directions api to receive distance, duration, etc
-	public async Task<(float Distance, double Duration)> DirectionsGetRouteAsync(string start, string end, string transportType)
+	public async Task<(float Distance, double Duration, string Image)> DirectionsGetRouteAsync(string start, string end, string transportType)
 	{
 		TransportTypes transportTypes = new TransportTypes();
 
 		Coordinates startPoint = GeocodeGetCoordinatesAsync(start).Result;
 		Coordinates endPoint = GeocodeGetCoordinatesAsync(end).Result;
+
+		string image = await _osm.TilesCreateMapPngAsync(startPoint);
 
 		// Console.WriteLine(startPoint.lon + " " + endPoint.lon);
 
@@ -162,7 +166,7 @@ public class OrsDirectionsApi
 
 				var data = JsonConvert.DeserializeObject<DirectionsRoot>(responseData);
 
-				return ((float)data.features[0].properties.summary.distance, (double)data.features[0].properties.summary.duration);
+				return ((float)data.features[0].properties.summary.distance, (double)data.features[0].properties.summary.duration, image);
 			}
 		}
 	}

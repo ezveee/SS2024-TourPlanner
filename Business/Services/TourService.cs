@@ -13,7 +13,7 @@ public class TourService(IRepository<DataAccess.Models.Tour> repository) : IServ
 
 	public Tour Create(Tour entity)
 	{
-        (entity.Distance, entity.EstimatedTime) = _ors.DirectionsGetRouteAsync(entity.From, entity.To, entity.TransportType).Result;
+        (entity.Distance, entity.EstimatedTime, entity.RouteInformation) = _ors.DirectionsGetRouteAsync(entity.From, entity.To, entity.TransportType).Result;
         
 		DataAccess.Models.Tour DataAccessTour = repository.Add(entity.MapTourToDataAccess());
 		repository.SaveChanges();
