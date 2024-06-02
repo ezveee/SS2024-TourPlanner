@@ -7,16 +7,16 @@ using System.Linq.Expressions;
 
 namespace Business.Services;
 
-public class TourService(IRepository<DataAccess.Models.Tour> repository) : IService<Tour>
+public class TourService(IRepository<DataAccess.Models.Tour> tourRepository, IRepository<DataAccess.Models.TourLog> tourLogRepository) : IService<Tour>
 {
-    private OrsDirectionsApi _ors = new OrsDirectionsApi();
+	private readonly OrsDirectionsApi _ors = new();
 
 	public Tour Create(Tour entity)
 	{
-        (entity.Distance, entity.EstimatedTime, entity.RouteInformation) = _ors.DirectionsGetRouteAsync(entity.From, entity.To, entity.TransportType).Result;
-        
-		DataAccess.Models.Tour DataAccessTour = repository.Add(entity.MapTourToDataAccess());
-		repository.SaveChanges();
+		(entity.Distance, entity.EstimatedTime, entity.RouteInformation) = _ors.DirectionsGetRouteAsync(entity.From, entity.To, entity.TransportType).Result;
+
+		DataAccess.Models.Tour DataAccessTour = tourRepository.Add(entity.MapTourToDataAccess());
+		tourRepository.SaveChanges();
 		return DataAccessTour.MapTourToBusiness();
 	}
 
@@ -31,19 +31,28 @@ public class TourService(IRepository<DataAccess.Models.Tour> repository) : IServ
 
 	public void Delete(int id)
 	{
-		repository.Delete(id);
-		repository.SaveChanges();
+		IEnumerable<TourLog>? logs = GetLogsByTourId(id);
+		if (logs is not null)
+		{
+			foreach (TourLog log in logs)
+			{
+				tourLogRepository.Delete(log.LogId);
+			}
+		}
+
+		tourRepository.Delete(id);
+		tourRepository.SaveChanges();
 	}
 
 	public Tour? GetById(int id)
 	{
-		DataAccess.Models.Tour? tour = repository.GetById(id);
+		DataAccess.Models.Tour? tour = tourRepository.GetById(id);
 		return tour?.MapTourToBusiness();
 	}
 
 	public IEnumerable<Tour>? GetAll()
 	{
-		IEnumerable<DataAccess.Models.Tour>? dataAccessTours = repository.GetAll();
+		IEnumerable<DataAccess.Models.Tour>? dataAccessTours = tourRepository.GetAll();
 		return dataAccessTours is null ? (IEnumerable<Tour>?)null : dataAccessTours.Select(dataAccessTour => dataAccessTour.MapTourToBusiness());
 	}
 
@@ -57,6 +66,7 @@ public class TourService(IRepository<DataAccess.Models.Tour> repository) : IServ
 	// please let me formally apologise for my atrocities
 	public IEnumerable<TourLog>? GetLogsByTourId(int id)
 	{
-		throw new NotImplementedException();
+		IEnumerable<DataAccess.Models.TourLog>? dataAccessTourLogs = tourLogRepository.Find(log => log.TourId == id);
+		return dataAccessTourLogs is null ? (IEnumerable<TourLog>?)null : dataAccessTourLogs.Select(dataAccessLog => dataAccessLog.MapLogToBusiness());
 	}
 }
