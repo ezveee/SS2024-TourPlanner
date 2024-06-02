@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using UI.HttpHelpers;
 using UI.Interfaces;
 using UI.Models;
@@ -18,6 +19,9 @@ public class TourLogHandlerViewModel : ICreationHandlerViewModel, INotifyPropert
 
 	public event PropertyChangedEventHandler? PropertyChanged;
 
+	public Brush BackgroundBrush;
+	public Brush ForegroundBrush;
+
 	// you know the gist
 	private readonly IHttpHelper<TourLogModel> _tourLogHelper = new HttpTourLogHelper();
 
@@ -27,6 +31,9 @@ public class TourLogHandlerViewModel : ICreationHandlerViewModel, INotifyPropert
 
 		CreationCommand = new RelayCommand(Create);
 		QuitCreationCommand = new RelayCommand(Quit);
+
+		BackgroundBrush = GlobalThemeState.BackgroundBrush;
+		ForegroundBrush = GlobalThemeState.ForegroundBrush;
 	}
 
 	#region Create a Tourlog

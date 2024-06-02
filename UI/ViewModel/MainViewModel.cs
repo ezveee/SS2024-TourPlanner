@@ -3,6 +3,7 @@ using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Xml.Linq;
 using UI.HttpHelpers;
 using UI.Interfaces;
@@ -31,6 +32,8 @@ public class MainViewModel : INotifyPropertyChanged
 
 	public ICommand RefreshTourCommand { get; set; }
 
+	public ICommand ToggleThemeCommand { get; set; }
+
 	public static TourModel? tourToModify = new();
 	public static TourLogModel? tourLogToModify = new();
 
@@ -53,6 +56,14 @@ public class MainViewModel : INotifyPropertyChanged
 		GenerateTourReportCommand = new RelayCommand(GenerateTourReport);
 		GenerateSummaryCommand = new RelayCommand(GenerateSummaryReport);
 		RefreshTourCommand = new RelayCommand(RefreshTourList);
+		ToggleThemeCommand = new RelayCommand(ToggleTheme);
+
+		// IsDarkMode = false;
+		BackgroundBrush = Brushes.White;
+		GlobalThemeState.BackgroundBrush = BackgroundBrush;
+
+		ForegroundBrush = Brushes.Black;
+		GlobalThemeState.ForegroundBrush = ForegroundBrush;
 
 		GetTourNames();
 
@@ -351,5 +362,65 @@ public class MainViewModel : INotifyPropertyChanged
 
 		TourLogHandlerWindow tourLogHandlerWindow = new();
 		tourLogHandlerWindow.Show();
+	}
+
+	//private bool _isDarkMode;
+	//public bool IsDarkMode
+	//{
+	//	get => _isDarkMode;
+	//	set
+	//	{
+	//		_isDarkMode = value;
+	//		OnPropertyChanged();
+	//		ApplyTheme(value);
+	//	}
+	//}
+
+	private Brush _backgroundBrush;
+	public Brush BackgroundBrush
+	{
+		get => _backgroundBrush;
+		set
+		{
+			_backgroundBrush = value;
+			OnPropertyChanged();
+		}
+	}
+
+	private Brush _foregroundBrush;	
+	public Brush ForegroundBrush
+	{
+		get => _foregroundBrush;
+		set
+		{
+			_foregroundBrush = value;
+			OnPropertyChanged();
+		}
+	}
+
+	public void ToggleTheme(object parameter)
+	{
+		GlobalThemeState.IsDarkMode = !GlobalThemeState.IsDarkMode;
+		ApplyTheme(GlobalThemeState.IsDarkMode);
+	}
+
+	private void ApplyTheme(bool isDarkMode)
+	{
+		if (isDarkMode)
+		{
+			BackgroundBrush = new SolidColorBrush(Color.FromArgb(230, 34, 31, 47));
+			GlobalThemeState.BackgroundBrush = BackgroundBrush;
+
+			ForegroundBrush = new SolidColorBrush(Colors.White);
+			GlobalThemeState.ForegroundBrush = ForegroundBrush;
+
+			return;
+		}
+
+		BackgroundBrush = new SolidColorBrush(Colors.White);
+		GlobalThemeState.BackgroundBrush = BackgroundBrush;
+
+		ForegroundBrush = new SolidColorBrush(Colors.Black);
+		GlobalThemeState.ForegroundBrush = ForegroundBrush;
 	}
 }

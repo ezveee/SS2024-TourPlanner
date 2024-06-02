@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock TextWrapping="Wrap">NARRATOR:
+        <TextBlock TextWrapping="Wrap" Foreground="{Binding ForegroundBrush}">NARRATOR:
 (Black screen with text; The sound of buzzing bees can be heard)
 According to all known laws
 of aviation,

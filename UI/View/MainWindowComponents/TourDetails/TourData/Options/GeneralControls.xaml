@@ -25,35 +25,35 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Name   " FontWeight="Bold"/>
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SelectedTourData.Name}"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Name   " FontWeight="Bold" Foreground="{Binding ForegroundBrush}"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SelectedTourData.Name}" Foreground="{Binding ForegroundBrush}"/>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Description   " FontWeight="Bold"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SelectedTourData.Description}"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Description   " FontWeight="Bold" Foreground="{Binding ForegroundBrush}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SelectedTourData.Description}" Foreground="{Binding ForegroundBrush}"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="From   " FontWeight="Bold"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SelectedTourData.From}"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="From   " FontWeight="Bold" Foreground="{Binding ForegroundBrush}"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SelectedTourData.From}" Foreground="{Binding ForegroundBrush}"/>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="To   " FontWeight="Bold"/>
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SelectedTourData.To}"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="To   " FontWeight="Bold" Foreground="{Binding ForegroundBrush}"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SelectedTourData.To}" Foreground="{Binding ForegroundBrush}"/>
 
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Type of Transport   " FontWeight="Bold"/>
-        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding SelectedTourData.TransportType}"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Type of Transport   " FontWeight="Bold" Foreground="{Binding ForegroundBrush}"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding SelectedTourData.TransportType}" Foreground="{Binding ForegroundBrush}"/>
 
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Distance   " FontWeight="Bold"/>
-        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding SelectedTourData.Distance}"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Distance   " FontWeight="Bold" Foreground="{Binding ForegroundBrush}"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding SelectedTourData.Distance}" Foreground="{Binding ForegroundBrush}"/>
 
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="Estimated Time   " FontWeight="Bold"/>
-        <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding SelectedTourData.EstimatedTime}"/>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Estimated Time   " FontWeight="Bold" Foreground="{Binding ForegroundBrush}"/>
+        <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding SelectedTourData.EstimatedTime}" Foreground="{Binding ForegroundBrush}"/>
 
         <Button x:Name="tourReport"
                 Grid.Column="1"
                 Grid.Row="7"
-                Command="{Binding GenerateTourReportCommand}">Generate Tour Report</Button>
+                Command="{Binding GenerateTourReportCommand}" Background="{Binding BackgroundBrush}" Foreground="{Binding ForegroundBrush}">Generate Tour Report</Button>
         <Button x:Name="summaryReport"
                 Grid.Column="1"
                 Grid.Row="8"
-                Command="{Binding GenerateSummaryCommand}">Generate Summary Report</Button>
+                Command="{Binding GenerateSummaryCommand}" Background="{Binding BackgroundBrush}" Foreground="{Binding ForegroundBrush}">Generate Summary Report</Button>
 
     </Grid>
 
