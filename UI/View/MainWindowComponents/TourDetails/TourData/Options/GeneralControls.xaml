@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="UI.View.MainWindowComponents.TourDetails.TourData.Options.GeneralControls"
+<UserControl x:Class="UI.View.MainWindowComponents.TourDetails.TourData.Options.GeneralControls"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -41,10 +41,10 @@
         <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding SelectedTourData.TransportType}" Foreground="{Binding ForegroundBrush}"/>
 
         <TextBlock Grid.Row="5" Grid.Column="0" Text="Distance   " FontWeight="Bold" Foreground="{Binding ForegroundBrush}"/>
-        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding SelectedTourData.Distance}" Foreground="{Binding ForegroundBrush}"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding SelectedTourData.Distance, StringFormat={}{0} km}" Foreground="{Binding ForegroundBrush}"/>
 
         <TextBlock Grid.Row="6" Grid.Column="0" Text="Estimated Time   " FontWeight="Bold" Foreground="{Binding ForegroundBrush}"/>
-        <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding SelectedTourData.EstimatedTime}" Foreground="{Binding ForegroundBrush}"/>
+        <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding SelectedTourData.EstimatedTime, StringFormat={}{0} min}" Foreground="{Binding ForegroundBrush}"/>
 
         <Button x:Name="tourReport"
                 Grid.Column="1"
