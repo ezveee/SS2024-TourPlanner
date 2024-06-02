@@ -22,6 +22,8 @@ public class TourService(IRepository<DataAccess.Models.Tour> repository) : IServ
 
 	public Tour Update(Tour entity)
 	{
+		(entity.Distance, entity.EstimatedTime, entity.RouteInformation) = _ors.DirectionsGetRouteAsync(entity.From, entity.To, entity.TransportType).Result;
+
 		DataAccess.Models.Tour DataAccessTour = repository.Update(entity.MapTourToDataAccess());
 		repository.SaveChanges();
 		return DataAccessTour.MapTourToBusiness();
