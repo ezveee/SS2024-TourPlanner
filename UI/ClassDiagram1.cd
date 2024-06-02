@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="UI.ViewModel.Commands.RelayCommand" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEACAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Commands\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UI.ViewModel.GlobalThemeState">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAIAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>ViewModel\GlobalThemeState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.ViewModel.MainViewModel" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>wAAgQgID2AAIAIQMMQVgJCAYsBAJWBAkAGSCAAKEBAA=</HashCode>
+      <FileName>ViewModel\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UI.ViewModel.ReportViewModel">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\ReportViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.ViewModel.TourEditorViewModel" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EgAQIAAQEgAgAAAAISAAAAQAoggJAEBAIAAgQGAAIQA=</HashCode>
+      <FileName>ViewModel\TourEditorViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UI.ViewModel.TourHandlerViewModel" BaseTypeListCollapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EgAQIAAQEgAgAAAIIiAAAAQAogAJAEBAIAAgQGAAIQA=</HashCode>
+      <FileName>ViewModel\TourHandlerViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UI.ViewModel.TourLogEditorViewModel" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EAAAQAAEEgAgQQAAJAAAAAAAoAAAAEFBIAAAAAQAIYA=</HashCode>
+      <FileName>ViewModel\TourLogEditorViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UI.ViewModel.TourLogHandlerViewModel" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>UAAAQAAEEgAgAQAIJAAAAAAAoAAAAEFBIAAEAAQAIYA=</HashCode>
+      <FileName>ViewModel\TourLogHandlerViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UI.Models.TourLogModel">
+    <Position X="7.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAQAEAAAAAAAAAAAAAAFBAAAEAAAAAQA=</HashCode>
+      <FileName>Models\TourLogModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.Models.TourModel">
+    <Position X="5.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAQAAAAAAQgAAAAAAAAAAQAAAAIAADAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\TourModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.Http.HttpClientSingleton">
+    <Position X="4" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>HttpHelpers\HttpClientSingleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.HttpHelpers.HttpTourHelper" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQEQAAAAAAAAABAAIAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>HttpHelpers\HttpTourHelper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UI.HttpHelpers.HttpTourLogHelper" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQEQAAAAAAAAABAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>HttpHelpers\HttpTourLogHelper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="UI.ViewModel.Interfaces.ICreationHandlerViewModel" Collapsed="true">
+    <Position X="5.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAQA=</HashCode>
+      <FileName>ViewModel\Interfaces\ICreationHandlerViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="UI.Interfaces.IHttpHelper&lt;T&gt;">
+    <Position X="0.5" Y="7" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEQAAAAAAAAABAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Interfaces\IHttpHelper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
