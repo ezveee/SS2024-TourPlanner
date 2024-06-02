@@ -58,9 +58,12 @@ public class MainViewModel : INotifyPropertyChanged
 		RefreshTourCommand = new RelayCommand(RefreshTourList);
 		ToggleThemeCommand = new RelayCommand(ToggleTheme);
 
-		IsDarkMode = false;
+		// IsDarkMode = false;
 		BackgroundBrush = Brushes.White;
+		GlobalThemeState.BackgroundBrush = BackgroundBrush;
+
 		ForegroundBrush = Brushes.Black;
+		GlobalThemeState.ForegroundBrush = ForegroundBrush;
 
 		GetTourNames();
 
@@ -361,17 +364,17 @@ public class MainViewModel : INotifyPropertyChanged
 		tourLogHandlerWindow.Show();
 	}
 
-	private bool _isDarkMode;
-	public bool IsDarkMode
-	{
-		get => _isDarkMode;
-		set
-		{
-			_isDarkMode = value;
-			OnPropertyChanged();
-			ApplyTheme(value);
-		}
-	}
+	//private bool _isDarkMode;
+	//public bool IsDarkMode
+	//{
+	//	get => _isDarkMode;
+	//	set
+	//	{
+	//		_isDarkMode = value;
+	//		OnPropertyChanged();
+	//		ApplyTheme(value);
+	//	}
+	//}
 
 	private Brush _backgroundBrush;
 	public Brush BackgroundBrush
@@ -397,7 +400,8 @@ public class MainViewModel : INotifyPropertyChanged
 
 	public void ToggleTheme(object parameter)
 	{
-		IsDarkMode = !IsDarkMode;
+		GlobalThemeState.IsDarkMode = !GlobalThemeState.IsDarkMode;
+		ApplyTheme(GlobalThemeState.IsDarkMode);
 	}
 
 	private void ApplyTheme(bool isDarkMode)
@@ -405,12 +409,18 @@ public class MainViewModel : INotifyPropertyChanged
 		if (isDarkMode)
 		{
 			BackgroundBrush = new SolidColorBrush(Color.FromArgb(230, 34, 31, 47));
+			GlobalThemeState.BackgroundBrush = BackgroundBrush;
+
 			ForegroundBrush = new SolidColorBrush(Colors.White);
+			GlobalThemeState.ForegroundBrush = ForegroundBrush;
 
 			return;
 		}
-		
-		BackgroundBrush = new SolidColorBrush(Colors.White); 
-		ForegroundBrush = new SolidColorBrush(Colors.Black); 
+
+		BackgroundBrush = new SolidColorBrush(Colors.White);
+		GlobalThemeState.BackgroundBrush = BackgroundBrush;
+
+		ForegroundBrush = new SolidColorBrush(Colors.Black);
+		GlobalThemeState.ForegroundBrush = ForegroundBrush;
 	}
 }

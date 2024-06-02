@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using UI.HttpHelpers;
 using UI.Interfaces;
 using UI.Models;
@@ -18,6 +19,9 @@ public class TourHandlerViewModel : ICreationHandlerViewModel, INotifyPropertyCh
 	public event PropertyChangedEventHandler? PropertyChanged;
 	public event EventHandler TourCreated;
 
+	public Brush BackgroundBrush;
+	public Brush ForegroundBrush;
+
 	// i know this is bad. but im adding this in hindsight
 	// and id probably have to change the entire ui
 	// if i were to use DI as planned
@@ -30,6 +34,9 @@ public class TourHandlerViewModel : ICreationHandlerViewModel, INotifyPropertyCh
 
 		CreationCommand = new RelayCommand(Create);
 		QuitCreationCommand = new RelayCommand(Quit);
+
+		BackgroundBrush = GlobalThemeState.BackgroundBrush;
+		ForegroundBrush = GlobalThemeState.ForegroundBrush;
 	}
 
 	public TourHandlerViewModel()
@@ -162,4 +169,42 @@ public class TourHandlerViewModel : ICreationHandlerViewModel, INotifyPropertyCh
 	{
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
+
+	//private Brush _backgroundBrush;
+	//public Brush BackgroundBrush
+	//{
+	//	get => _backgroundBrush;
+	//	set
+	//	{
+	//		_backgroundBrush = value;
+	//		OnPropertyChanged(nameof(BackgroundBrush));
+	//	}
+	//}
+
+	//private Brush _foregroundBrush;
+	//public Brush ForegroundBrush
+	//{
+	//	get => _foregroundBrush;
+	//	set
+	//	{
+	//		_foregroundBrush = value;
+	//		OnPropertyChanged(nameof(ForegroundBrush));
+	//	}
+	//}
+
+
+
+	//private void ApplyTheme(bool isDarkMode)
+	//{
+	//	if (isDarkMode)
+	//	{
+	//		BackgroundBrush = new SolidColorBrush(Color.FromArgb(230, 34, 31, 47));
+	//		ForegroundBrush = new SolidColorBrush(Colors.White);
+
+	//		return;
+	//	}
+
+	//	BackgroundBrush = new SolidColorBrush(Colors.White);
+	//	ForegroundBrush = new SolidColorBrush(Colors.Black);
+	//}
 }
