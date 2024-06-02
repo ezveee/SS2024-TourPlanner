@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.IO;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
@@ -294,9 +295,11 @@ public class MainViewModel : INotifyPropertyChanged
 
 		int tourId = (int)parameter;
 		GetTourLogData(tourId);
-		GetImage(tourId);
 
 		SelectedTourData = await _tourHelper.GetDataAsync(tourId);
+
+		GetImage(SelectedTourData.RouteInformation);
+
 		CurrentView = new MapDisplayControls();
 	}
 
@@ -331,11 +334,15 @@ public class MainViewModel : INotifyPropertyChanged
 		}
 	}
 
-	private void GetImage(int tourId)
+	private void GetImage(string imageId)
 	{
 		// TODO: fix image loading
 		//ImageLoader imageLoader = new();
 		//Image = imageLoader.GetImagePath(tourId);
+
+		var currDir = System.IO.Directory.GetCurrentDirectory();
+
+		Image = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "Images", imageId);
 	}
 	#endregion
 

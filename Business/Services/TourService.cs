@@ -24,8 +24,8 @@ public class TourService(IRepository<DataAccess.Models.Tour> tourRepository, IRe
 	{
 		(entity.Distance, entity.EstimatedTime, entity.RouteInformation) = _ors.DirectionsGetRouteAsync(entity.From, entity.To, entity.TransportType).Result;
 
-		DataAccess.Models.Tour DataAccessTour = repository.Update(entity.MapTourToDataAccess());
-		repository.SaveChanges();
+		DataAccess.Models.Tour DataAccessTour = tourRepository.Update(entity.MapTourToDataAccess());
+		tourRepository.SaveChanges();
 		return DataAccessTour.MapTourToBusiness();
 	}
 
