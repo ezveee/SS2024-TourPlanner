@@ -14,6 +14,8 @@ using iText.Layout.Element;
 using iText.Layout.Properties;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.Logging;
+using iText.IO.Image;
+using Image = iText.Layout.Element.Image;
 
 namespace Business;
 public class ReportGenerator(IService<Tour> tourService, IService<TourLog> tourLogService)
@@ -140,6 +142,12 @@ public class ReportGenerator(IService<Tour> tourService, IService<TourLog> tourL
 		}
 
 		document.Add(table);
+
+		var imagePath = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName, "Images", _currTour.RouteInformation);
+		ImageData imageData = ImageDataFactory.Create(imagePath);
+		Image image = new Image(imageData);
+
+		document.Add(image);
 
 		document.Close();
 	}

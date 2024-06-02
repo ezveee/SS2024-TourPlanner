@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Xml.Linq;
 using UI.HttpHelpers;
 using UI.Interfaces;
+using UI.Logging;
 using UI.Models;
 using UI.View.MainWindowComponents.TourDetails.TourData.Options;
 using UI.ViewModel.Commands;
@@ -16,6 +17,8 @@ namespace UI.ViewModel;
 
 public class MainViewModel : INotifyPropertyChanged
 {
+	private static readonly ILogger _logger = LoggerFactory.GetLogger();
+
 	public ICommand OpenTourHandlerCommand { get; set; }
 	public ICommand OpenTourLogHandlerCommand { get; set; }
 	public ICommand DeleteTourCommand { get; set; }
@@ -87,6 +90,7 @@ public class MainViewModel : INotifyPropertyChanged
 	public void RefreshTourList(object obj)
 	{
 		GetTourNames();
+		_logger.Info("Refreshed tour list");
 	}
 
 	public void SwitchToGeneral(object obj)
@@ -108,6 +112,7 @@ public class MainViewModel : INotifyPropertyChanged
 	{
 		if (_selectedTour == null)
 		{
+			_logger.Warn("No tour selected");
 			return;
 		}
 
@@ -120,6 +125,7 @@ public class MainViewModel : INotifyPropertyChanged
 	{
 		if (_selectedTour == null)
 		{
+			_logger.Warn("No tour selected");
 			return;
 		}
 
@@ -136,6 +142,7 @@ public class MainViewModel : INotifyPropertyChanged
 	{
 		if (_selectedTour is null)
 		{
+			_logger.Warn("No tour selected");
 			return;
 		}
 
@@ -143,17 +150,20 @@ public class MainViewModel : INotifyPropertyChanged
 
 		if (tourToModify is null)
 		{
+			_logger.Warn("Tour to be modified is null/Info couldnt be collected from HTTPS");
 			return;
 		}
 
 		TourHandlerWindow tourHandlerWindow = new(tourToModify);
 		tourHandlerWindow.Show();
+		_logger.Info("Tour modified");
 	}
 
 	private async void ModifyTourLog(object parameter)
 	{
 		if (_selectedTourLog is null)
 		{
+			_logger.Warn("No tour selected");
 			return;
 		}
 
@@ -161,17 +171,20 @@ public class MainViewModel : INotifyPropertyChanged
 
 		if (tourLogToModify == null)
 		{
+			_logger.Warn("Tourlog to be modified is null/Info couldnt be collected from HTTPS");
 			return;
 		}
 
 		TourLogHandlerWindow tourlogHandlerWindow = new(tourLogToModify);
 		tourlogHandlerWindow.Show();
+		_logger.Info("Tourlog modified");
 	}
 
 	public void DeleteTour(object parameter)
 	{
 		if (_selectedTour is null)
 		{
+			_logger.Warn("No tour selected");
 			return;
 		}
 
@@ -193,12 +206,14 @@ public class MainViewModel : INotifyPropertyChanged
 
 		_selectedTour = null;
 		GetTourNames();
+		_logger.Info("Tour deleted");
 	}
 
 	public void DeleteTourLog(object parameter)
 	{
 		if (_selectedTourLog is null)
 		{
+			_logger.Warn("No tour selected");
 			return;
 		}
 
